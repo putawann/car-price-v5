@@ -1,0 +1,12 @@
+DT/DT_new_cardb.ipynb
+RF/RF_new_cardb.ipynb
+XGB/XGB_new_cardb.ipynb
+DT/DT_new_cardb_adj.ipynb
+RF/RF_new_cardb_adj.ipynb
+XGB/XGB_new_cardb_adj.ipynb
+DT/DT_merge50minC.ipynb
+RF/RF_merge50minC.ipynb
+XGB/XGB_merge50minC.ipynb
+DT/DT_merge50minC_adj.ipynb
+RF/RF_merge50minC_adj.ipynb
+XGB/XGB_merge50minC_adj.ipynb

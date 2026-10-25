@@ -1,0 +1,4715 @@
+{
+  "schema_version": 1,
+  "source": "saved notebook outputs; no execution",
+  "cv_precision": "mean and SD from printed fold summary, rounded to integer baht",
+  "runs": [
+    {
+      "run_id": "DT_new_cardb",
+      "notebook": "DT/DT_new_cardb.ipynb",
+      "model": "DT",
+      "dataset": "new_cardb",
+      "variant": "base",
+      "result": {
+        "run_id": "DT_new_cardb",
+        "model": "DT",
+        "dataset": "new_car_dataset.csv",
+        "variant": "base",
+        "version": "v5",
+        "features": [
+          "engine",
+          "mileage",
+          "car_age",
+          "brand",
+          "model",
+          "car_type",
+          "fuel",
+          "gear"
+        ],
+        "train": {
+          "R2": 0.9846765150274094,
+          "RMSE": 80654.0431396732,
+          "MAE": 56081.4382562205,
+          "MAPE": 0.1241136086602639
+        },
+        "validation": {
+          "R2": 0.8787368538020567,
+          "RMSE": 231717.97654295553,
+          "MAE": 84840.10329693081,
+          "MAPE": 0.14467516582767675
+        },
+        "test": {
+          "R2": 0.9249865586605381,
+          "RMSE": 161298.97826228233,
+          "MAE": 75926.59963815239,
+          "MAPE": 0.1366728773905031
+        },
+        "best_params": {
+          "ccp_alpha": 4865092.784376718,
+          "max_depth": null,
+          "min_samples_leaf": 1
+        }
+      },
+      "importance": {
+        "run_id": "DT_new_cardb",
+        "permutation": {
+          "engine": {
+            "mean": 188446.62834988473,
+            "std": 5112.02334230181
+          },
+          "mileage": {
+            "mean": 23406.22914764463,
+            "std": 2434.592392747707
+          },
+          "car_age": {
+            "mean": 186358.74371394358,
+            "std": 4523.552703168262
+          },
+          "brand": {
+            "mean": 117551.97445638105,
+            "std": 3718.789828411316
+          },
+          "model": {
+            "mean": 39858.245780747086,
+            "std": 952.5857980360572
+          },
+          "car_type": {
+            "mean": 79519.36021101639,
+            "std": 4412.839466636804
+          },
+          "fuel": {
+            "mean": 13338.20631693469,
+            "std": 1236.5154850384952
+          },
+          "gear": {
+            "mean": 7708.704976688343,
+            "std": 1189.9750692777532
+          }
+        },
+        "model_based": {
+          "engine": 0.19170734310270365,
+          "mileage": 0.09375156614495518,
+          "car_age": 0.16561566363754726,
+          "brand": 0.350240771316219,
+          "model": 0.11564093801398766,
+          "car_type": 0.06922632822626444,
+          "fuel": 0.011432580904249312,
+          "gear": 0.002384808654073511
+        }
+      },
+      "cv": {
+        "mean": 89298.0,
+        "sd": 5251.0,
+        "source": "ตาราง CV train เทียบ validation",
+        "precision": "printed integer baht"
+      },
+      "cv_tables": [
+        {
+          "kind": "search_candidates",
+          "rows": [
+            {
+              "candidate": 144.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 2347.0,
+              "rank": 1.0,
+              "max_depth": "None",
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 1138000.0,
+              "cv_mae": 87386.0,
+              "cv_mae_sd": 5068.0,
+              "train_mae": 38236.0,
+              "gap": 49151.0
+            },
+            {
+              "candidate": 174.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 1558.0,
+              "rank": 2.0,
+              "max_depth": "None",
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 2345000.0,
+              "cv_mae": 88151.0,
+              "cv_mae_sd": 5154.0,
+              "train_mae": 46041.0,
+              "gap": 42110.0
+            },
+            {
+              "candidate": 114.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 3548.0,
+              "rank": 3.0,
+              "max_depth": "None",
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 549600.0,
+              "cv_mae": 88163.0,
+              "cv_mae_sd": 4900.0,
+              "train_mae": 30713.0,
+              "gap": 57451.0
+            },
+            {
+              "candidate": 138.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 2079.0,
+              "rank": 4.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 1138000.0,
+              "cv_mae": 88552.0,
+              "cv_mae_sd": 5026.0,
+              "train_mae": 43560.0,
+              "gap": 44992.0
+            },
+            {
+              "candidate": 168.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 1446.0,
+              "rank": 5.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 2345000.0,
+              "cv_mae": 89174.0,
+              "cv_mae_sd": 5161.0,
+              "train_mae": 49753.0,
+              "gap": 39421.0
+            },
+            {
+              "candidate": 108.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 3024.0,
+              "rank": 6.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 549600.0,
+              "cv_mae": 89191.0,
+              "cv_mae_sd": 4891.0,
+              "train_mae": 37853.0,
+              "gap": 51338.0
+            },
+            {
+              "candidate": 204.0,
+              "chosen": "*",
+              "eligible": "yes",
+              "leaves": 1041.0,
+              "rank": 7.0,
+              "max_depth": "None",
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 4865000.0,
+              "cv_mae": 89298.0,
+              "cv_mae_sd": 5251.0,
+              "train_mae": 54253.0,
+              "gap": 35046.0
+            },
+            {
+              "candidate": 84.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 5370.0,
+              "rank": 8.0,
+              "max_depth": "None",
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 265500.0,
+              "cv_mae": 89637.0,
+              "cv_mae_sd": 4768.0,
+              "train_mae": 23559.0,
+              "gap": 66078.0
+            },
+            {
+              "candidate": 78.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 9.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 265500.0,
+              "cv_mae": 90225.0,
+              "cv_mae_sd": 4765.0,
+              "train_mae": 32689.0,
+              "gap": 57536.0
+            },
+            {
+              "candidate": 198.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 10.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 4865000.0,
+              "cv_mae": 90282.0,
+              "cv_mae_sd": 5400.0,
+              "train_mae": 56579.0,
+              "gap": 33703.0
+            }
+          ]
+        },
+        {
+          "kind": "fold_scores",
+          "rows": [
+            {
+              "": 1.0,
+              "train MAE": 54293.0,
+              "validation MAE": 88073.0,
+              "MAE gap": 33780.0,
+              "gap % of validation MAE": 38.35,
+              "train R2": 0.9859,
+              "validation R2": 0.8936,
+              "R2 gap": 0.0923
+            },
+            {
+              "": 2.0,
+              "train MAE": 54633.0,
+              "validation MAE": 99200.0,
+              "MAE gap": 44567.0,
+              "gap % of validation MAE": 44.93,
+              "train R2": 0.9849,
+              "validation R2": 0.7941,
+              "R2 gap": 0.1908
+            },
+            {
+              "": 3.0,
+              "train MAE": 54125.0,
+              "validation MAE": 89365.0,
+              "MAE gap": 35240.0,
+              "gap % of validation MAE": 39.43,
+              "train R2": 0.9867,
+              "validation R2": 0.8577,
+              "R2 gap": 0.129
+            },
+            {
+              "": 4.0,
+              "train MAE": 54055.0,
+              "validation MAE": 85183.0,
+              "MAE gap": 31128.0,
+              "gap % of validation MAE": 36.54,
+              "train R2": 0.9868,
+              "validation R2": 0.9038,
+              "R2 gap": 0.0829
+            },
+            {
+              "": 5.0,
+              "train MAE": 54158.0,
+              "validation MAE": 84671.0,
+              "MAE gap": 30514.0,
+              "gap % of validation MAE": 36.04,
+              "train R2": 0.9864,
+              "validation R2": 0.8575,
+              "R2 gap": 0.1289
+            },
+            {
+              "": "mean",
+              "train MAE": 54253.0,
+              "validation MAE": 89298.0,
+              "MAE gap": 35046.0,
+              "gap % of validation MAE": 39.06,
+              "train R2": 0.9861,
+              "validation R2": 0.8613,
+              "R2 gap": 0.1248
+            },
+            {
+              "": "sd",
+              "train MAE": 205.0,
+              "validation MAE": 5251.0,
+              "MAE gap": 5063.0,
+              "gap % of validation MAE": 3.18,
+              "train R2": 0.0007,
+              "validation R2": 0.0384,
+              "R2 gap": 0.0379
+            }
+          ]
+        }
+      ],
+      "ablation": [],
+      "overfit": [
+        "PASS validation เทียบ CV     : ต่างกัน -4,458 บาท (-4.99%) เกณฑ์ ±9,218 บาท (2 SE)",
+        "WARN test เทียบ CV           : ต่างกัน -13,372 บาท (-14.97%) เกณฑ์ ±7,033 บาท (2 SE)",
+        "PASS test เทียบ validation   : ต่างกัน -8,914 บาท (-10.51%) เกณฑ์ ±9,504 บาท (2 SE)",
+        "PASS learning curve (2,365 -> 23,657 แถว): test MAE 116,018 -> 75,927 บาท, gap 85,985 -> 19,845 บาท (ต้องลดลงทั้งคู่)"
+      ],
+      "plots": {
+        "learning": "img/DT_new_cardb_learning.png",
+        "permutation": "img/DT_new_cardb_permutation.png",
+        "model_based": "img/DT_new_cardb_model_based.png"
+      },
+      "data": {
+        "rows": 29571,
+        "models": 445,
+        "split": [
+          {
+            "ชุด": "train",
+            "แถว": 23657.0,
+            "สัดส่วน (%)": 80.0,
+            "จำนวนรุ่น": 445.0
+          },
+          {
+            "ชุด": "validation",
+            "แถว": 2957.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 232.0
+          },
+          {
+            "ชุด": "test",
+            "แถว": 2957.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 246.0
+          }
+        ]
+      },
+      "missing": [],
+      "runtime": {
+        "start": "2026-10-26 00:10:47",
+        "end": "2026-10-26 00:16:58",
+        "status": "ok",
+        "seconds": 371.0
+      }
+    },
+    {
+      "run_id": "RF_new_cardb",
+      "notebook": "RF/RF_new_cardb.ipynb",
+      "model": "RF",
+      "dataset": "new_cardb",
+      "variant": "base",
+      "result": {
+        "run_id": "RF_new_cardb",
+        "model": "RF",
+        "dataset": "new_car_dataset.csv",
+        "variant": "base",
+        "version": "v5",
+        "features": [
+          "engine",
+          "mileage",
+          "car_age",
+          "brand",
+          "model",
+          "car_type",
+          "fuel",
+          "gear"
+        ],
+        "train": {
+          "R2": 0.9881706636837515,
+          "RMSE": 70864.30945335864,
+          "MAE": 29939.1700167164,
+          "MAPE": 0.04976860763666233
+        },
+        "validation": {
+          "R2": 0.9176045504854838,
+          "RMSE": 191005.9627764141,
+          "MAE": 71935.38323468083,
+          "MAPE": 0.11862187839216266
+        },
+        "test": {
+          "R2": 0.9457941451222516,
+          "RMSE": 137115.06394598205,
+          "MAE": 65864.24338064737,
+          "MAPE": 0.11347901495874109
+        },
+        "best_params": {
+          "max_features": 0.8,
+          "min_samples_leaf": 1
+        }
+      },
+      "importance": {
+        "run_id": "RF_new_cardb",
+        "permutation": {
+          "engine": {
+            "mean": 178663.4753857322,
+            "std": 4573.098557899297
+          },
+          "mileage": {
+            "mean": 27662.677940805082,
+            "std": 1802.8446568417053
+          },
+          "car_age": {
+            "mean": 176320.62123570679,
+            "std": 4441.152165583016
+          },
+          "brand": {
+            "mean": 105340.04202859229,
+            "std": 2189.0965044761438
+          },
+          "model": {
+            "mean": 34878.94008699556,
+            "std": 683.4423401183702
+          },
+          "car_type": {
+            "mean": 63312.49128898487,
+            "std": 2923.063009660446
+          },
+          "fuel": {
+            "mean": 13525.970017383224,
+            "std": 626.6353510701268
+          },
+          "gear": {
+            "mean": 6638.868597724993,
+            "std": 314.6281481513421
+          }
+        },
+        "model_based": {
+          "engine": 0.180100097435365,
+          "mileage": 0.0949893513669555,
+          "car_age": 0.18713650786937572,
+          "brand": 0.3121197725453346,
+          "model": 0.12257274575143973,
+          "car_type": 0.06520282679253736,
+          "fuel": 0.03517457102251712,
+          "gear": 0.002704127216475073
+        }
+      },
+      "cv": {
+        "mean": 75331.0,
+        "sd": 2738.0,
+        "source": "ตาราง CV train เทียบ validation",
+        "precision": "printed integer baht"
+      },
+      "cv_tables": [
+        {
+          "kind": "search_candidates",
+          "rows": [
+            {
+              "candidate": 0.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 3198641.0,
+              "rank": 1.0,
+              "max_features": 0.2,
+              "min_samples_leaf": 1.0,
+              "cv_mae": 74263.0,
+              "cv_mae_sd": 2680.0,
+              "train_mae": 29911.0,
+              "gap": 44352.0
+            },
+            {
+              "candidate": 6.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 3194367.0,
+              "rank": 2.0,
+              "max_features": 0.3,
+              "min_samples_leaf": 1.0,
+              "cv_mae": 74326.0,
+              "cv_mae_sd": 2657.0,
+              "train_mae": 29882.0,
+              "gap": 44443.0
+            },
+            {
+              "candidate": 12.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 3189781.0,
+              "rank": 3.0,
+              "max_features": 0.4,
+              "min_samples_leaf": 1.0,
+              "cv_mae": 74481.0,
+              "cv_mae_sd": 2698.0,
+              "train_mae": 29904.0,
+              "gap": 44578.0
+            },
+            {
+              "candidate": 18.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 3185049.0,
+              "rank": 4.0,
+              "max_features": 0.5,
+              "min_samples_leaf": 1.0,
+              "cv_mae": 74599.0,
+              "cv_mae_sd": 2664.0,
+              "train_mae": 29876.0,
+              "gap": 44723.0
+            },
+            {
+              "candidate": 24.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 3180098.0,
+              "rank": 5.0,
+              "max_features": 0.6,
+              "min_samples_leaf": 1.0,
+              "cv_mae": 74803.0,
+              "cv_mae_sd": 2646.0,
+              "train_mae": 29957.0,
+              "gap": 44846.0
+            },
+            {
+              "candidate": 30.0,
+              "chosen": "*",
+              "eligible": "yes",
+              "leaves": 3168723.0,
+              "rank": 6.0,
+              "max_features": 0.8,
+              "min_samples_leaf": 1.0,
+              "cv_mae": 75331.0,
+              "cv_mae_sd": 2738.0,
+              "train_mae": 30035.0,
+              "gap": 45296.0
+            },
+            {
+              "candidate": 36.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 3153956.0,
+              "rank": 7.0,
+              "max_features": 1.0,
+              "min_samples_leaf": 1.0,
+              "cv_mae": 75987.0,
+              "cv_mae_sd": 2788.0,
+              "train_mae": 30266.0,
+              "gap": 45721.0
+            },
+            {
+              "candidate": 13.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1282221.0,
+              "rank": 8.0,
+              "max_features": 0.4,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 76107.0,
+              "cv_mae_sd": 2989.0,
+              "train_mae": 51072.0,
+              "gap": 25035.0
+            },
+            {
+              "candidate": 19.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1340011.0,
+              "rank": 9.0,
+              "max_features": 0.5,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 76128.0,
+              "cv_mae_sd": 2909.0,
+              "train_mae": 49589.0,
+              "gap": 26538.0
+            },
+            {
+              "candidate": 25.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1385609.0,
+              "rank": 10.0,
+              "max_features": 0.6,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 76216.0,
+              "cv_mae_sd": 2964.0,
+              "train_mae": 48510.0,
+              "gap": 27706.0
+            }
+          ]
+        },
+        {
+          "kind": "fold_scores",
+          "rows": [
+            {
+              "": 1.0,
+              "train MAE": 30383.0,
+              "validation MAE": 73102.0,
+              "MAE gap": 42719.0,
+              "gap % of validation MAE": 58.44,
+              "train R2": 0.9868,
+              "validation R2": 0.9343,
+              "R2 gap": 0.0525
+            },
+            {
+              "": 2.0,
+              "train MAE": 29895.0,
+              "validation MAE": 79514.0,
+              "MAE gap": 49619.0,
+              "gap % of validation MAE": 62.4,
+              "train R2": 0.9868,
+              "validation R2": 0.9082,
+              "R2 gap": 0.0786
+            },
+            {
+              "": 3.0,
+              "train MAE": 29907.0,
+              "validation MAE": 76102.0,
+              "MAE gap": 46196.0,
+              "gap % of validation MAE": 60.7,
+              "train R2": 0.9874,
+              "validation R2": 0.9176,
+              "R2 gap": 0.0698
+            },
+            {
+              "": 4.0,
+              "train MAE": 29725.0,
+              "validation MAE": 76283.0,
+              "MAE gap": 46558.0,
+              "gap % of validation MAE": 61.03,
+              "train R2": 0.9886,
+              "validation R2": 0.912,
+              "R2 gap": 0.0766
+            },
+            {
+              "": 5.0,
+              "train MAE": 30267.0,
+              "validation MAE": 71654.0,
+              "MAE gap": 41387.0,
+              "gap % of validation MAE": 57.76,
+              "train R2": 0.9887,
+              "validation R2": 0.8967,
+              "R2 gap": 0.092
+            },
+            {
+              "": "mean",
+              "train MAE": 30035.0,
+              "validation MAE": 75331.0,
+              "MAE gap": 45296.0,
+              "gap % of validation MAE": 60.07,
+              "train R2": 0.9877,
+              "validation R2": 0.9137,
+              "R2 gap": 0.0739
+            },
+            {
+              "": "sd",
+              "train MAE": 248.0,
+              "validation MAE": 2738.0,
+              "MAE gap": 2933.0,
+              "gap % of validation MAE": 1.72,
+              "train R2": 0.0008,
+              "validation R2": 0.0123,
+              "R2 gap": 0.0129
+            }
+          ]
+        }
+      ],
+      "ablation": [],
+      "overfit": [
+        "PASS validation เทียบ CV     : ต่างกัน -3,396 บาท (-4.51%) เกณฑ์ ±6,954 บาท (2 SE)",
+        "WARN test เทียบ CV           : ต่างกัน -9,467 บาท (-12.57%) เกณฑ์ ±5,057 บาท (2 SE)",
+        "PASS validation เทียบ OOB    : ต่างกัน -1,094 บาท (-1.50%) เกณฑ์ ±6,853 บาท (2 SE)",
+        "WARN test เทียบ OOB          : ต่างกัน -7,165 บาท (-9.81%) เกณฑ์ ±4,916 บาท (2 SE)",
+        "PASS test เทียบ validation   : ต่างกัน -6,071 บาท (-8.44%) เกณฑ์ ±7,870 บาท (2 SE)",
+        "PASS learning curve (2,365 -> 23,657 แถว): test MAE 90,412 -> 65,971 บาท, gap 52,527 -> 36,005 บาท (ต้องลดลงทั้งคู่)"
+      ],
+      "plots": {
+        "learning": "img/RF_new_cardb_learning.png",
+        "permutation": "img/RF_new_cardb_permutation.png",
+        "model_based": "img/RF_new_cardb_model_based.png"
+      },
+      "data": {
+        "rows": 29571,
+        "models": 445,
+        "split": [
+          {
+            "ชุด": "train",
+            "แถว": 23657.0,
+            "สัดส่วน (%)": 80.0,
+            "จำนวนรุ่น": 445.0
+          },
+          {
+            "ชุด": "validation",
+            "แถว": 2957.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 232.0
+          },
+          {
+            "ชุด": "test",
+            "แถว": 2957.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 246.0
+          }
+        ]
+      },
+      "missing": [],
+      "runtime": {
+        "start": "2026-10-26 00:16:58",
+        "end": "2026-10-26 00:38:39",
+        "status": "ok",
+        "seconds": 1300.0
+      }
+    },
+    {
+      "run_id": "XGB_new_cardb",
+      "notebook": "XGB/XGB_new_cardb.ipynb",
+      "model": "XGB",
+      "dataset": "new_cardb",
+      "variant": "base",
+      "result": {
+        "run_id": "XGB_new_cardb",
+        "model": "XGB",
+        "dataset": "new_car_dataset.csv",
+        "variant": "base",
+        "version": "v5",
+        "features": [
+          "engine",
+          "mileage",
+          "car_age",
+          "brand",
+          "model",
+          "car_type",
+          "fuel",
+          "gear"
+        ],
+        "train": {
+          "R2": 0.9888212084770203,
+          "RMSE": 68888.2559512142,
+          "MAE": 45411.6640625,
+          "MAPE": 0.09253146412269388
+        },
+        "validation": {
+          "R2": 0.9218228459358215,
+          "RMSE": 186052.3810973673,
+          "MAE": 69484.21875,
+          "MAPE": 0.11654520422648122
+        },
+        "test": {
+          "R2": 0.9397590756416321,
+          "RMSE": 144546.56805334397,
+          "MAE": 64228.0703125,
+          "MAPE": 0.1097904576454413
+        },
+        "best_params": {
+          "max_depth": 12,
+          "min_child_weight": 1,
+          "n_estimators": 300,
+          "reg_lambda": 1.0
+        }
+      },
+      "importance": {
+        "run_id": "XGB_new_cardb",
+        "permutation": {
+          "engine": {
+            "mean": 163707.359375,
+            "std": 4065.3794764164472
+          },
+          "mileage": {
+            "mean": 29853.6515625,
+            "std": 1746.7898246026764
+          },
+          "car_age": {
+            "mean": 165590.753125,
+            "std": 3373.09242890526
+          },
+          "brand": {
+            "mean": 113415.0203125,
+            "std": 2148.482794156637
+          },
+          "model": {
+            "mean": 42755.8703125,
+            "std": 810.520530032702
+          },
+          "car_type": {
+            "mean": 59881.45625,
+            "std": 2349.8037142047688
+          },
+          "fuel": {
+            "mean": 16832.92734375,
+            "std": 1206.3753153162654
+          },
+          "gear": {
+            "mean": 7016.7234375,
+            "std": 374.5673707746358
+          }
+        },
+        "model_based": {
+          "engine": 0.009485303060924405,
+          "mileage": 0.000792354766430992,
+          "car_age": 0.0036541840021272944,
+          "brand": 0.4430853955509855,
+          "model": 0.4469961811617357,
+          "car_type": 0.08472111627956874,
+          "fuel": 0.008878365602807798,
+          "gear": 0.002387099575419637
+        }
+      },
+      "cv": {
+        "mean": 73564.0,
+        "sd": 2474.0,
+        "source": "ตาราง CV train เทียบ validation",
+        "precision": "printed integer baht"
+      },
+      "cv_tables": [
+        {
+          "kind": "search_candidates",
+          "rows": [
+            {
+              "candidate": 254.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 78945.0,
+              "rank": 1.0,
+              "max_depth": 24.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 200.0,
+              "cv_mae": 73092.0,
+              "cv_mae_sd": 2518.0,
+              "train_mae": 43709.0,
+              "gap": 29383.0
+            },
+            {
+              "candidate": 258.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 118172.0,
+              "rank": 2.0,
+              "max_depth": 24.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 300.0,
+              "cv_mae": 73173.0,
+              "cv_mae_sd": 2656.0,
+              "train_mae": 38333.0,
+              "gap": 34840.0
+            },
+            {
+              "candidate": 189.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 72370.0,
+              "rank": 3.0,
+              "max_depth": 20.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 1.0,
+              "n_estimators": 100.0,
+              "cv_mae": 73227.0,
+              "cv_mae_sd": 2776.0,
+              "train_mae": 35068.0,
+              "gap": 38160.0
+            },
+            {
+              "candidate": 198.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 74293.0,
+              "rank": 4.0,
+              "max_depth": 20.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 300.0,
+              "cv_mae": 73259.0,
+              "cv_mae_sd": 2563.0,
+              "train_mae": 44060.0,
+              "gap": 29199.0
+            },
+            {
+              "candidate": 133.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 61671.0,
+              "rank": 5.0,
+              "max_depth": 16.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 1.0,
+              "n_estimators": 200.0,
+              "cv_mae": 73265.0,
+              "cv_mae_sd": 2598.0,
+              "train_mae": 37418.0,
+              "gap": 35847.0
+            },
+            {
+              "candidate": 77.0,
+              "chosen": "*",
+              "eligible": "yes",
+              "leaves": 37671.0,
+              "rank": 6.0,
+              "max_depth": 12.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 1.0,
+              "n_estimators": 300.0,
+              "cv_mae": 73564.0,
+              "cv_mae_sd": 2474.0,
+              "train_mae": 44637.0,
+              "gap": 28927.0
+            },
+            {
+              "candidate": 137.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 84282.0,
+              "rank": 7.0,
+              "max_depth": 16.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 1.0,
+              "n_estimators": 300.0,
+              "cv_mae": 73596.0,
+              "cv_mae_sd": 2658.0,
+              "train_mae": 33007.0,
+              "gap": 40589.0
+            },
+            {
+              "candidate": 194.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 52510.0,
+              "rank": 8.0,
+              "max_depth": 20.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 200.0,
+              "cv_mae": 73629.0,
+              "cv_mae_sd": 2558.0,
+              "train_mae": 48510.0,
+              "gap": 25119.0
+            },
+            {
+              "candidate": 193.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 111439.0,
+              "rank": 9.0,
+              "max_depth": 20.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 1.0,
+              "n_estimators": 200.0,
+              "cv_mae": 73710.0,
+              "cv_mae_sd": 2829.0,
+              "train_mae": 28815.0,
+              "gap": 44894.0
+            },
+            {
+              "candidate": 250.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 53689.0,
+              "rank": 10.0,
+              "max_depth": 24.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 100.0,
+              "cv_mae": 73758.0,
+              "cv_mae_sd": 2455.0,
+              "train_mae": 49570.0,
+              "gap": 24188.0
+            }
+          ]
+        },
+        {
+          "kind": "fold_scores",
+          "rows": [
+            {
+              "": 1.0,
+              "train MAE": 45452.0,
+              "validation MAE": 72207.0,
+              "MAE gap": 26755.0,
+              "gap % of validation MAE": 37.05,
+              "train R2": 0.9885,
+              "validation R2": 0.9352,
+              "R2 gap": 0.0533
+            },
+            {
+              "": 2.0,
+              "train MAE": 45037.0,
+              "validation MAE": 76739.0,
+              "MAE gap": 31703.0,
+              "gap % of validation MAE": 41.31,
+              "train R2": 0.9886,
+              "validation R2": 0.9073,
+              "R2 gap": 0.0813
+            },
+            {
+              "": 3.0,
+              "train MAE": 43888.0,
+              "validation MAE": 75303.0,
+              "MAE gap": 31415.0,
+              "gap % of validation MAE": 41.72,
+              "train R2": 0.9905,
+              "validation R2": 0.9249,
+              "R2 gap": 0.0656
+            },
+            {
+              "": 4.0,
+              "train MAE": 43738.0,
+              "validation MAE": 73946.0,
+              "MAE gap": 30208.0,
+              "gap % of validation MAE": 40.85,
+              "train R2": 0.9904,
+              "validation R2": 0.9134,
+              "R2 gap": 0.077
+            },
+            {
+              "": 5.0,
+              "train MAE": 45071.0,
+              "validation MAE": 69624.0,
+              "MAE gap": 24554.0,
+              "gap % of validation MAE": 35.27,
+              "train R2": 0.9894,
+              "validation R2": 0.9059,
+              "R2 gap": 0.0836
+            },
+            {
+              "": "mean",
+              "train MAE": 44637.0,
+              "validation MAE": 73564.0,
+              "MAE gap": 28927.0,
+              "gap % of validation MAE": 39.24,
+              "train R2": 0.9895,
+              "validation R2": 0.9173,
+              "R2 gap": 0.0721
+            },
+            {
+              "": "sd",
+              "train MAE": 690.0,
+              "validation MAE": 2474.0,
+              "MAE gap": 2806.0,
+              "gap % of validation MAE": 2.59,
+              "train R2": 0.0008,
+              "validation R2": 0.0112,
+              "R2 gap": 0.0113
+            }
+          ]
+        }
+      ],
+      "ablation": [],
+      "overfit": [
+        "WARN : validation MAE ต่างจาก CV MAE ไม่เกิน 5% (generalisation)",
+        "WARN : test MAE ต่างจาก CV MAE ไม่เกิน 5% (generalisation)",
+        "PASS : จำนวนรอบอยู่ในช่วง 1 SE ของจุดที่ CV MAE ต่ำสุด (ไม่น้อยหรือมากเกินไป)",
+        "PASS : ช่องว่าง test - train แคบลงเมื่อเพิ่มข้อมูลฝึก (learning curve)"
+      ],
+      "plots": {
+        "learning": "img/XGB_new_cardb_learning.png",
+        "permutation": "img/XGB_new_cardb_permutation.png",
+        "model_based": "img/XGB_new_cardb_model_based.png"
+      },
+      "data": {
+        "rows": 29571,
+        "models": 445,
+        "split": [
+          {
+            "ชุด": "train",
+            "แถว": 23657.0,
+            "สัดส่วน (%)": 80.0,
+            "จำนวนรุ่น": 445.0
+          },
+          {
+            "ชุด": "validation",
+            "แถว": 2957.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 232.0
+          },
+          {
+            "ชุด": "test",
+            "แถว": 2957.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 246.0
+          }
+        ]
+      },
+      "missing": [],
+      "runtime": {
+        "start": "2026-10-26 00:38:39",
+        "end": "2026-10-26 01:11:24",
+        "status": "ok",
+        "seconds": 1965.0
+      }
+    },
+    {
+      "run_id": "DT_new_cardb_adj",
+      "notebook": "DT/DT_new_cardb_adj.ipynb",
+      "model": "DT",
+      "dataset": "new_cardb",
+      "variant": "adj",
+      "result": {
+        "run_id": "DT_new_cardb_adj",
+        "model": "DT",
+        "dataset": "new_car_dataset.csv",
+        "variant": "adj",
+        "version": "v5",
+        "features": [
+          "engine",
+          "mileage",
+          "car_age",
+          "brand",
+          "model",
+          "car_type",
+          "fuel",
+          "gear"
+        ],
+        "train": {
+          "R2": 0.9693675895263726,
+          "RMSE": 114034.94469373493,
+          "MAE": 58412.114936691105,
+          "MAPE": 0.09782522341432497
+        },
+        "validation": {
+          "R2": 0.8547211948159092,
+          "RMSE": 253627.55855840436,
+          "MAE": 84203.10330073867,
+          "MAPE": 0.13429568586842552
+        },
+        "test": {
+          "R2": 0.885901859241491,
+          "RMSE": 198930.4913469408,
+          "MAE": 76608.07733205233,
+          "MAPE": 0.1226054585373167
+        },
+        "best_params": {
+          "ccp_alpha": 7.0248221691964315e-06,
+          "max_depth": null,
+          "min_samples_leaf": 1
+        }
+      },
+      "importance": {
+        "run_id": "DT_new_cardb_adj",
+        "permutation": {
+          "engine": {
+            "mean": 206417.15898641967,
+            "std": 9370.441881418483
+          },
+          "mileage": {
+            "mean": 27696.08685624103,
+            "std": 2926.764723774851
+          },
+          "car_age": {
+            "mean": 176390.71187985796,
+            "std": 4888.958635922793
+          },
+          "brand": {
+            "mean": 72906.13710149922,
+            "std": 1767.6645327084098
+          },
+          "model": {
+            "mean": 51755.87071177741,
+            "std": 1180.013189629016
+          },
+          "car_type": {
+            "mean": 84377.59105655234,
+            "std": 4644.42753042442
+          },
+          "fuel": {
+            "mean": 14741.519231212955,
+            "std": 462.1045718528575
+          },
+          "gear": {
+            "mean": 5366.39482575267,
+            "std": 513.6113151108943
+          }
+        },
+        "model_based": {
+          "engine": 0.26319533726886674,
+          "mileage": 0.05409105305605485,
+          "car_age": 0.3698139638595046,
+          "brand": 0.11492322329464828,
+          "model": 0.08173268510447641,
+          "car_type": 0.09722816833704118,
+          "fuel": 0.01403705109907881,
+          "gear": 0.004978517980329151
+        }
+      },
+      "cv": {
+        "mean": 87038.0,
+        "sd": 1968.0,
+        "source": "ตาราง CV train เทียบ validation",
+        "precision": "printed integer baht"
+      },
+      "cv_tables": [
+        {
+          "kind": "search_candidates",
+          "rows": [
+            {
+              "candidate": 144.0,
+              "chosen": "*",
+              "eligible": "yes",
+              "leaves": 1403.0,
+              "rank": 1.0,
+              "max_depth": "None",
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 7.025e-06,
+              "cv_mae": 87038.0,
+              "cv_mae_sd": 1968.0,
+              "train_mae": 55705.0,
+              "gap": 31333.0
+            },
+            {
+              "candidate": 114.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 2381.0,
+              "rank": 2.0,
+              "max_depth": "None",
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 3.398e-06,
+              "cv_mae": 87331.0,
+              "cv_mae_sd": 2131.0,
+              "train_mae": 45189.0,
+              "gap": 42142.0
+            },
+            {
+              "candidate": 84.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 3.0,
+              "max_depth": "None",
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 1.644e-06,
+              "cv_mae": 89507.0,
+              "cv_mae_sd": 2646.0,
+              "train_mae": 34587.0,
+              "gap": 54921.0
+            },
+            {
+              "candidate": 138.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 4.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 7.025e-06,
+              "cv_mae": 89514.0,
+              "cv_mae_sd": 2879.0,
+              "train_mae": 57335.0,
+              "gap": 32179.0
+            },
+            {
+              "candidate": 174.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 5.0,
+              "max_depth": "None",
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 1.459e-05,
+              "cv_mae": 89799.0,
+              "cv_mae_sd": 2175.0,
+              "train_mae": 66272.0,
+              "gap": 23527.0
+            },
+            {
+              "candidate": 108.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 6.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 3.398e-06,
+              "cv_mae": 89846.0,
+              "cv_mae_sd": 2906.0,
+              "train_mae": 48124.0,
+              "gap": 41722.0
+            },
+            {
+              "candidate": 78.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 7.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 1.644e-06,
+              "cv_mae": 91375.0,
+              "cv_mae_sd": 3573.0,
+              "train_mae": 39325.0,
+              "gap": 52050.0
+            },
+            {
+              "candidate": 54.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 8.0,
+              "max_depth": "None",
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 7.94e-07,
+              "cv_mae": 91504.0,
+              "cv_mae_sd": 2901.0,
+              "train_mae": 24369.0,
+              "gap": 67136.0
+            },
+            {
+              "candidate": 168.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 9.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 1.459e-05,
+              "cv_mae": 91786.0,
+              "cv_mae_sd": 3114.0,
+              "train_mae": 67171.0,
+              "gap": 24615.0
+            },
+            {
+              "candidate": 132.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 10.0,
+              "max_depth": 20.0,
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 7.025e-06,
+              "cv_mae": 91985.0,
+              "cv_mae_sd": 2433.0,
+              "train_mae": 62083.0,
+              "gap": 29902.0
+            }
+          ]
+        },
+        {
+          "kind": "fold_scores",
+          "rows": [
+            {
+              "": 1.0,
+              "train MAE": 56218.0,
+              "validation MAE": 85612.0,
+              "MAE gap": 29395.0,
+              "gap % of validation MAE": 34.33,
+              "train R2": 0.9719,
+              "validation R2": 0.8958,
+              "R2 gap": 0.0761
+            },
+            {
+              "": 2.0,
+              "train MAE": 55240.0,
+              "validation MAE": 89773.0,
+              "MAE gap": 34533.0,
+              "gap % of validation MAE": 38.47,
+              "train R2": 0.9743,
+              "validation R2": 0.8714,
+              "R2 gap": 0.1029
+            },
+            {
+              "": 3.0,
+              "train MAE": 55674.0,
+              "validation MAE": 87687.0,
+              "MAE gap": 32013.0,
+              "gap % of validation MAE": 36.51,
+              "train R2": 0.9739,
+              "validation R2": 0.8502,
+              "R2 gap": 0.1237
+            },
+            {
+              "": 4.0,
+              "train MAE": 55357.0,
+              "validation MAE": 87998.0,
+              "MAE gap": 32641.0,
+              "gap % of validation MAE": 37.09,
+              "train R2": 0.9749,
+              "validation R2": 0.8538,
+              "R2 gap": 0.1212
+            },
+            {
+              "": 5.0,
+              "train MAE": 56037.0,
+              "validation MAE": 84121.0,
+              "MAE gap": 28084.0,
+              "gap % of validation MAE": 33.39,
+              "train R2": 0.9746,
+              "validation R2": 0.8186,
+              "R2 gap": 0.156
+            },
+            {
+              "": "mean",
+              "train MAE": 55705.0,
+              "validation MAE": 87038.0,
+              "MAE gap": 31333.0,
+              "gap % of validation MAE": 35.96,
+              "train R2": 0.9739,
+              "validation R2": 0.8579,
+              "R2 gap": 0.116
+            },
+            {
+              "": "sd",
+              "train MAE": 377.0,
+              "validation MAE": 1968.0,
+              "MAE gap": 2312.0,
+              "gap % of validation MAE": 1.85,
+              "train R2": 0.0011,
+              "validation R2": 0.0254,
+              "R2 gap": 0.0263
+            }
+          ]
+        }
+      ],
+      "ablation": [
+        {
+          "variant": "none",
+          "CV MAE mean": 92680.915239,
+          "CV MAE SD": 5134.867063,
+          "test MAE": 78463.430419,
+          "test RMSE": 168668.506805,
+          "test R2": 0.917975,
+          "test MAPE": 0.135576,
+          "change test MAE (baht)": 0.0,
+          "change test MAE (%)": 0.0,
+          "change CV MAE mean (baht)": 0.0,
+          "change CV MAE mean (%)": 0.0
+        },
+        {
+          "variant": "scale only",
+          "CV MAE mean": 92229.63292,
+          "CV MAE SD": 4807.302917,
+          "test MAE": 78486.426699,
+          "test RMSE": 168647.683079,
+          "test R2": 0.917996,
+          "test MAPE": 0.135814,
+          "change test MAE (baht)": 22.99628,
+          "change test MAE (%)": 0.029308,
+          "change CV MAE mean (baht)": -451.28232,
+          "change CV MAE mean (%)": -0.48692
+        },
+        {
+          "variant": "log only",
+          "CV MAE mean": 87011.263071,
+          "CV MAE SD": 1939.515556,
+          "test MAE": 76600.611362,
+          "test RMSE": 198928.708118,
+          "test R2": 0.885904,
+          "test MAPE": 0.122501,
+          "change test MAE (baht)": -1862.819057,
+          "change test MAE (%)": -2.374124,
+          "change CV MAE mean (baht)": -5669.652168,
+          "change CV MAE mean (%)": -6.117389
+        },
+        {
+          "variant": "both",
+          "CV MAE mean": 87038.074414,
+          "CV MAE SD": 1968.140866,
+          "test MAE": 76608.077332,
+          "test RMSE": 198930.491347,
+          "test R2": 0.885902,
+          "test MAPE": 0.122605,
+          "change test MAE (baht)": -1855.353087,
+          "change test MAE (%)": -2.364609,
+          "change CV MAE mean (baht)": -5642.840825,
+          "change CV MAE mean (%)": -6.08846
+        }
+      ],
+      "overfit": [
+        "PASS validation เทียบ CV     : ต่างกัน -2,835 บาท (-3.26%) เกณฑ์ ±8,975 บาท (2 SE)",
+        "WARN test เทียบ CV           : ต่างกัน -10,430 บาท (-11.98%) เกณฑ์ ±6,979 บาท (2 SE)",
+        "PASS test เทียบ validation   : ต่างกัน -7,595 บาท (-9.02%) เกณฑ์ ±11,093 บาท (2 SE)",
+        "PASS learning curve (2,365 -> 23,657 แถว): test MAE 123,155 -> 76,586 บาท, gap 102,570 -> 18,198 บาท (ต้องลดลงทั้งคู่)"
+      ],
+      "plots": {
+        "learning": "img/DT_new_cardb_adj_learning.png",
+        "permutation": "img/DT_new_cardb_adj_permutation.png",
+        "model_based": "img/DT_new_cardb_adj_model_based.png"
+      },
+      "data": {
+        "rows": 29571,
+        "models": 445,
+        "split": [
+          {
+            "ชุด": "train",
+            "แถว": 23657.0,
+            "สัดส่วน (%)": 80.0,
+            "จำนวนรุ่น": 445.0
+          },
+          {
+            "ชุด": "validation",
+            "แถว": 2957.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 232.0
+          },
+          {
+            "ชุด": "test",
+            "แถว": 2957.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 246.0
+          }
+        ]
+      },
+      "missing": [],
+      "runtime": {
+        "start": "2026-10-26 01:11:24",
+        "end": "2026-10-26 01:20:38",
+        "status": "ok",
+        "seconds": 553.0
+      }
+    },
+    {
+      "run_id": "RF_new_cardb_adj",
+      "notebook": "RF/RF_new_cardb_adj.ipynb",
+      "model": "RF",
+      "dataset": "new_cardb",
+      "variant": "adj",
+      "result": {
+        "run_id": "RF_new_cardb_adj",
+        "model": "RF",
+        "dataset": "new_car_dataset.csv",
+        "variant": "adj",
+        "version": "v5",
+        "features": [
+          "engine",
+          "mileage",
+          "car_age",
+          "brand",
+          "model",
+          "car_type",
+          "fuel",
+          "gear"
+        ],
+        "train": {
+          "R2": 0.9811698242005582,
+          "RMSE": 89407.62470615542,
+          "MAE": 31367.01630754708,
+          "MAPE": 0.04867676161210098
+        },
+        "validation": {
+          "R2": 0.9053901063245325,
+          "RMSE": 204674.429560051,
+          "MAE": 71727.91526026257,
+          "MAPE": 0.11593283422186697
+        },
+        "test": {
+          "R2": 0.9343108185309764,
+          "RMSE": 150941.61647783904,
+          "MAE": 66012.85894907241,
+          "MAPE": 0.11202098600537153
+        },
+        "best_params": {
+          "max_features": 0.6,
+          "min_samples_leaf": 1
+        }
+      },
+      "importance": {
+        "run_id": "RF_new_cardb_adj",
+        "permutation": {
+          "engine": {
+            "mean": 192404.5932458779,
+            "std": 6244.448146673168
+          },
+          "mileage": {
+            "mean": 35665.95636183845,
+            "std": 2136.7631535480923
+          },
+          "car_age": {
+            "mean": 165183.77535836535,
+            "std": 3808.861154257736
+          },
+          "brand": {
+            "mean": 70368.56270557031,
+            "std": 1696.5387576222058
+          },
+          "model": {
+            "mean": 34262.76259624234,
+            "std": 511.43537263556425
+          },
+          "car_type": {
+            "mean": 60426.726066579795,
+            "std": 2906.0902912634187
+          },
+          "fuel": {
+            "mean": 19655.12331941716,
+            "std": 1505.8182261101658
+          },
+          "gear": {
+            "mean": 8778.275509833627,
+            "std": 1003.8570262684095
+          }
+        },
+        "model_based": {
+          "engine": 0.22712970361893162,
+          "mileage": 0.0718553401882515,
+          "car_age": 0.34552761576919755,
+          "brand": 0.12129616607314557,
+          "model": 0.08681557538554131,
+          "car_type": 0.08567244245265397,
+          "fuel": 0.04458484852296703,
+          "gear": 0.01711830798931137
+        }
+      },
+      "cv": {
+        "mean": 76110.0,
+        "sd": 2201.0,
+        "source": "ตาราง CV train เทียบ validation",
+        "precision": "printed integer baht"
+      },
+      "cv_tables": [
+        {
+          "kind": "search_candidates",
+          "rows": [
+            {
+              "candidate": 0.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 3247497.0,
+              "rank": 1.0,
+              "max_features": 0.2,
+              "min_samples_leaf": 1.0,
+              "cv_mae": 75370.0,
+              "cv_mae_sd": 2021.0,
+              "train_mae": 31589.0,
+              "gap": 43781.0
+            },
+            {
+              "candidate": 6.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 3244330.0,
+              "rank": 2.0,
+              "max_features": 0.3,
+              "min_samples_leaf": 1.0,
+              "cv_mae": 75615.0,
+              "cv_mae_sd": 2280.0,
+              "train_mae": 31634.0,
+              "gap": 43981.0
+            },
+            {
+              "candidate": 12.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 3241190.0,
+              "rank": 3.0,
+              "max_features": 0.4,
+              "min_samples_leaf": 1.0,
+              "cv_mae": 75760.0,
+              "cv_mae_sd": 2229.0,
+              "train_mae": 31656.0,
+              "gap": 44104.0
+            },
+            {
+              "candidate": 18.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 3237544.0,
+              "rank": 4.0,
+              "max_features": 0.5,
+              "min_samples_leaf": 1.0,
+              "cv_mae": 76045.0,
+              "cv_mae_sd": 2130.0,
+              "train_mae": 31692.0,
+              "gap": 44354.0
+            },
+            {
+              "candidate": 24.0,
+              "chosen": "*",
+              "eligible": "yes",
+              "leaves": 3233630.0,
+              "rank": 5.0,
+              "max_features": 0.6,
+              "min_samples_leaf": 1.0,
+              "cv_mae": 76110.0,
+              "cv_mae_sd": 2201.0,
+              "train_mae": 31726.0,
+              "gap": 44384.0
+            },
+            {
+              "candidate": 30.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 3224762.0,
+              "rank": 6.0,
+              "max_features": 0.8,
+              "min_samples_leaf": 1.0,
+              "cv_mae": 76524.0,
+              "cv_mae_sd": 1999.0,
+              "train_mae": 31755.0,
+              "gap": 44769.0
+            },
+            {
+              "candidate": 36.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 3212863.0,
+              "rank": 7.0,
+              "max_features": 1.0,
+              "min_samples_leaf": 1.0,
+              "cv_mae": 77281.0,
+              "cv_mae_sd": 1812.0,
+              "train_mae": 32034.0,
+              "gap": 45247.0
+            },
+            {
+              "candidate": 13.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1286208.0,
+              "rank": 8.0,
+              "max_features": 0.4,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 77885.0,
+              "cv_mae_sd": 2731.0,
+              "train_mae": 52661.0,
+              "gap": 25224.0
+            },
+            {
+              "candidate": 19.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1343939.0,
+              "rank": 9.0,
+              "max_features": 0.5,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 77966.0,
+              "cv_mae_sd": 2671.0,
+              "train_mae": 51110.0,
+              "gap": 26855.0
+            },
+            {
+              "candidate": 7.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1199338.0,
+              "rank": 10.0,
+              "max_features": 0.3,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 78093.0,
+              "cv_mae_sd": 2779.0,
+              "train_mae": 55032.0,
+              "gap": 23061.0
+            }
+          ]
+        },
+        {
+          "kind": "fold_scores",
+          "rows": [
+            {
+              "": 1.0,
+              "train MAE": 31966.0,
+              "validation MAE": 75730.0,
+              "MAE gap": 43765.0,
+              "gap % of validation MAE": 57.79,
+              "train R2": 0.9785,
+              "validation R2": 0.9196,
+              "R2 gap": 0.059
+            },
+            {
+              "": 2.0,
+              "train MAE": 31799.0,
+              "validation MAE": 79033.0,
+              "MAE gap": 47234.0,
+              "gap % of validation MAE": 59.76,
+              "train R2": 0.9774,
+              "validation R2": 0.8969,
+              "R2 gap": 0.0805
+            },
+            {
+              "": 3.0,
+              "train MAE": 31547.0,
+              "validation MAE": 76437.0,
+              "MAE gap": 44890.0,
+              "gap % of validation MAE": 58.73,
+              "train R2": 0.9794,
+              "validation R2": 0.9084,
+              "R2 gap": 0.071
+            },
+            {
+              "": 4.0,
+              "train MAE": 31480.0,
+              "validation MAE": 77051.0,
+              "MAE gap": 45571.0,
+              "gap % of validation MAE": 59.14,
+              "train R2": 0.9814,
+              "validation R2": 0.8932,
+              "R2 gap": 0.0883
+            },
+            {
+              "": 5.0,
+              "train MAE": 31838.0,
+              "validation MAE": 72298.0,
+              "MAE gap": 40461.0,
+              "gap % of validation MAE": 55.96,
+              "train R2": 0.9814,
+              "validation R2": 0.8898,
+              "R2 gap": 0.0916
+            },
+            {
+              "": "mean",
+              "train MAE": 31726.0,
+              "validation MAE": 76110.0,
+              "MAE gap": 44384.0,
+              "gap % of validation MAE": 58.28,
+              "train R2": 0.9796,
+              "validation R2": 0.9015,
+              "R2 gap": 0.0781
+            },
+            {
+              "": "sd",
+              "train MAE": 183.0,
+              "validation MAE": 2201.0,
+              "MAE gap": 2261.0,
+              "gap % of validation MAE": 1.32,
+              "train R2": 0.0016,
+              "validation R2": 0.011,
+              "R2 gap": 0.0119
+            }
+          ]
+        }
+      ],
+      "ablation": [
+        {
+          "variant": "none",
+          "CV MAE mean": 74802.73172,
+          "CV MAE SD": 2646.115622,
+          "test MAE": 65503.995544,
+          "test RMSE": 134859.098191,
+          "test R2": 0.947563,
+          "test MAPE": 0.113592,
+          "change test MAE (baht)": 0.0,
+          "change test MAE (%)": 0.0,
+          "change CV MAE mean (baht)": 0.0,
+          "change CV MAE mean (%)": 0.0
+        },
+        {
+          "variant": "scale only",
+          "CV MAE mean": 74755.950334,
+          "CV MAE SD": 2569.462097,
+          "test MAE": 65740.559298,
+          "test RMSE": 135586.037981,
+          "test R2": 0.946996,
+          "test MAPE": 0.113595,
+          "change test MAE (baht)": 236.563754,
+          "change test MAE (%)": 0.361144,
+          "change CV MAE mean (baht)": -46.781387,
+          "change CV MAE mean (%)": -0.06254
+        },
+        {
+          "variant": "log only",
+          "CV MAE mean": 76105.774904,
+          "CV MAE SD": 2210.672714,
+          "test MAE": 65916.771741,
+          "test RMSE": 150467.493423,
+          "test R2": 0.934723,
+          "test MAPE": 0.112002,
+          "change test MAE (baht)": 412.776197,
+          "change test MAE (%)": 0.630154,
+          "change CV MAE mean (baht)": 1303.043183,
+          "change CV MAE mean (%)": 1.741973
+        },
+        {
+          "variant": "both",
+          "CV MAE mean": 76110.107515,
+          "CV MAE SD": 2200.545945,
+          "test MAE": 66012.858949,
+          "test RMSE": 150941.616478,
+          "test R2": 0.934311,
+          "test MAPE": 0.112021,
+          "change test MAE (baht)": 508.863405,
+          "change test MAE (%)": 0.776843,
+          "change CV MAE mean (baht)": 1307.375794,
+          "change CV MAE mean (%)": 1.747765
+        }
+      ],
+      "overfit": [
+        "PASS validation เทียบ CV     : ต่างกัน -4,382 บาท (-5.76%) เกณฑ์ ±7,321 บาท (2 SE)",
+        "WARN test เทียบ CV           : ต่างกัน -10,097 บาท (-13.27%) เกณฑ์ ±5,367 บาท (2 SE)",
+        "PASS validation เทียบ OOB    : ต่างกัน -2,322 บาท (-3.14%) เกณฑ์ ±7,429 บาท (2 SE)",
+        "WARN test เทียบ OOB          : ต่างกัน -8,037 บาท (-10.85%) เกณฑ์ ±5,514 บาท (2 SE)",
+        "PASS test เทียบ validation   : ต่างกัน -5,715 บาท (-7.97%) เกณฑ์ ±8,640 บาท (2 SE)",
+        "PASS learning curve (2,365 -> 23,657 แถว): test MAE 91,156 -> 66,012 บาท, gap 48,765 -> 34,595 บาท (ต้องลดลงทั้งคู่)"
+      ],
+      "plots": {
+        "learning": "img/RF_new_cardb_adj_learning.png",
+        "permutation": "img/RF_new_cardb_adj_permutation.png",
+        "model_based": "img/RF_new_cardb_adj_model_based.png"
+      },
+      "data": {
+        "rows": 29571,
+        "models": 445,
+        "split": [
+          {
+            "ชุด": "train",
+            "แถว": 23657.0,
+            "สัดส่วน (%)": 80.0,
+            "จำนวนรุ่น": 445.0
+          },
+          {
+            "ชุด": "validation",
+            "แถว": 2957.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 232.0
+          },
+          {
+            "ชุด": "test",
+            "แถว": 2957.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 246.0
+          }
+        ]
+      },
+      "missing": [],
+      "runtime": {
+        "start": "2026-10-26 01:20:38",
+        "end": "2026-10-26 01:47:16",
+        "status": "ok",
+        "seconds": 1598.0
+      }
+    },
+    {
+      "run_id": "XGB_new_cardb_adj",
+      "notebook": "XGB/XGB_new_cardb_adj.ipynb",
+      "model": "XGB",
+      "dataset": "new_cardb",
+      "variant": "adj",
+      "result": {
+        "run_id": "XGB_new_cardb_adj",
+        "model": "XGB",
+        "dataset": "new_car_dataset.csv",
+        "variant": "adj",
+        "version": "v5",
+        "features": [
+          "engine",
+          "mileage",
+          "car_age",
+          "brand",
+          "model",
+          "car_type",
+          "fuel",
+          "gear"
+        ],
+        "train": {
+          "R2": 0.9779476523399353,
+          "RMSE": 96755.24254530088,
+          "MAE": 48492.01953125,
+          "MAPE": 0.0809291391817826
+        },
+        "validation": {
+          "R2": 0.9236561059951782,
+          "RMSE": 183857.97092321017,
+          "MAE": 67528.03125,
+          "MAPE": 0.10970971636956543
+        },
+        "test": {
+          "R2": 0.9385710954666138,
+          "RMSE": 145964.89835573483,
+          "MAE": 62883.2265625,
+          "MAPE": 0.10456382641088388
+        },
+        "best_params": {
+          "max_depth": 12,
+          "min_child_weight": 1,
+          "n_estimators": 200,
+          "reg_lambda": 1.0
+        }
+      },
+      "importance": {
+        "run_id": "XGB_new_cardb_adj",
+        "permutation": {
+          "engine": {
+            "mean": 155351.79375,
+            "std": 4442.848779421722
+          },
+          "mileage": {
+            "mean": 34100.53359375,
+            "std": 2226.842562216742
+          },
+          "car_age": {
+            "mean": 159846.1484375,
+            "std": 3425.068699720158
+          },
+          "brand": {
+            "mean": 92886.415625,
+            "std": 2532.7051757166787
+          },
+          "model": {
+            "mean": 34436.2984375,
+            "std": 769.1333871294794
+          },
+          "car_type": {
+            "mean": 60426.025,
+            "std": 2418.8509708939346
+          },
+          "fuel": {
+            "mean": 17169.80703125,
+            "std": 1643.9044978005243
+          },
+          "gear": {
+            "mean": 8330.621875,
+            "std": 707.1774940361784
+          }
+        },
+        "model_based": {
+          "engine": 0.014278841663280835,
+          "mileage": 0.0006192410029757572,
+          "car_age": 0.008503077026742207,
+          "brand": 0.22780143565708613,
+          "model": 0.5791181054733326,
+          "car_type": 0.15113093256720103,
+          "fuel": 0.014115830833547812,
+          "gear": 0.0044325357758335454
+        }
+      },
+      "cv": {
+        "mean": 72802.0,
+        "sd": 2478.0,
+        "source": "ตาราง CV train เทียบ validation",
+        "precision": "printed integer baht"
+      },
+      "cv_tables": [
+        {
+          "kind": "search_candidates",
+          "rows": [
+            {
+              "candidate": 138.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 87291.0,
+              "rank": 1.0,
+              "max_depth": 16.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 300.0,
+              "cv_mae": 72286.0,
+              "cv_mae_sd": 2359.0,
+              "train_mae": 46045.0,
+              "gap": 26241.0
+            },
+            {
+              "candidate": 254.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 146910.0,
+              "rank": 2.0,
+              "max_depth": 24.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 200.0,
+              "cv_mae": 72413.0,
+              "cv_mae_sd": 2278.0,
+              "train_mae": 39919.0,
+              "gap": 32494.0
+            },
+            {
+              "candidate": 194.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 98173.0,
+              "rank": 3.0,
+              "max_depth": 20.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 200.0,
+              "cv_mae": 72447.0,
+              "cv_mae_sd": 2241.0,
+              "train_mae": 45385.0,
+              "gap": 27063.0
+            },
+            {
+              "candidate": 77.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 59839.0,
+              "rank": 4.0,
+              "max_depth": 12.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 1.0,
+              "n_estimators": 300.0,
+              "cv_mae": 72500.0,
+              "cv_mae_sd": 2496.0,
+              "train_mae": 41672.0,
+              "gap": 30828.0
+            },
+            {
+              "candidate": 198.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 164950.0,
+              "rank": 5.0,
+              "max_depth": 20.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 300.0,
+              "cv_mae": 72527.0,
+              "cv_mae_sd": 2340.0,
+              "train_mae": 37304.0,
+              "gap": 35223.0
+            },
+            {
+              "candidate": 73.0,
+              "chosen": "*",
+              "eligible": "yes",
+              "leaves": 43815.0,
+              "rank": 6.0,
+              "max_depth": 12.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 1.0,
+              "n_estimators": 200.0,
+              "cv_mae": 72802.0,
+              "cv_mae_sd": 2478.0,
+              "train_mae": 46369.0,
+              "gap": 26433.0
+            },
+            {
+              "candidate": 250.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 96467.0,
+              "rank": 7.0,
+              "max_depth": 24.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 100.0,
+              "cv_mae": 73025.0,
+              "cv_mae_sd": 2112.0,
+              "train_mae": 47207.0,
+              "gap": 25818.0
+            },
+            {
+              "candidate": 134.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 58382.0,
+              "rank": 8.0,
+              "max_depth": 16.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 200.0,
+              "cv_mae": 73061.0,
+              "cv_mae_sd": 2217.0,
+              "train_mae": 51827.0,
+              "gap": 21234.0
+            },
+            {
+              "candidate": 258.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 269071.0,
+              "rank": 9.0,
+              "max_depth": 24.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 300.0,
+              "cv_mae": 73174.0,
+              "cv_mae_sd": 2454.0,
+              "train_mae": 30411.0,
+              "gap": 42763.0
+            },
+            {
+              "candidate": 72.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 73330.0,
+              "rank": 10.0,
+              "max_depth": 12.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 0.0,
+              "n_estimators": 200.0,
+              "cv_mae": 73181.0,
+              "cv_mae_sd": 2504.0,
+              "train_mae": 37438.0,
+              "gap": 35742.0
+            }
+          ]
+        },
+        {
+          "kind": "fold_scores",
+          "rows": [
+            {
+              "": 1.0,
+              "train MAE": 45803.0,
+              "validation MAE": 73833.0,
+              "MAE gap": 28030.0,
+              "gap % of validation MAE": 37.96,
+              "train R2": 0.9807,
+              "validation R2": 0.9195,
+              "R2 gap": 0.0612
+            },
+            {
+              "": 2.0,
+              "train MAE": 46439.0,
+              "validation MAE": 74964.0,
+              "MAE gap": 28526.0,
+              "gap % of validation MAE": 38.05,
+              "train R2": 0.9801,
+              "validation R2": 0.9107,
+              "R2 gap": 0.0694
+            },
+            {
+              "": 3.0,
+              "train MAE": 46048.0,
+              "validation MAE": 73888.0,
+              "MAE gap": 27840.0,
+              "gap % of validation MAE": 37.68,
+              "train R2": 0.9808,
+              "validation R2": 0.916,
+              "R2 gap": 0.0648
+            },
+            {
+              "": 4.0,
+              "train MAE": 47163.0,
+              "validation MAE": 73366.0,
+              "MAE gap": 26203.0,
+              "gap % of validation MAE": 35.71,
+              "train R2": 0.9799,
+              "validation R2": 0.9029,
+              "R2 gap": 0.077
+            },
+            {
+              "": 5.0,
+              "train MAE": 46393.0,
+              "validation MAE": 67958.0,
+              "MAE gap": 21566.0,
+              "gap % of validation MAE": 31.73,
+              "train R2": 0.9807,
+              "validation R2": 0.9076,
+              "R2 gap": 0.0731
+            },
+            {
+              "": "mean",
+              "train MAE": 46369.0,
+              "validation MAE": 72802.0,
+              "MAE gap": 26433.0,
+              "gap % of validation MAE": 36.23,
+              "train R2": 0.9805,
+              "validation R2": 0.9114,
+              "R2 gap": 0.0691
+            },
+            {
+              "": "sd",
+              "train MAE": 460.0,
+              "validation MAE": 2478.0,
+              "MAE gap": 2556.0,
+              "gap % of validation MAE": 2.4,
+              "train R2": 0.0004,
+              "validation R2": 0.0059,
+              "R2 gap": 0.0056
+            }
+          ]
+        }
+      ],
+      "ablation": [
+        {
+          "variant": "none",
+          "CV MAE mean": 74363.573438,
+          "CV MAE SD": 2440.78688,
+          "test MAE": 65014.855469,
+          "test RMSE": 143521.958515,
+          "test R2": 0.94061,
+          "test MAPE": 0.112355,
+          "change test MAE (baht)": 0.0,
+          "change test MAE (%)": 0.0,
+          "change CV MAE mean (baht)": 0.0,
+          "change CV MAE mean (%)": 0.0
+        },
+        {
+          "variant": "scale only",
+          "CV MAE mean": 74363.573438,
+          "CV MAE SD": 2440.78688,
+          "test MAE": 65014.855469,
+          "test RMSE": 143521.958515,
+          "test R2": 0.94061,
+          "test MAPE": 0.112355,
+          "change test MAE (baht)": 0.0,
+          "change test MAE (%)": 0.0,
+          "change CV MAE mean (baht)": 0.0,
+          "change CV MAE mean (%)": 0.0
+        },
+        {
+          "variant": "log only",
+          "CV MAE mean": 72801.9125,
+          "CV MAE SD": 2477.781986,
+          "test MAE": 62883.226562,
+          "test RMSE": 145964.898356,
+          "test R2": 0.938571,
+          "test MAPE": 0.104564,
+          "change test MAE (baht)": -2131.628906,
+          "change test MAE (%)": -3.27868,
+          "change CV MAE mean (baht)": -1561.660937,
+          "change CV MAE mean (%)": -2.100035
+        },
+        {
+          "variant": "both",
+          "CV MAE mean": 72801.9125,
+          "CV MAE SD": 2477.781986,
+          "test MAE": 62883.226562,
+          "test RMSE": 145964.898356,
+          "test R2": 0.938571,
+          "test MAPE": 0.104564,
+          "change test MAE (baht)": -2131.628906,
+          "change test MAE (%)": -3.27868,
+          "change CV MAE mean (baht)": -1561.660937,
+          "change CV MAE mean (%)": -2.100035
+        }
+      ],
+      "overfit": [
+        "WARN : validation MAE ต่างจาก CV MAE ไม่เกิน 5% (generalisation)",
+        "WARN : test MAE ต่างจาก CV MAE ไม่เกิน 5% (generalisation)",
+        "PASS : จำนวนรอบอยู่ในช่วง 1 SE ของจุดที่ CV MAE ต่ำสุด (ไม่น้อยหรือมากเกินไป)",
+        "PASS : ช่องว่าง test - train แคบลงเมื่อเพิ่มข้อมูลฝึก (learning curve)"
+      ],
+      "plots": {
+        "learning": "img/XGB_new_cardb_adj_learning.png",
+        "permutation": "img/XGB_new_cardb_adj_permutation.png",
+        "model_based": "img/XGB_new_cardb_adj_model_based.png"
+      },
+      "data": {
+        "rows": 29571,
+        "models": 445,
+        "split": [
+          {
+            "ชุด": "train",
+            "แถว": 23657.0,
+            "สัดส่วน (%)": 80.0,
+            "จำนวนรุ่น": 445.0
+          },
+          {
+            "ชุด": "validation",
+            "แถว": 2957.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 232.0
+          },
+          {
+            "ชุด": "test",
+            "แถว": 2957.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 246.0
+          }
+        ]
+      },
+      "missing": [],
+      "runtime": {
+        "start": "2026-10-26 01:47:16",
+        "end": "2026-10-26 02:38:10",
+        "status": "ok",
+        "seconds": 3054.0
+      }
+    },
+    {
+      "run_id": "DT_merge50minC",
+      "notebook": "DT/DT_merge50minC.ipynb",
+      "model": "DT",
+      "dataset": "merge50minC",
+      "variant": "base",
+      "result": {
+        "run_id": "DT_merge50minC",
+        "model": "DT",
+        "dataset": "merge_50min_clean.csv",
+        "variant": "base",
+        "version": "v5",
+        "features": [
+          "engine",
+          "mileage",
+          "car_age",
+          "brand",
+          "model",
+          "car_type",
+          "fuel",
+          "gear"
+        ],
+        "train": {
+          "R2": 0.9513040408249569,
+          "RMSE": 72702.47744366423,
+          "MAE": 48993.646198384165,
+          "MAPE": 0.09671673574641712
+        },
+        "validation": {
+          "R2": 0.9277946622819477,
+          "RMSE": 86671.25018158511,
+          "MAE": 56706.497806234715,
+          "MAPE": 0.1088683960778833
+        },
+        "test": {
+          "R2": 0.9286139391648999,
+          "RMSE": 87453.83873526199,
+          "MAE": 57794.46356523799,
+          "MAPE": 0.109997324835545
+        },
+        "best_params": {
+          "ccp_alpha": 564591.7380491865,
+          "max_depth": 25,
+          "min_samples_leaf": 5
+        }
+      },
+      "importance": {
+        "run_id": "DT_merge50minC",
+        "permutation": {
+          "engine": {
+            "mean": 132055.18999013683,
+            "std": 1949.9216155468246
+          },
+          "mileage": {
+            "mean": 17604.282479798225,
+            "std": 908.7276216161168
+          },
+          "car_age": {
+            "mean": 129231.62074399593,
+            "std": 1413.6219407445647
+          },
+          "brand": {
+            "mean": 54990.42676471422,
+            "std": 1164.9463479046724
+          },
+          "model": {
+            "mean": 38407.47287977014,
+            "std": 998.3420068090463
+          },
+          "car_type": {
+            "mean": 61544.42292075511,
+            "std": 1208.8869425757646
+          },
+          "fuel": {
+            "mean": 14016.480875375852,
+            "std": 580.9894732715849
+          },
+          "gear": {
+            "mean": 6016.032557466123,
+            "std": 194.96044922064527
+          }
+        },
+        "model_based": {
+          "engine": 0.21462862443568317,
+          "mileage": 0.058403581757196864,
+          "car_age": 0.2664338690851022,
+          "brand": 0.12628058425826896,
+          "model": 0.1423701152267068,
+          "car_type": 0.16177058067779235,
+          "fuel": 0.021311148543833775,
+          "gear": 0.008801496015415964
+        }
+      },
+      "cv": {
+        "mean": 58291.0,
+        "sd": 162.0,
+        "source": "ตาราง CV train เทียบ validation",
+        "precision": "printed integer baht"
+      },
+      "cv_tables": [
+        {
+          "kind": "search_candidates",
+          "rows": [
+            {
+              "candidate": 109.0,
+              "chosen": "*",
+              "eligible": "yes",
+              "leaves": 1502.0,
+              "rank": 1.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 5.0,
+              "ccp_alpha": 564600.0,
+              "cv_mae": 58291.0,
+              "cv_mae_sd": 162.0,
+              "train_mae": 48651.0,
+              "gap": 9640.0
+            },
+            {
+              "candidate": 115.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 1575.0,
+              "rank": 2.0,
+              "max_depth": "None",
+              "min_samples_leaf": 5.0,
+              "ccp_alpha": 564600.0,
+              "cv_mae": 58325.0,
+              "cv_mae_sd": 240.0,
+              "train_mae": 48417.0,
+              "gap": 9908.0
+            },
+            {
+              "candidate": 79.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 2094.0,
+              "rank": 3.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 5.0,
+              "ccp_alpha": 272800.0,
+              "cv_mae": 58345.0,
+              "cv_mae_sd": 109.0,
+              "train_mae": 46935.0,
+              "gap": 11410.0
+            },
+            {
+              "candidate": 85.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 4.0,
+              "max_depth": "None",
+              "min_samples_leaf": 5.0,
+              "ccp_alpha": 272800.0,
+              "cv_mae": 58375.0,
+              "cv_mae_sd": 175.0,
+              "train_mae": 46601.0,
+              "gap": 11774.0
+            },
+            {
+              "candidate": 49.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 5.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 5.0,
+              "ccp_alpha": 131700.0,
+              "cv_mae": 58503.0,
+              "cv_mae_sd": 147.0,
+              "train_mae": 45809.0,
+              "gap": 12693.0
+            },
+            {
+              "candidate": 55.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 6.0,
+              "max_depth": "None",
+              "min_samples_leaf": 5.0,
+              "ccp_alpha": 131700.0,
+              "cv_mae": 58557.0,
+              "cv_mae_sd": 178.0,
+              "train_mae": 45430.0,
+              "gap": 13127.0
+            },
+            {
+              "candidate": 138.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 7.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 1168000.0,
+              "cv_mae": 58688.0,
+              "cv_mae_sd": 164.0,
+              "train_mae": 45070.0,
+              "gap": 13618.0
+            },
+            {
+              "candidate": 144.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 8.0,
+              "max_depth": "None",
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 1168000.0,
+              "cv_mae": 58693.0,
+              "cv_mae_sd": 110.0,
+              "train_mae": 44553.0,
+              "gap": 14140.0
+            },
+            {
+              "candidate": 145.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 9.0,
+              "max_depth": "None",
+              "min_samples_leaf": 5.0,
+              "ccp_alpha": 1168000.0,
+              "cv_mae": 58736.0,
+              "cv_mae_sd": 186.0,
+              "train_mae": 50788.0,
+              "gap": 7948.0
+            },
+            {
+              "candidate": 139.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 10.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 5.0,
+              "ccp_alpha": 1168000.0,
+              "cv_mae": 58762.0,
+              "cv_mae_sd": 138.0,
+              "train_mae": 50942.0,
+              "gap": 7821.0
+            }
+          ]
+        },
+        {
+          "kind": "fold_scores",
+          "rows": [
+            {
+              "": 1.0,
+              "train MAE": 48739.0,
+              "validation MAE": 58184.0,
+              "MAE gap": 9445.0,
+              "gap % of validation MAE": 16.23,
+              "train R2": 0.9511,
+              "validation R2": 0.9292,
+              "R2 gap": 0.0219
+            },
+            {
+              "": 2.0,
+              "train MAE": 48709.0,
+              "validation MAE": 58270.0,
+              "MAE gap": 9561.0,
+              "gap % of validation MAE": 16.41,
+              "train R2": 0.9511,
+              "validation R2": 0.9256,
+              "R2 gap": 0.0255
+            },
+            {
+              "": 3.0,
+              "train MAE": 49013.0,
+              "validation MAE": 58074.0,
+              "MAE gap": 9060.0,
+              "gap % of validation MAE": 15.6,
+              "train R2": 0.9514,
+              "validation R2": 0.9219,
+              "R2 gap": 0.0295
+            },
+            {
+              "": 4.0,
+              "train MAE": 48496.0,
+              "validation MAE": 58545.0,
+              "MAE gap": 10048.0,
+              "gap % of validation MAE": 17.16,
+              "train R2": 0.9523,
+              "validation R2": 0.9238,
+              "R2 gap": 0.0285
+            },
+            {
+              "": 5.0,
+              "train MAE": 48295.0,
+              "validation MAE": 58382.0,
+              "MAE gap": 10087.0,
+              "gap % of validation MAE": 17.28,
+              "train R2": 0.9532,
+              "validation R2": 0.9198,
+              "R2 gap": 0.0333
+            },
+            {
+              "": "mean",
+              "train MAE": 48651.0,
+              "validation MAE": 58291.0,
+              "MAE gap": 9640.0,
+              "gap % of validation MAE": 16.54,
+              "train R2": 0.9518,
+              "validation R2": 0.9241,
+              "R2 gap": 0.0277
+            },
+            {
+              "": "sd",
+              "train MAE": 242.0,
+              "validation MAE": 162.0,
+              "MAE gap": 387.0,
+              "gap % of validation MAE": 0.62,
+              "train R2": 0.0008,
+              "validation R2": 0.0032,
+              "R2 gap": 0.0038
+            }
+          ]
+        }
+      ],
+      "ablation": [],
+      "overfit": [
+        "PASS validation เทียบ CV     : ต่างกัน -1,584 บาท (-2.72%) เกณฑ์ ±1,918 บาท (2 SE)",
+        "PASS test เทียบ CV           : ต่างกัน -496 บาท (-0.85%) เกณฑ์ ±1,920 บาท (2 SE)",
+        "PASS test เทียบ validation   : ต่างกัน +1,088 บาท (+1.92%) เกณฑ์ ±2,706 บาท (2 SE)",
+        "PASS learning curve (3,760 -> 37,600 แถว): test MAE 81,994 -> 57,794 บาท, gap 25,119 -> 8,801 บาท (ต้องลดลงทั้งคู่)"
+      ],
+      "plots": {
+        "learning": "img/DT_merge50minC_learning.png",
+        "permutation": "img/DT_merge50minC_permutation.png",
+        "model_based": "img/DT_merge50minC_model_based.png"
+      },
+      "data": {
+        "rows": 47001,
+        "split": [
+          {
+            "ชุด": "train",
+            "แถว": 37600.0,
+            "สัดส่วน (%)": 80.0,
+            "จำนวนรุ่น": 115.0
+          },
+          {
+            "ชุด": "validation",
+            "แถว": 4700.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 115.0
+          },
+          {
+            "ชุด": "test",
+            "แถว": 4701.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 115.0
+          }
+        ],
+        "models": 115.0
+      },
+      "missing": [],
+      "runtime": {
+        "start": "2026-10-26 02:38:11",
+        "end": "2026-10-26 02:44:44",
+        "status": "ok",
+        "seconds": 393.0
+      }
+    },
+    {
+      "run_id": "RF_merge50minC",
+      "notebook": "RF/RF_merge50minC.ipynb",
+      "model": "RF",
+      "dataset": "merge50minC",
+      "variant": "base",
+      "result": {
+        "run_id": "RF_merge50minC",
+        "model": "RF",
+        "dataset": "merge_50min_clean.csv",
+        "variant": "base",
+        "version": "v5",
+        "features": [
+          "engine",
+          "mileage",
+          "car_age",
+          "brand",
+          "model",
+          "car_type",
+          "fuel",
+          "gear"
+        ],
+        "train": {
+          "R2": 0.9671043105103881,
+          "RMSE": 59754.724002635856,
+          "MAE": 38902.04836364557,
+          "MAPE": 0.07468988881860679
+        },
+        "validation": {
+          "R2": 0.9410954573461947,
+          "RMSE": 78282.52104878938,
+          "MAE": 52209.298102918736,
+          "MAPE": 0.10127589727223421
+        },
+        "test": {
+          "R2": 0.9394257413455945,
+          "RMSE": 80559.39987596293,
+          "MAE": 53415.836252871675,
+          "MAPE": 0.10251432504220247
+        },
+        "best_params": {
+          "max_features": 0.3,
+          "min_samples_leaf": 2
+        }
+      },
+      "importance": {
+        "run_id": "RF_merge50minC",
+        "permutation": {
+          "engine": {
+            "mean": 104729.42661559311,
+            "std": 1203.9991793610586
+          },
+          "mileage": {
+            "mean": 21877.493893201427,
+            "std": 832.0499812777887
+          },
+          "car_age": {
+            "mean": 114979.2466093686,
+            "std": 1551.8881529612052
+          },
+          "brand": {
+            "mean": 41620.55078950645,
+            "std": 884.1117080162874
+          },
+          "model": {
+            "mean": 32745.270592636265,
+            "std": 504.40983156676657
+          },
+          "car_type": {
+            "mean": 46979.17151828073,
+            "std": 1052.5808192727734
+          },
+          "fuel": {
+            "mean": 18849.66835307553,
+            "std": 660.787807653559
+          },
+          "gear": {
+            "mean": 7448.032331906276,
+            "std": 319.9853611456674
+          }
+        },
+        "model_based": {
+          "engine": 0.17011123658960417,
+          "mileage": 0.0829951974514856,
+          "car_age": 0.22488412461907192,
+          "brand": 0.1302291191833123,
+          "model": 0.18644802906088104,
+          "car_type": 0.12163254606714473,
+          "fuel": 0.05597911931389877,
+          "gear": 0.027720627714601462
+        }
+      },
+      "cv": {
+        "mean": 53541.0,
+        "sd": 316.0,
+        "source": "ตาราง CV train เทียบ validation",
+        "precision": "printed integer baht"
+      },
+      "cv_tables": [
+        {
+          "kind": "search_candidates",
+          "rows": [
+            {
+              "candidate": 13.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 1917320.0,
+              "rank": 1.0,
+              "max_features": 0.4,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 53483.0,
+              "cv_mae_sd": 264.0,
+              "train_mae": 38313.0,
+              "gap": 15170.0
+            },
+            {
+              "candidate": 19.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 1973993.0,
+              "rank": 2.0,
+              "max_features": 0.5,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 53539.0,
+              "cv_mae_sd": 246.0,
+              "train_mae": 37806.0,
+              "gap": 15733.0
+            },
+            {
+              "candidate": 7.0,
+              "chosen": "*",
+              "eligible": "yes",
+              "leaves": 1838780.0,
+              "rank": 3.0,
+              "max_features": 0.3,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 53541.0,
+              "cv_mae_sd": 316.0,
+              "train_mae": 39052.0,
+              "gap": 14488.0
+            },
+            {
+              "candidate": 25.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 2026128.0,
+              "rank": 4.0,
+              "max_features": 0.6,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 53657.0,
+              "cv_mae_sd": 227.0,
+              "train_mae": 37331.0,
+              "gap": 16326.0
+            },
+            {
+              "candidate": 14.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1216178.0,
+              "rank": 5.0,
+              "max_features": 0.4,
+              "min_samples_leaf": 3.0,
+              "cv_mae": 53746.0,
+              "cv_mae_sd": 238.0,
+              "train_mae": 42839.0,
+              "gap": 10907.0
+            },
+            {
+              "candidate": 20.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1267008.0,
+              "rank": 6.0,
+              "max_features": 0.5,
+              "min_samples_leaf": 3.0,
+              "cv_mae": 53762.0,
+              "cv_mae_sd": 259.0,
+              "train_mae": 42244.0,
+              "gap": 11518.0
+            },
+            {
+              "candidate": 26.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1314293.0,
+              "rank": 7.0,
+              "max_features": 0.6,
+              "min_samples_leaf": 3.0,
+              "cv_mae": 53803.0,
+              "cv_mae_sd": 190.0,
+              "train_mae": 41722.0,
+              "gap": 12081.0
+            },
+            {
+              "candidate": 1.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1740705.0,
+              "rank": 8.0,
+              "max_features": 0.2,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 53871.0,
+              "cv_mae_sd": 356.0,
+              "train_mae": 40221.0,
+              "gap": 13650.0
+            },
+            {
+              "candidate": 31.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 2121545.0,
+              "rank": 9.0,
+              "max_features": 0.8,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 53883.0,
+              "cv_mae_sd": 199.0,
+              "train_mae": 36538.0,
+              "gap": 17344.0
+            },
+            {
+              "candidate": 32.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1396686.0,
+              "rank": 10.0,
+              "max_features": 0.8,
+              "min_samples_leaf": 3.0,
+              "cv_mae": 53981.0,
+              "cv_mae_sd": 160.0,
+              "train_mae": 40877.0,
+              "gap": 13105.0
+            }
+          ]
+        },
+        {
+          "kind": "fold_scores",
+          "rows": [
+            {
+              "": 1.0,
+              "train MAE": 39178.0,
+              "validation MAE": 53365.0,
+              "MAE gap": 14187.0,
+              "gap % of validation MAE": 26.58,
+              "train R2": 0.9663,
+              "validation R2": 0.942,
+              "R2 gap": 0.0242
+            },
+            {
+              "": 2.0,
+              "train MAE": 39217.0,
+              "validation MAE": 53235.0,
+              "MAE gap": 14017.0,
+              "gap % of validation MAE": 26.33,
+              "train R2": 0.9665,
+              "validation R2": 0.9392,
+              "R2 gap": 0.0274
+            },
+            {
+              "": 3.0,
+              "train MAE": 38980.0,
+              "validation MAE": 53675.0,
+              "MAE gap": 14695.0,
+              "gap % of validation MAE": 27.38,
+              "train R2": 0.9671,
+              "validation R2": 0.9374,
+              "R2 gap": 0.0297
+            },
+            {
+              "": 4.0,
+              "train MAE": 38775.0,
+              "validation MAE": 54098.0,
+              "MAE gap": 15323.0,
+              "gap % of validation MAE": 28.32,
+              "train R2": 0.9673,
+              "validation R2": 0.9371,
+              "R2 gap": 0.0302
+            },
+            {
+              "": 5.0,
+              "train MAE": 39110.0,
+              "validation MAE": 53331.0,
+              "MAE gap": 14221.0,
+              "gap % of validation MAE": 26.66,
+              "train R2": 0.9672,
+              "validation R2": 0.9361,
+              "R2 gap": 0.0312
+            },
+            {
+              "": "mean",
+              "train MAE": 39052.0,
+              "validation MAE": 53541.0,
+              "MAE gap": 14488.0,
+              "gap % of validation MAE": 27.06,
+              "train R2": 0.9669,
+              "validation R2": 0.9384,
+              "R2 gap": 0.0285
+            },
+            {
+              "": "sd",
+              "train MAE": 160.0,
+              "validation MAE": 316.0,
+              "MAE gap": 474.0,
+              "gap % of validation MAE": 0.72,
+              "train R2": 0.0004,
+              "validation R2": 0.0021,
+              "R2 gap": 0.0025
+            }
+          ]
+        }
+      ],
+      "ablation": [],
+      "overfit": [
+        "PASS validation เทียบ CV     : ต่างกัน -1,331 บาท (-2.49%) เกณฑ์ ±1,725 บาท (2 SE)",
+        "PASS test เทียบ CV           : ต่างกัน -125 บาท (-0.23%) เกณฑ์ ±1,782 บาท (2 SE)",
+        "PASS validation เทียบ OOB    : ต่างกัน -546 บาท (-1.03%) เกณฑ์ ±1,814 บาท (2 SE)",
+        "PASS test เทียบ OOB          : ต่างกัน +661 บาท (+1.25%) เกณฑ์ ±1,868 บาท (2 SE)",
+        "PASS test เทียบ validation   : ต่างกัน +1,207 บาท (+2.31%) เกณฑ์ ±2,448 บาท (2 SE)",
+        "PASS learning curve (3,760 -> 37,600 แถว): test MAE 66,027 -> 53,422 บาท, gap 21,352 -> 14,502 บาท (ต้องลดลงทั้งคู่)"
+      ],
+      "plots": {
+        "learning": "img/RF_merge50minC_learning.png",
+        "permutation": "img/RF_merge50minC_permutation.png",
+        "model_based": "img/RF_merge50minC_model_based.png"
+      },
+      "data": {
+        "rows": 47001,
+        "split": [
+          {
+            "ชุด": "train",
+            "แถว": 37600.0,
+            "สัดส่วน (%)": 80.0,
+            "จำนวนรุ่น": 115.0
+          },
+          {
+            "ชุด": "validation",
+            "แถว": 4700.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 115.0
+          },
+          {
+            "ชุด": "test",
+            "แถว": 4701.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 115.0
+          }
+        ],
+        "models": 115.0
+      },
+      "missing": [],
+      "runtime": {
+        "start": "2026-10-26 02:44:44",
+        "end": "2026-10-26 03:03:09",
+        "status": "ok",
+        "seconds": 1105.0
+      }
+    },
+    {
+      "run_id": "XGB_merge50minC",
+      "notebook": "XGB/XGB_merge50minC.ipynb",
+      "model": "XGB",
+      "dataset": "merge50minC",
+      "variant": "base",
+      "result": {
+        "run_id": "XGB_merge50minC",
+        "model": "XGB",
+        "dataset": "merge_50min_clean.csv",
+        "variant": "base",
+        "version": "v5",
+        "features": [
+          "engine",
+          "mileage",
+          "car_age",
+          "brand",
+          "model",
+          "car_type",
+          "fuel",
+          "gear"
+        ],
+        "train": {
+          "R2": 0.9629954695701599,
+          "RMSE": 63376.7674783118,
+          "MAE": 42882.9765625,
+          "MAPE": 0.0846389067735716
+        },
+        "validation": {
+          "R2": 0.9435633420944214,
+          "RMSE": 76625.12089386875,
+          "MAE": 51228.734375,
+          "MAPE": 0.09931620222261506
+        },
+        "test": {
+          "R2": 0.9431384801864624,
+          "RMSE": 78051.54235503613,
+          "MAE": 52194.87109375,
+          "MAPE": 0.10039211162910083
+        },
+        "best_params": {
+          "max_depth": 16,
+          "min_child_weight": 1,
+          "n_estimators": 100,
+          "reg_lambda": 10.0
+        }
+      },
+      "importance": {
+        "run_id": "XGB_merge50minC",
+        "permutation": {
+          "engine": {
+            "mean": 118108.20234375,
+            "std": 1459.7771553607038
+          },
+          "mileage": {
+            "mean": 21781.16875,
+            "std": 790.8758702657321
+          },
+          "car_age": {
+            "mean": 121912.71328125,
+            "std": 1709.5093762767506
+          },
+          "brand": {
+            "mean": 47699.84921875,
+            "std": 856.0015372702796
+          },
+          "model": {
+            "mean": 32929.0421875,
+            "std": 626.9228773413131
+          },
+          "car_type": {
+            "mean": 51649.66953125,
+            "std": 1235.333251360338
+          },
+          "fuel": {
+            "mean": 13095.772265625,
+            "std": 550.6468821722119
+          },
+          "gear": {
+            "mean": 7047.170703125,
+            "std": 231.25533814606536
+          }
+        },
+        "model_based": {
+          "engine": 0.011431964509630355,
+          "mileage": 0.0004962590053940571,
+          "car_age": 0.00585587614900077,
+          "brand": 0.21166452521129817,
+          "model": 0.45618749085083266,
+          "car_type": 0.2939828832646027,
+          "fuel": 0.014586573298325184,
+          "gear": 0.005794427710916118
+        }
+      },
+      "cv": {
+        "mean": 52646.0,
+        "sd": 261.0,
+        "source": "ตาราง CV train เทียบ validation",
+        "precision": "printed integer baht"
+      },
+      "cv_tables": [
+        {
+          "kind": "search_candidates",
+          "rows": [
+            {
+              "candidate": 190.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 111065.0,
+              "rank": 1.0,
+              "max_depth": 20.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 100.0,
+              "cv_mae": 52578.0,
+              "cv_mae_sd": 272.0,
+              "train_mae": 38905.0,
+              "gap": 13673.0
+            },
+            {
+              "candidate": 130.0,
+              "chosen": "*",
+              "eligible": "yes",
+              "leaves": 65640.0,
+              "rank": 2.0,
+              "max_depth": 16.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 100.0,
+              "cv_mae": 52646.0,
+              "cv_mae_sd": 261.0,
+              "train_mae": 42317.0,
+              "gap": 10330.0
+            },
+            {
+              "candidate": 134.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 112785.0,
+              "rank": 3.0,
+              "max_depth": 16.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 200.0,
+              "cv_mae": 52702.0,
+              "cv_mae_sd": 292.0,
+              "train_mae": 38582.0,
+              "gap": 14119.0
+            },
+            {
+              "candidate": 74.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 49807.0,
+              "rank": 4.0,
+              "max_depth": 12.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 200.0,
+              "cv_mae": 52739.0,
+              "cv_mae_sd": 407.0,
+              "train_mae": 43788.0,
+              "gap": 8951.0
+            },
+            {
+              "candidate": 78.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 75180.0,
+              "rank": 5.0,
+              "max_depth": 12.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 300.0,
+              "cv_mae": 52745.0,
+              "cv_mae_sd": 407.0,
+              "train_mae": 41328.0,
+              "gap": 11417.0
+            },
+            {
+              "candidate": 250.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 159419.0,
+              "rank": 6.0,
+              "max_depth": 24.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 100.0,
+              "cv_mae": 52747.0,
+              "cv_mae_sd": 305.0,
+              "train_mae": 36442.0,
+              "gap": 16305.0
+            },
+            {
+              "candidate": 210.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 57328.0,
+              "rank": 7.0,
+              "max_depth": 20.0,
+              "min_child_weight": 5.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 100.0,
+              "cv_mae": 52866.0,
+              "cv_mae_sd": 317.0,
+              "train_mae": 42355.0,
+              "gap": 10511.0
+            },
+            {
+              "candidate": 259.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 347610.0,
+              "rank": 8.0,
+              "max_depth": 24.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 100.0,
+              "n_estimators": 300.0,
+              "cv_mae": 52900.0,
+              "cv_mae_sd": 433.0,
+              "train_mae": 40059.0,
+              "gap": 12841.0
+            },
+            {
+              "candidate": 69.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 48226.0,
+              "rank": 9.0,
+              "max_depth": 12.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 1.0,
+              "n_estimators": 100.0,
+              "cv_mae": 52925.0,
+              "cv_mae_sd": 370.0,
+              "train_mae": 40337.0,
+              "gap": 12588.0
+            },
+            {
+              "candidate": 199.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 231224.0,
+              "rank": 10.0,
+              "max_depth": 20.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 100.0,
+              "n_estimators": 300.0,
+              "cv_mae": 52927.0,
+              "cv_mae_sd": 456.0,
+              "train_mae": 42140.0,
+              "gap": 10787.0
+            }
+          ]
+        },
+        {
+          "kind": "fold_scores",
+          "rows": [
+            {
+              "": 1.0,
+              "train MAE": 42395.0,
+              "validation MAE": 52440.0,
+              "MAE gap": 10045.0,
+              "gap % of validation MAE": 19.16,
+              "train R2": 0.9637,
+              "validation R2": 0.9442,
+              "R2 gap": 0.0194
+            },
+            {
+              "": 2.0,
+              "train MAE": 42089.0,
+              "validation MAE": 52551.0,
+              "MAE gap": 10462.0,
+              "gap % of validation MAE": 19.91,
+              "train R2": 0.9642,
+              "validation R2": 0.9411,
+              "R2 gap": 0.0231
+            },
+            {
+              "": 3.0,
+              "train MAE": 42302.0,
+              "validation MAE": 52811.0,
+              "MAE gap": 10509.0,
+              "gap % of validation MAE": 19.9,
+              "train R2": 0.9641,
+              "validation R2": 0.9396,
+              "R2 gap": 0.0245
+            },
+            {
+              "": 4.0,
+              "train MAE": 42271.0,
+              "validation MAE": 53069.0,
+              "MAE gap": 10799.0,
+              "gap % of validation MAE": 20.35,
+              "train R2": 0.9638,
+              "validation R2": 0.9399,
+              "R2 gap": 0.0239
+            },
+            {
+              "": 5.0,
+              "train MAE": 42526.0,
+              "validation MAE": 52360.0,
+              "MAE gap": 9834.0,
+              "gap % of validation MAE": 18.78,
+              "train R2": 0.9642,
+              "validation R2": 0.9386,
+              "R2 gap": 0.0256
+            },
+            {
+              "": "mean",
+              "train MAE": 42317.0,
+              "validation MAE": 52646.0,
+              "MAE gap": 10330.0,
+              "gap % of validation MAE": 19.62,
+              "train R2": 0.964,
+              "validation R2": 0.9407,
+              "R2 gap": 0.0233
+            },
+            {
+              "": "sd",
+              "train MAE": 144.0,
+              "validation MAE": 261.0,
+              "MAE gap": 345.0,
+              "gap % of validation MAE": 0.57,
+              "train R2": 0.0002,
+              "validation R2": 0.0019,
+              "R2 gap": 0.0021
+            }
+          ]
+        }
+      ],
+      "ablation": [],
+      "overfit": [
+        "PASS : validation MAE ต่างจาก CV MAE ไม่เกิน 5% (generalisation)",
+        "PASS : test MAE ต่างจาก CV MAE ไม่เกิน 5% (generalisation)",
+        "PASS : จำนวนรอบอยู่ในช่วง 1 SE ของจุดที่ CV MAE ต่ำสุด (ไม่น้อยหรือมากเกินไป)",
+        "PASS : ช่องว่าง test - train แคบลงเมื่อเพิ่มข้อมูลฝึก (learning curve)"
+      ],
+      "plots": {
+        "learning": "img/XGB_merge50minC_learning.png",
+        "permutation": "img/XGB_merge50minC_permutation.png",
+        "model_based": "img/XGB_merge50minC_model_based.png"
+      },
+      "data": {
+        "rows": 47001,
+        "split": [
+          {
+            "ชุด": "train",
+            "แถว": 37600.0,
+            "สัดส่วน (%)": 80.0,
+            "จำนวนรุ่น": 115.0
+          },
+          {
+            "ชุด": "validation",
+            "แถว": 4700.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 115.0
+          },
+          {
+            "ชุด": "test",
+            "แถว": 4701.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 115.0
+          }
+        ],
+        "models": 115.0
+      },
+      "missing": [],
+      "runtime": {
+        "start": "2026-10-26 03:03:09",
+        "end": "2026-10-26 03:36:21",
+        "status": "ok",
+        "seconds": 1991.0
+      }
+    },
+    {
+      "run_id": "DT_merge50minC_adj",
+      "notebook": "DT/DT_merge50minC_adj.ipynb",
+      "model": "DT",
+      "dataset": "merge50minC",
+      "variant": "adj",
+      "result": {
+        "run_id": "DT_merge50minC_adj",
+        "model": "DT",
+        "dataset": "merge_50min_clean.csv",
+        "variant": "adj",
+        "version": "v5",
+        "features": [
+          "engine",
+          "mileage",
+          "car_age",
+          "brand",
+          "model",
+          "car_type",
+          "fuel",
+          "gear"
+        ],
+        "train": {
+          "R2": 0.9543421871663219,
+          "RMSE": 70397.99654410724,
+          "MAE": 47147.17550681636,
+          "MAPE": 0.08773456570508097
+        },
+        "validation": {
+          "R2": 0.9238705429710486,
+          "RMSE": 88995.23934877825,
+          "MAE": 56283.13870841901,
+          "MAPE": 0.10652380266660444
+        },
+        "test": {
+          "R2": 0.9262389810302329,
+          "RMSE": 88896.69647434758,
+          "MAE": 57187.17605445705,
+          "MAPE": 0.10724654086293987
+        },
+        "best_params": {
+          "ccp_alpha": 2.7592604952954323e-06,
+          "max_depth": null,
+          "min_samples_leaf": 1
+        }
+      },
+      "importance": {
+        "run_id": "DT_merge50minC_adj",
+        "permutation": {
+          "engine": {
+            "mean": 144512.2421757915,
+            "std": 2015.4324788751805
+          },
+          "mileage": {
+            "mean": 18124.655942749676,
+            "std": 1198.4803795856023
+          },
+          "car_age": {
+            "mean": 128689.46596652933,
+            "std": 1751.8115360809686
+          },
+          "brand": {
+            "mean": 55891.50106501639,
+            "std": 979.107106140487
+          },
+          "model": {
+            "mean": 35257.39767703846,
+            "std": 647.5129869431502
+          },
+          "car_type": {
+            "mean": 74014.37607262761,
+            "std": 1584.8572874268593
+          },
+          "fuel": {
+            "mean": 18968.308723092363,
+            "std": 983.6590592981568
+          },
+          "gear": {
+            "mean": 5685.29597789446,
+            "std": 212.09184768850173
+          }
+        },
+        "model_based": {
+          "engine": 0.258811601388008,
+          "mileage": 0.024568824040969658,
+          "car_age": 0.3770547989575815,
+          "brand": 0.10568761762360342,
+          "model": 0.07412299200092047,
+          "car_type": 0.12747284932757705,
+          "fuel": 0.019868319986366043,
+          "gear": 0.012412996674973958
+        }
+      },
+      "cv": {
+        "mean": 57379.0,
+        "sd": 244.0,
+        "source": "ตาราง CV train เทียบ validation",
+        "precision": "printed integer baht"
+      },
+      "cv_tables": [
+        {
+          "kind": "search_candidates",
+          "rows": [
+            {
+              "candidate": 144.0,
+              "chosen": "*",
+              "eligible": "yes",
+              "leaves": 1721.0,
+              "rank": 1.0,
+              "max_depth": "None",
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 2.759e-06,
+              "cv_mae": 57379.0,
+              "cv_mae_sd": 244.0,
+              "train_mae": 45283.0,
+              "gap": 12095.0
+            },
+            {
+              "candidate": 138.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 2.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 2.759e-06,
+              "cv_mae": 57651.0,
+              "cv_mae_sd": 469.0,
+              "train_mae": 45773.0,
+              "gap": 11878.0
+            },
+            {
+              "candidate": 145.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 3.0,
+              "max_depth": "None",
+              "min_samples_leaf": 5.0,
+              "ccp_alpha": 2.759e-06,
+              "cv_mae": 58139.0,
+              "cv_mae_sd": 505.0,
+              "train_mae": 49935.0,
+              "gap": 8204.0
+            },
+            {
+              "candidate": 115.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 4.0,
+              "max_depth": "None",
+              "min_samples_leaf": 5.0,
+              "ccp_alpha": 1.334e-06,
+              "cv_mae": 58185.0,
+              "cv_mae_sd": 553.0,
+              "train_mae": 47309.0,
+              "gap": 10876.0
+            },
+            {
+              "candidate": 139.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 5.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 5.0,
+              "ccp_alpha": 2.759e-06,
+              "cv_mae": 58248.0,
+              "cv_mae_sd": 715.0,
+              "train_mae": 50123.0,
+              "gap": 8125.0
+            },
+            {
+              "candidate": 109.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 6.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 5.0,
+              "ccp_alpha": 1.334e-06,
+              "cv_mae": 58259.0,
+              "cv_mae_sd": 714.0,
+              "train_mae": 47605.0,
+              "gap": 10654.0
+            },
+            {
+              "candidate": 174.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 7.0,
+              "max_depth": "None",
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 5.71e-06,
+              "cv_mae": 58344.0,
+              "cv_mae_sd": 274.0,
+              "train_mae": 51051.0,
+              "gap": 7293.0
+            },
+            {
+              "candidate": 114.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 8.0,
+              "max_depth": "None",
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 1.334e-06,
+              "cv_mae": 58423.0,
+              "cv_mae_sd": 135.0,
+              "train_mae": 38250.0,
+              "gap": 20173.0
+            },
+            {
+              "candidate": 168.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 9.0,
+              "max_depth": 25.0,
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 5.71e-06,
+              "cv_mae": 58455.0,
+              "cv_mae_sd": 411.0,
+              "train_mae": 51255.0,
+              "gap": 7200.0
+            },
+            {
+              "candidate": 85.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": "",
+              "rank": 10.0,
+              "max_depth": "None",
+              "min_samples_leaf": 5.0,
+              "ccp_alpha": 6.443e-07,
+              "cv_mae": 58601.0,
+              "cv_mae_sd": 523.0,
+              "train_mae": 45600.0,
+              "gap": 13001.0
+            }
+          ]
+        },
+        {
+          "kind": "fold_scores",
+          "rows": [
+            {
+              "": 1.0,
+              "train MAE": 45130.0,
+              "validation MAE": 57388.0,
+              "MAE gap": 12258.0,
+              "gap % of validation MAE": 21.36,
+              "train R2": 0.9581,
+              "validation R2": 0.9282,
+              "R2 gap": 0.0299
+            },
+            {
+              "": 2.0,
+              "train MAE": 45369.0,
+              "validation MAE": 57653.0,
+              "MAE gap": 12284.0,
+              "gap % of validation MAE": 21.31,
+              "train R2": 0.9577,
+              "validation R2": 0.9271,
+              "R2 gap": 0.0306
+            },
+            {
+              "": 3.0,
+              "train MAE": 45254.0,
+              "validation MAE": 57118.0,
+              "MAE gap": 11865.0,
+              "gap % of validation MAE": 20.77,
+              "train R2": 0.9586,
+              "validation R2": 0.9194,
+              "R2 gap": 0.0392
+            },
+            {
+              "": 4.0,
+              "train MAE": 45177.0,
+              "validation MAE": 57645.0,
+              "MAE gap": 12467.0,
+              "gap % of validation MAE": 21.63,
+              "train R2": 0.9582,
+              "validation R2": 0.9271,
+              "R2 gap": 0.0311
+            },
+            {
+              "": 5.0,
+              "train MAE": 45486.0,
+              "validation MAE": 57089.0,
+              "MAE gap": 11603.0,
+              "gap % of validation MAE": 20.32,
+              "train R2": 0.9582,
+              "validation R2": 0.9219,
+              "R2 gap": 0.0363
+            },
+            {
+              "": "mean",
+              "train MAE": 45283.0,
+              "validation MAE": 57379.0,
+              "MAE gap": 12095.0,
+              "gap % of validation MAE": 21.08,
+              "train R2": 0.9582,
+              "validation R2": 0.9247,
+              "R2 gap": 0.0334
+            },
+            {
+              "": "sd",
+              "train MAE": 130.0,
+              "validation MAE": 244.0,
+              "MAE gap": 315.0,
+              "gap % of validation MAE": 0.47,
+              "train R2": 0.0003,
+              "validation R2": 0.0035,
+              "R2 gap": 0.0037
+            }
+          ]
+        }
+      ],
+      "ablation": [
+        {
+          "variant": "none",
+          "CV MAE mean": 63112.525963,
+          "CV MAE SD": 425.003273,
+          "test MAE": 61229.704557,
+          "test RMSE": 96352.296986,
+          "test R2": 0.913348,
+          "test MAPE": 0.116934,
+          "change test MAE (baht)": 0.0,
+          "change test MAE (%)": 0.0,
+          "change CV MAE mean (baht)": 0.0,
+          "change CV MAE mean (%)": 0.0
+        },
+        {
+          "variant": "scale only",
+          "CV MAE mean": 63098.13026,
+          "CV MAE SD": 447.630314,
+          "test MAE": 61175.308329,
+          "test RMSE": 96317.862932,
+          "test R2": 0.91341,
+          "test MAPE": 0.11683,
+          "change test MAE (baht)": -54.396228,
+          "change test MAE (%)": -0.08884,
+          "change CV MAE mean (baht)": -14.395703,
+          "change CV MAE mean (%)": -0.02281
+        },
+        {
+          "variant": "log only",
+          "CV MAE mean": 57415.737361,
+          "CV MAE SD": 235.151754,
+          "test MAE": 57201.479838,
+          "test RMSE": 88904.24646,
+          "test R2": 0.926226,
+          "test MAPE": 0.107283,
+          "change test MAE (baht)": -4028.224719,
+          "change test MAE (%)": -6.578873,
+          "change CV MAE mean (baht)": -5696.788602,
+          "change CV MAE mean (%)": -9.026399
+        },
+        {
+          "variant": "both",
+          "CV MAE mean": 57378.726943,
+          "CV MAE SD": 244.029128,
+          "test MAE": 57187.176054,
+          "test RMSE": 88896.696474,
+          "test R2": 0.926239,
+          "test MAPE": 0.107247,
+          "change test MAE (baht)": -4042.528503,
+          "change test MAE (%)": -6.602234,
+          "change CV MAE mean (baht)": -5733.79902,
+          "change CV MAE mean (%)": -9.085041
+        }
+      ],
+      "overfit": [
+        "PASS validation เทียบ CV     : ต่างกัน -1,096 บาท (-1.91%) เกณฑ์ ±2,023 บาท (2 SE)",
+        "PASS test เทียบ CV           : ต่างกัน -192 บาท (-0.33%) เกณฑ์ ±1,997 บาท (2 SE)",
+        "PASS test เทียบ validation   : ต่างกัน +904 บาท (+1.61%) เกณฑ์ ±2,826 บาท (2 SE)",
+        "PASS learning curve (3,760 -> 37,600 แถว): test MAE 82,302 -> 57,267 บาท, gap 64,827 -> 10,120 บาท (ต้องลดลงทั้งคู่)"
+      ],
+      "plots": {
+        "learning": "img/DT_merge50minC_adj_learning.png",
+        "permutation": "img/DT_merge50minC_adj_permutation.png",
+        "model_based": "img/DT_merge50minC_adj_model_based.png"
+      },
+      "data": {
+        "rows": 47001,
+        "split": [
+          {
+            "ชุด": "train",
+            "แถว": 37600.0,
+            "สัดส่วน (%)": 80.0,
+            "จำนวนรุ่น": 115.0
+          },
+          {
+            "ชุด": "validation",
+            "แถว": 4700.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 115.0
+          },
+          {
+            "ชุด": "test",
+            "แถว": 4701.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 115.0
+          }
+        ],
+        "models": 115.0
+      },
+      "missing": [],
+      "runtime": {
+        "start": "2026-10-26 03:36:21",
+        "end": "2026-10-26 03:44:50",
+        "status": "ok",
+        "seconds": 509.0
+      }
+    },
+    {
+      "run_id": "RF_merge50minC_adj",
+      "notebook": "RF/RF_merge50minC_adj.ipynb",
+      "model": "RF",
+      "dataset": "merge50minC",
+      "variant": "adj",
+      "result": {
+        "run_id": "RF_merge50minC_adj",
+        "model": "RF",
+        "dataset": "merge_50min_clean.csv",
+        "variant": "adj",
+        "version": "v5",
+        "features": [
+          "engine",
+          "mileage",
+          "car_age",
+          "brand",
+          "model",
+          "car_type",
+          "fuel",
+          "gear"
+        ],
+        "train": {
+          "R2": 0.9658360871019033,
+          "RMSE": 60895.68933008246,
+          "MAE": 38842.82819997588,
+          "MAPE": 0.07272184850158007
+        },
+        "validation": {
+          "R2": 0.9397825260369784,
+          "RMSE": 79150.13792883008,
+          "MAE": 51939.613884188206,
+          "MAPE": 0.09907252835851187
+        },
+        "test": {
+          "R2": 0.9373551418277403,
+          "RMSE": 81924.70451084172,
+          "MAE": 53456.872706978764,
+          "MAPE": 0.10044669473593211
+        },
+        "best_params": {
+          "max_features": 0.3,
+          "min_samples_leaf": 2
+        }
+      },
+      "importance": {
+        "run_id": "RF_merge50minC_adj",
+        "permutation": {
+          "engine": {
+            "mean": 105768.34155645322,
+            "std": 1272.945148929611
+          },
+          "mileage": {
+            "mean": 22404.69816099274,
+            "std": 924.1007068861886
+          },
+          "car_age": {
+            "mean": 114530.78802836558,
+            "std": 1597.9548047288883
+          },
+          "brand": {
+            "mean": 37832.17993943517,
+            "std": 628.7359402686578
+          },
+          "model": {
+            "mean": 30047.883431681305,
+            "std": 504.7942612694573
+          },
+          "car_type": {
+            "mean": 50432.23273399487,
+            "std": 765.2641625574681
+          },
+          "fuel": {
+            "mean": 17462.08625760911,
+            "std": 681.053688873435
+          },
+          "gear": {
+            "mean": 8584.66565091793,
+            "std": 449.13502890873747
+          }
+        },
+        "model_based": {
+          "engine": 0.1793690762869723,
+          "mileage": 0.07577902797478826,
+          "car_age": 0.29990073254442434,
+          "brand": 0.10148308373640504,
+          "model": 0.12574568615654091,
+          "car_type": 0.12768491294160308,
+          "fuel": 0.05976703493277764,
+          "gear": 0.030270445426488355
+        }
+      },
+      "cv": {
+        "mean": 53356.0,
+        "sd": 367.0,
+        "source": "ตาราง CV train เทียบ validation",
+        "precision": "printed integer baht"
+      },
+      "cv_tables": [
+        {
+          "kind": "search_candidates",
+          "rows": [
+            {
+              "candidate": 13.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 1917163.0,
+              "rank": 1.0,
+              "max_features": 0.4,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 53331.0,
+              "cv_mae_sd": 401.0,
+              "train_mae": 38252.0,
+              "gap": 15079.0
+            },
+            {
+              "candidate": 7.0,
+              "chosen": "*",
+              "eligible": "yes",
+              "leaves": 1838156.0,
+              "rank": 2.0,
+              "max_features": 0.3,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 53356.0,
+              "cv_mae_sd": 367.0,
+              "train_mae": 39023.0,
+              "gap": 14333.0
+            },
+            {
+              "candidate": 19.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 1974059.0,
+              "rank": 3.0,
+              "max_features": 0.5,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 53400.0,
+              "cv_mae_sd": 383.0,
+              "train_mae": 37761.0,
+              "gap": 15639.0
+            },
+            {
+              "candidate": 25.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 2026548.0,
+              "rank": 4.0,
+              "max_features": 0.6,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 53474.0,
+              "cv_mae_sd": 357.0,
+              "train_mae": 37293.0,
+              "gap": 16181.0
+            },
+            {
+              "candidate": 20.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1266437.0,
+              "rank": 5.0,
+              "max_features": 0.5,
+              "min_samples_leaf": 3.0,
+              "cv_mae": 53592.0,
+              "cv_mae_sd": 431.0,
+              "train_mae": 42160.0,
+              "gap": 11432.0
+            },
+            {
+              "candidate": 26.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1313238.0,
+              "rank": 6.0,
+              "max_features": 0.6,
+              "min_samples_leaf": 3.0,
+              "cv_mae": 53610.0,
+              "cv_mae_sd": 401.0,
+              "train_mae": 41640.0,
+              "gap": 11970.0
+            },
+            {
+              "candidate": 14.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1214108.0,
+              "rank": 7.0,
+              "max_features": 0.4,
+              "min_samples_leaf": 3.0,
+              "cv_mae": 53618.0,
+              "cv_mae_sd": 412.0,
+              "train_mae": 42789.0,
+              "gap": 10829.0
+            },
+            {
+              "candidate": 1.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1737597.0,
+              "rank": 8.0,
+              "max_features": 0.2,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 53733.0,
+              "cv_mae_sd": 398.0,
+              "train_mae": 40253.0,
+              "gap": 13480.0
+            },
+            {
+              "candidate": 31.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 2120578.0,
+              "rank": 9.0,
+              "max_features": 0.8,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 53744.0,
+              "cv_mae_sd": 351.0,
+              "train_mae": 36497.0,
+              "gap": 17247.0
+            },
+            {
+              "candidate": 8.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 1143894.0,
+              "rank": 10.0,
+              "max_features": 0.3,
+              "min_samples_leaf": 3.0,
+              "cv_mae": 53817.0,
+              "cv_mae_sd": 453.0,
+              "train_mae": 43746.0,
+              "gap": 10071.0
+            }
+          ]
+        },
+        {
+          "kind": "fold_scores",
+          "rows": [
+            {
+              "": 1.0,
+              "train MAE": 39166.0,
+              "validation MAE": 53076.0,
+              "MAE gap": 13910.0,
+              "gap % of validation MAE": 26.21,
+              "train R2": 0.9647,
+              "validation R2": 0.9411,
+              "R2 gap": 0.0236
+            },
+            {
+              "": 2.0,
+              "train MAE": 39119.0,
+              "validation MAE": 53479.0,
+              "MAE gap": 14360.0,
+              "gap % of validation MAE": 26.85,
+              "train R2": 0.9652,
+              "validation R2": 0.9362,
+              "R2 gap": 0.0289
+            },
+            {
+              "": 3.0,
+              "train MAE": 38934.0,
+              "validation MAE": 53319.0,
+              "MAE gap": 14385.0,
+              "gap % of validation MAE": 26.98,
+              "train R2": 0.9657,
+              "validation R2": 0.9363,
+              "R2 gap": 0.0293
+            },
+            {
+              "": 4.0,
+              "train MAE": 38728.0,
+              "validation MAE": 53982.0,
+              "MAE gap": 15254.0,
+              "gap % of validation MAE": 28.26,
+              "train R2": 0.9658,
+              "validation R2": 0.9346,
+              "R2 gap": 0.0312
+            },
+            {
+              "": 5.0,
+              "train MAE": 39165.0,
+              "validation MAE": 52922.0,
+              "MAE gap": 13757.0,
+              "gap % of validation MAE": 25.99,
+              "train R2": 0.9656,
+              "validation R2": 0.9349,
+              "R2 gap": 0.0307
+            },
+            {
+              "": "mean",
+              "train MAE": 39023.0,
+              "validation MAE": 53356.0,
+              "MAE gap": 14333.0,
+              "gap % of validation MAE": 26.86,
+              "train R2": 0.9654,
+              "validation R2": 0.9366,
+              "R2 gap": 0.0288
+            },
+            {
+              "": "sd",
+              "train MAE": 170.0,
+              "validation MAE": 367.0,
+              "MAE gap": 522.0,
+              "gap % of validation MAE": 0.79,
+              "train R2": 0.0004,
+              "validation R2": 0.0023,
+              "R2 gap": 0.0027
+            }
+          ]
+        }
+      ],
+      "ablation": [
+        {
+          "variant": "none",
+          "CV MAE mean": 53540.716962,
+          "CV MAE SD": 315.583169,
+          "test MAE": 53415.836253,
+          "test RMSE": 80559.399876,
+          "test R2": 0.939426,
+          "test MAPE": 0.102514,
+          "change test MAE (baht)": 0.0,
+          "change test MAE (%)": 0.0,
+          "change CV MAE mean (baht)": 0.0,
+          "change CV MAE mean (%)": 0.0
+        },
+        {
+          "variant": "scale only",
+          "CV MAE mean": 53523.970248,
+          "CV MAE SD": 323.626673,
+          "test MAE": 53345.795494,
+          "test RMSE": 80494.24721,
+          "test R2": 0.939524,
+          "test MAPE": 0.102384,
+          "change test MAE (baht)": -70.040759,
+          "change test MAE (%)": -0.131124,
+          "change CV MAE mean (baht)": -16.746714,
+          "change CV MAE mean (%)": -0.031278
+        },
+        {
+          "variant": "log only",
+          "CV MAE mean": 53357.889828,
+          "CV MAE SD": 353.933288,
+          "test MAE": 53480.887986,
+          "test RMSE": 81934.198549,
+          "test R2": 0.937341,
+          "test MAPE": 0.100499,
+          "change test MAE (baht)": 65.051733,
+          "change test MAE (%)": 0.121784,
+          "change CV MAE mean (baht)": -182.827134,
+          "change CV MAE mean (%)": -0.341473
+        },
+        {
+          "variant": "both",
+          "CV MAE mean": 53355.774887,
+          "CV MAE SD": 367.399493,
+          "test MAE": 53456.872707,
+          "test RMSE": 81924.704511,
+          "test R2": 0.937355,
+          "test MAPE": 0.100447,
+          "change test MAE (baht)": 41.036454,
+          "change test MAE (%)": 0.076825,
+          "change CV MAE mean (baht)": -184.942075,
+          "change CV MAE mean (%)": -0.345423
+        }
+      ],
+      "overfit": [
+        "PASS validation เทียบ CV     : ต่างกัน -1,416 บาท (-2.65%) เกณฑ์ ±1,773 บาท (2 SE)",
+        "PASS test เทียบ CV           : ต่างกัน +101 บาท (+0.19%) เกณฑ์ ±1,841 บาท (2 SE)",
+        "PASS validation เทียบ OOB    : ต่างกัน -631 บาท (-1.20%) เกณฑ์ ±1,857 บาท (2 SE)",
+        "PASS test เทียบ OOB          : ต่างกัน +886 บาท (+1.69%) เกณฑ์ ±1,921 บาท (2 SE)",
+        "PASS test เทียบ validation   : ต่างกัน +1,517 บาท (+2.92%) เกณฑ์ ±2,513 บาท (2 SE)",
+        "PASS learning curve (3,760 -> 37,600 แถว): test MAE 67,202 -> 53,399 บาท, gap 21,997 -> 14,557 บาท (ต้องลดลงทั้งคู่)"
+      ],
+      "plots": {
+        "learning": "img/RF_merge50minC_adj_learning.png",
+        "permutation": "img/RF_merge50minC_adj_permutation.png",
+        "model_based": "img/RF_merge50minC_adj_model_based.png"
+      },
+      "data": {
+        "rows": 47001,
+        "split": [
+          {
+            "ชุด": "train",
+            "แถว": 37600.0,
+            "สัดส่วน (%)": 80.0,
+            "จำนวนรุ่น": 115.0
+          },
+          {
+            "ชุด": "validation",
+            "แถว": 4700.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 115.0
+          },
+          {
+            "ชุด": "test",
+            "แถว": 4701.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 115.0
+          }
+        ],
+        "models": 115.0
+      },
+      "missing": [],
+      "runtime": {
+        "start": "2026-10-26 03:44:50",
+        "end": "2026-10-26 04:02:27",
+        "status": "ok",
+        "seconds": 1057.0
+      }
+    },
+    {
+      "run_id": "XGB_merge50minC_adj",
+      "notebook": "XGB/XGB_merge50minC_adj.ipynb",
+      "model": "XGB",
+      "dataset": "merge50minC",
+      "variant": "adj",
+      "result": {
+        "run_id": "XGB_merge50minC_adj",
+        "model": "XGB",
+        "dataset": "merge_50min_clean.csv",
+        "variant": "adj",
+        "version": "v5",
+        "features": [
+          "engine",
+          "mileage",
+          "car_age",
+          "brand",
+          "model",
+          "car_type",
+          "fuel",
+          "gear"
+        ],
+        "train": {
+          "R2": 0.9630944132804871,
+          "RMSE": 63292.005940718926,
+          "MAE": 41861.1484375,
+          "MAPE": 0.07794867858111337
+        },
+        "validation": {
+          "R2": 0.9429357647895813,
+          "RMSE": 77049.95989616089,
+          "MAE": 51149.9453125,
+          "MAPE": 0.09756248399906324
+        },
+        "test": {
+          "R2": 0.9421570301055908,
+          "RMSE": 78722.24387045887,
+          "MAE": 52229.140625,
+          "MAPE": 0.09868048073579969
+        },
+        "best_params": {
+          "max_depth": 12,
+          "min_child_weight": 1,
+          "n_estimators": 100,
+          "reg_lambda": 1.0
+        }
+      },
+      "importance": {
+        "run_id": "XGB_merge50minC_adj",
+        "permutation": {
+          "engine": {
+            "mean": 107268.69375,
+            "std": 1520.1341347097516
+          },
+          "mileage": {
+            "mean": 22084.1359375,
+            "std": 898.2909643828633
+          },
+          "car_age": {
+            "mean": 122338.9203125,
+            "std": 1629.9329544968361
+          },
+          "brand": {
+            "mean": 48188.87578125,
+            "std": 654.3643445759178
+          },
+          "model": {
+            "mean": 31010.36953125,
+            "std": 623.3560223626982
+          },
+          "car_type": {
+            "mean": 46534.5,
+            "std": 1044.2972483774674
+          },
+          "fuel": {
+            "mean": 11332.3921875,
+            "std": 408.7766277119148
+          },
+          "gear": {
+            "mean": 9599.430078125,
+            "std": 440.6595919608367
+          }
+        },
+        "model_based": {
+          "engine": 0.015673821520599162,
+          "mileage": 0.0003533014055737541,
+          "car_age": 0.009060821676028162,
+          "brand": 0.21609598518549478,
+          "model": 0.46067048439839753,
+          "car_type": 0.2663750469095459,
+          "fuel": 0.022378931592300016,
+          "gear": 0.009391607312060745
+        }
+      },
+      "cv": {
+        "mean": 52567.0,
+        "sd": 394.0,
+        "source": "ตาราง CV train เทียบ validation",
+        "precision": "printed integer baht"
+      },
+      "cv_tables": [
+        {
+          "kind": "search_candidates",
+          "rows": [
+            {
+              "candidate": 190.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 138342.0,
+              "rank": 1.0,
+              "max_depth": 20.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 100.0,
+              "cv_mae": 52466.0,
+              "cv_mae_sd": 331.0,
+              "train_mae": 38487.0,
+              "gap": 13979.0
+            },
+            {
+              "candidate": 78.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 92187.0,
+              "rank": 2.0,
+              "max_depth": 12.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 300.0,
+              "cv_mae": 52475.0,
+              "cv_mae_sd": 472.0,
+              "train_mae": 40839.0,
+              "gap": 11636.0
+            },
+            {
+              "candidate": 134.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 145515.0,
+              "rank": 3.0,
+              "max_depth": 16.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 200.0,
+              "cv_mae": 52497.0,
+              "cv_mae_sd": 341.0,
+              "train_mae": 37792.0,
+              "gap": 14706.0
+            },
+            {
+              "candidate": 74.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 60440.0,
+              "rank": 4.0,
+              "max_depth": 12.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 200.0,
+              "cv_mae": 52521.0,
+              "cv_mae_sd": 444.0,
+              "train_mae": 43539.0,
+              "gap": 8982.0
+            },
+            {
+              "candidate": 130.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 79859.0,
+              "rank": 5.0,
+              "max_depth": 16.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 100.0,
+              "cv_mae": 52551.0,
+              "cv_mae_sd": 343.0,
+              "train_mae": 42227.0,
+              "gap": 10325.0
+            },
+            {
+              "candidate": 69.0,
+              "chosen": "*",
+              "eligible": "yes",
+              "leaves": 54470.0,
+              "rank": 6.0,
+              "max_depth": 12.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 1.0,
+              "n_estimators": 100.0,
+              "cv_mae": 52567.0,
+              "cv_mae_sd": 394.0,
+              "train_mae": 40705.0,
+              "gap": 11862.0
+            },
+            {
+              "candidate": 250.0,
+              "chosen": "",
+              "eligible": "yes",
+              "leaves": 197003.0,
+              "rank": 7.0,
+              "max_depth": 24.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 100.0,
+              "cv_mae": 52569.0,
+              "cv_mae_sd": 337.0,
+              "train_mae": 35862.0,
+              "gap": 16707.0
+            },
+            {
+              "candidate": 93.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 50290.0,
+              "rank": 8.0,
+              "max_depth": 12.0,
+              "min_child_weight": 5.0,
+              "reg_lambda": 1.0,
+              "n_estimators": 200.0,
+              "cv_mae": 52660.0,
+              "cv_mae_sd": 361.0,
+              "train_mae": 41395.0,
+              "gap": 11265.0
+            },
+            {
+              "candidate": 154.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 78884.0,
+              "rank": 9.0,
+              "max_depth": 16.0,
+              "min_child_weight": 5.0,
+              "reg_lambda": 10.0,
+              "n_estimators": 200.0,
+              "cv_mae": 52667.0,
+              "cv_mae_sd": 377.0,
+              "train_mae": 41057.0,
+              "gap": 11609.0
+            },
+            {
+              "candidate": 73.0,
+              "chosen": "",
+              "eligible": "",
+              "leaves": 92702.0,
+              "rank": 10.0,
+              "max_depth": 12.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 1.0,
+              "n_estimators": 200.0,
+              "cv_mae": 52687.0,
+              "cv_mae_sd": 377.0,
+              "train_mae": 36156.0,
+              "gap": 16531.0
+            }
+          ]
+        },
+        {
+          "kind": "fold_scores",
+          "rows": [
+            {
+              "": 1.0,
+              "train MAE": 40610.0,
+              "validation MAE": 52278.0,
+              "MAE gap": 11668.0,
+              "gap % of validation MAE": 22.32,
+              "train R2": 0.9654,
+              "validation R2": 0.9444,
+              "R2 gap": 0.021
+            },
+            {
+              "": 2.0,
+              "train MAE": 40641.0,
+              "validation MAE": 52660.0,
+              "MAE gap": 12019.0,
+              "gap % of validation MAE": 22.82,
+              "train R2": 0.9652,
+              "validation R2": 0.9389,
+              "R2 gap": 0.0263
+            },
+            {
+              "": 3.0,
+              "train MAE": 40815.0,
+              "validation MAE": 52554.0,
+              "MAE gap": 11739.0,
+              "gap % of validation MAE": 22.34,
+              "train R2": 0.9653,
+              "validation R2": 0.939,
+              "R2 gap": 0.0263
+            },
+            {
+              "": 4.0,
+              "train MAE": 40594.0,
+              "validation MAE": 53247.0,
+              "MAE gap": 12653.0,
+              "gap % of validation MAE": 23.76,
+              "train R2": 0.9651,
+              "validation R2": 0.9374,
+              "R2 gap": 0.0277
+            },
+            {
+              "": 5.0,
+              "train MAE": 40866.0,
+              "validation MAE": 52097.0,
+              "MAE gap": 11231.0,
+              "gap % of validation MAE": 21.56,
+              "train R2": 0.9656,
+              "validation R2": 0.937,
+              "R2 gap": 0.0286
+            },
+            {
+              "": "mean",
+              "train MAE": 40705.0,
+              "validation MAE": 52567.0,
+              "MAE gap": 11862.0,
+              "gap % of validation MAE": 22.56,
+              "train R2": 0.9653,
+              "validation R2": 0.9393,
+              "R2 gap": 0.026
+            },
+            {
+              "": "sd",
+              "train MAE": 113.0,
+              "validation MAE": 394.0,
+              "MAE gap": 469.0,
+              "gap % of validation MAE": 0.72,
+              "train R2": 0.0002,
+              "validation R2": 0.0026,
+              "R2 gap": 0.0026
+            }
+          ]
+        }
+      ],
+      "ablation": [
+        {
+          "variant": "none",
+          "CV MAE mean": 52925.421094,
+          "CV MAE SD": 369.734181,
+          "test MAE": 52393.265625,
+          "test RMSE": 79019.391645,
+          "test R2": 0.94172,
+          "test MAPE": 0.100586,
+          "change test MAE (baht)": 0.0,
+          "change test MAE (%)": 0.0,
+          "change CV MAE mean (baht)": 0.0,
+          "change CV MAE mean (%)": 0.0
+        },
+        {
+          "variant": "scale only",
+          "CV MAE mean": 52925.421094,
+          "CV MAE SD": 369.734181,
+          "test MAE": 52393.265625,
+          "test RMSE": 79019.391645,
+          "test R2": 0.94172,
+          "test MAPE": 0.100586,
+          "change test MAE (baht)": 0.0,
+          "change test MAE (%)": 0.0,
+          "change CV MAE mean (baht)": 0.0,
+          "change CV MAE mean (%)": 0.0
+        },
+        {
+          "variant": "log only",
+          "CV MAE mean": 52567.236719,
+          "CV MAE SD": 393.74876,
+          "test MAE": 52229.140625,
+          "test RMSE": 78722.24387,
+          "test R2": 0.942157,
+          "test MAPE": 0.09868,
+          "change test MAE (baht)": -164.125,
+          "change test MAE (%)": -0.313256,
+          "change CV MAE mean (baht)": -358.184375,
+          "change CV MAE mean (%)": -0.676772
+        },
+        {
+          "variant": "both",
+          "CV MAE mean": 52567.236719,
+          "CV MAE SD": 393.74876,
+          "test MAE": 52229.140625,
+          "test RMSE": 78722.24387,
+          "test R2": 0.942157,
+          "test MAPE": 0.09868,
+          "change test MAE (baht)": -164.125,
+          "change test MAE (%)": -0.313256,
+          "change CV MAE mean (baht)": -358.184375,
+          "change CV MAE mean (%)": -0.676772
+        }
+      ],
+      "overfit": [
+        "PASS : validation MAE ต่างจาก CV MAE ไม่เกิน 5% (generalisation)",
+        "PASS : test MAE ต่างจาก CV MAE ไม่เกิน 5% (generalisation)",
+        "PASS : จำนวนรอบอยู่ในช่วง 1 SE ของจุดที่ CV MAE ต่ำสุด (ไม่น้อยหรือมากเกินไป)",
+        "PASS : ช่องว่าง test - train แคบลงเมื่อเพิ่มข้อมูลฝึก (learning curve)"
+      ],
+      "plots": {
+        "learning": "img/XGB_merge50minC_adj_learning.png",
+        "permutation": "img/XGB_merge50minC_adj_permutation.png",
+        "model_based": "img/XGB_merge50minC_adj_model_based.png"
+      },
+      "data": {
+        "rows": 47001,
+        "split": [
+          {
+            "ชุด": "train",
+            "แถว": 37600.0,
+            "สัดส่วน (%)": 80.0,
+            "จำนวนรุ่น": 115.0
+          },
+          {
+            "ชุด": "validation",
+            "แถว": 4700.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 115.0
+          },
+          {
+            "ชุด": "test",
+            "แถว": 4701.0,
+            "สัดส่วน (%)": 10.0,
+            "จำนวนรุ่น": 115.0
+          }
+        ],
+        "models": 115.0
+      },
+      "missing": [],
+      "runtime": {
+        "start": "2026-10-26 04:02:27",
+        "end": "2026-10-26 04:31:51",
+        "status": "ok",
+        "seconds": 1764.0
+      }
+    }
+  ],
+  "total_seconds": 15660.0,
+  "missing": []
+}

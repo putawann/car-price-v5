@@ -1,0 +1,13 @@
+notebook,start,end,seconds,status
+DT/DT_new_cardb.ipynb,2026-10-26 00:10:47,2026-10-26 00:16:58,371,ok
+RF/RF_new_cardb.ipynb,2026-10-26 00:16:58,2026-10-26 00:38:39,1300,ok
+XGB/XGB_new_cardb.ipynb,2026-10-26 00:38:39,2026-10-26 01:11:24,1965,ok
+DT/DT_new_cardb_adj.ipynb,2026-10-26 01:11:24,2026-10-26 01:20:38,553,ok
+RF/RF_new_cardb_adj.ipynb,2026-10-26 01:20:38,2026-10-26 01:47:16,1598,ok
+XGB/XGB_new_cardb_adj.ipynb,2026-10-26 01:47:16,2026-10-26 02:38:10,3054,ok
+DT/DT_merge50minC.ipynb,2026-10-26 02:38:11,2026-10-26 02:44:44,393,ok
+RF/RF_merge50minC.ipynb,2026-10-26 02:44:44,2026-10-26 03:03:09,1105,ok
+XGB/XGB_merge50minC.ipynb,2026-10-26 03:03:09,2026-10-26 03:36:21,1991,ok
+DT/DT_merge50minC_adj.ipynb,2026-10-26 03:36:21,2026-10-26 03:44:50,509,ok
+RF/RF_merge50minC_adj.ipynb,2026-10-26 03:44:50,2026-10-26 04:02:27,1057,ok
+XGB/XGB_merge50minC_adj.ipynb,2026-10-26 04:02:27,2026-10-26 04:31:51,1764,ok
