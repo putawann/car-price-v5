@@ -2,11 +2,12 @@
 
 Run from this worktree: python -X utf8 make_report.py
 Only curated aggregates, PASS/WARN messages and three plot types are exported.
-Uses the standard library only. Input files are never modified.
+Reads installed estimator defaults without fitting. Input files are never modified.
 """
 from __future__ import annotations
 
 import base64
+import ast
 import csv
 import html
 from html.parser import HTMLParser
@@ -22,6 +23,242 @@ MISSING = 'ไม่มีผล'
 DATASETS = ('new_cardb', 'merge50minC')
 MODELS = ('DT', 'RF', 'XGB')
 FORBIDDEN = re.compile(r'[A-Za-z]:[/\\]|putaw|(?:api[_-]?key|access[_-]?token|secret)\s*[:=]', re.I)
+
+PARAM_MISSING = 'ไม่พบในผลรัน'
+FIXED_SOURCE = 'กำหนดคงที่ในโค้ด'
+PARAM_MEANINGS = {
+    'criterion': 'เกณฑ์วัดคุณภาพการแตกกิ่ง', 'splitter': 'วิธีเลือกจุดแตกกิ่ง',
+    'max_depth': 'ความลึกสูงสุดของต้นไม้', 'min_samples_split': 'จำนวนแถวขั้นต่ำก่อนแตกกิ่ง',
+    'min_samples_leaf': 'จำนวนแถวขั้นต่ำต่อใบ', 'min_weight_fraction_leaf': 'สัดส่วนน้ำหนักขั้นต่ำต่อใบ',
+    'max_features': 'จำนวนหรือสัดส่วนตัวแปรที่ใช้เลือกจุดแตกกิ่ง',
+    'random_state': 'เลขสุ่มสำหรับทำผลซ้ำ', 'max_leaf_nodes': 'จำนวนใบสูงสุด',
+    'min_impurity_decrease': 'การลดความไม่บริสุทธิ์ขั้นต่ำก่อนแตกกิ่ง',
+    'ccp_alpha': 'ความแรงของการตัดกิ่ง', 'monotonic_cst': 'ข้อบังคับทิศทางความสัมพันธ์',
+    'n_estimators': 'จำนวนต้นไม้หรือรอบ boosting', 'bootstrap': 'การสุ่มแถวแบบใส่คืน',
+    'oob_score': 'การวัดผลด้วยแถวที่ไม่ถูกสุ่มเข้าแต่ละต้น', 'n_jobs': 'จำนวนงานหรือ thread ของโมเดล',
+    'verbose': 'ระดับข้อความความคืบหน้า', 'warm_start': 'การต่อเติมโมเดลเดิม',
+    'max_samples': 'ขนาดตัวอย่าง bootstrap', 'objective': 'ฟังก์ชันเป้าหมายในการฝึก',
+    'learning_rate': 'ขนาดก้าวของ boosting', 'min_child_weight': 'น้ำหนัก Hessian ขั้นต่ำของโหนดลูก',
+    'reg_lambda': 'บทลงโทษ L2 ของค่าในใบ', 'reg_alpha': 'บทลงโทษ L1 ของค่าในใบ',
+    'gamma': 'การลด loss ขั้นต่ำก่อนแตกกิ่ง', 'max_delta_step': 'ขนาดการปรับค่าในใบสูงสุด',
+    'subsample': 'สัดส่วนแถวที่สุ่มใช้แต่ละรอบ', 'colsample_bytree': 'สัดส่วนคอลัมน์ที่สุ่มต่อหนึ่งต้น',
+    'colsample_bylevel': 'สัดส่วนคอลัมน์ที่สุ่มต่อระดับ', 'colsample_bynode': 'สัดส่วนคอลัมน์ที่สุ่มต่อโหนด',
+    'tree_method': 'วิธีสร้างต้นไม้', 'max_bin': 'จำนวนช่วง histogram สูงสุด',
+    'grow_policy': 'ลำดับการขยายต้นไม้', 'booster': 'ชนิดตัวเรียนรู้ย่อย',
+    'eval_metric': 'ตัววัดระหว่างฝึกเมื่อมี eval_set', 'early_stopping_rounds': 'จำนวนรอบรอก่อนหยุดฝึก',
+    'base_score': 'ค่าทำนายเริ่มต้น', 'callbacks': 'ฟังก์ชันเสริมระหว่างฝึก',
+    'device': 'อุปกรณ์ประมวลผล', 'enable_categorical': 'การอนุญาตข้อมูลหมวดหมู่แบบ native',
+    'feature_types': 'ชนิดข้อมูลของตัวแปร', 'feature_weights': 'น้ำหนักในการสุ่มตัวแปร',
+    'importance_type': 'วิธีสรุปความสำคัญตัวแปร', 'interaction_constraints': 'ข้อจำกัดปฏิสัมพันธ์ของตัวแปร',
+    'max_cat_threshold': 'จำนวนหมวดหมู่สูงสุดที่พิจารณาจุดแบ่ง',
+    'max_cat_to_onehot': 'เกณฑ์เลือก one-hot สำหรับข้อมูลหมวดหมู่ native',
+    'max_leaves': 'จำนวนใบสูงสุด', 'missing': 'ค่าที่ใช้แทนข้อมูลสูญหาย',
+    'monotone_constraints': 'ข้อบังคับทิศทางความสัมพันธ์', 'multi_strategy': 'วิธีเรียนรู้หลายเป้าหมาย',
+    'num_parallel_tree': 'จำนวนต้นไม้ขนานต่อรอบ', 'sampling_method': 'วิธีสุ่มแถวฝึก',
+    'scale_pos_weight': 'น้ำหนักสัมพัทธ์ของคลาสบวก', 'validate_parameters': 'การตรวจชื่อพารามิเตอร์',
+    'verbosity': 'ระดับข้อความของ XGBoost',
+}
+
+
+def estimator_class(model):
+    # Imports and construction only: never load training data or fit a model.
+    if model == 'XGB':
+        import xgboost
+        return xgboost.XGBRegressor, 'xgboost ' + xgboost.__version__
+    import sklearn
+    from sklearn.tree import DecisionTreeRegressor
+    from sklearn.ensemble import RandomForestRegressor
+    return {'DT': DecisionTreeRegressor, 'RF': RandomForestRegressor}[model], 'sklearn ' + sklearn.__version__
+
+
+def static_value(node, names):
+    """Small allowlist of value expressions; no notebook code is evaluated."""
+    if isinstance(node, ast.Name):
+        return names[node.id]
+    if isinstance(node, (ast.Constant, ast.List, ast.Tuple, ast.Dict, ast.UnaryOp)):
+        return ast.literal_eval(node)
+    if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Div):
+        left, right = static_value(node.left, names), static_value(node.right, names)
+        return [v / right for v in left] if isinstance(left, list) else left / right
+    if (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
+            and isinstance(node.func.value, ast.Name) and node.func.value.id == 'np'
+            and node.func.attr == 'arange' and not node.keywords):
+        return list(range(*(static_value(a, names) for a in node.args)))
+    raise ValueError('unsupported static parameter expression')
+
+
+def param_display(value):
+    if isinstance(value, float) and not math.isfinite(value):
+        return 'NaN' if math.isnan(value) else str(value)
+    return json.dumps(value, ensure_ascii=False, allow_nan=False)
+
+
+def collect_params(cells, run):
+    """Read each notebook's AST and saved summaries, never execute its cells."""
+    sources = [joined(c.get('source', '')) for c in cells if c.get('cell_type') == 'code']
+    constants, comments, fixed, fixed_comments, grid = {}, {}, {}, {}, {}
+    trees = [(s, ast.parse(s)) for s in sources]
+    for source, tree in trees:
+        if 'ค่าคงที่ของการทดลอง' in source and re.search(r'^SEED\s*=', source, re.M):
+            lines = source.splitlines()
+            for node in tree.body:
+                if not isinstance(node, ast.Assign):
+                    continue
+                targets = node.targets[0]
+                names = [targets.id] if isinstance(targets, ast.Name) else [n.id for n in targets.elts]
+                try:
+                    value = static_value(node.value, constants)
+                    values = [value] if isinstance(targets, ast.Name) else value
+                except (ValueError, KeyError, TypeError):
+                    values = [PARAM_MISSING] * len(names)
+                for name, value in zip(names, values):
+                    constants[name] = value
+                    comments[name] = lines[node.end_lineno - 1].partition('#')[2].strip()
+        for node in tree.body:
+            if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'PARAM_GRID' for t in node.targets):
+                grid.update(static_value(node.value, constants))
+            if isinstance(node, ast.FunctionDef) and node.name == 'make_model':
+                call = next(n.value for n in node.body if isinstance(n, ast.Return))
+                for kw in call.keywords:
+                    try:
+                        fixed[kw.arg] = static_value(kw.value, constants)
+                    except (ValueError, KeyError, TypeError):
+                        fixed[kw.arg] = PARAM_MISSING
+                    fixed_comments[kw.arg] = source.splitlines()[kw.end_lineno - 1].partition('#')[2].strip()
+    best = dict((run['result'] or {}).get('best_params', {}))
+    edge = {}
+    alpha_printed = None
+    for cell in cells:
+        text = output_text(cell)
+        if re.search(r'^=== \[\d+\] สรุปผลกฎ 1-SE', text, re.M):
+            selected = text.partition('ชุดที่กฎ 1-SE เลือก')[2]
+            found = re.search(r'^\s*params\s*:\s*(\{[^\n]+\})', selected, re.M)
+            if found:
+                for key, value in ast.literal_eval(found[1]).items():
+                    if key in best and best[key] != value:
+                        raise ValueError('RESULT_JSON and 1-SE summary disagree: ' + run['run_id'] + ' ' + key)
+                    best.setdefault(key, value)
+        if re.search(r'^=== \[\d+\] ccp 5:', text, re.M):
+            block = text.partition('ccp_alpha ที่ใส่ใน PARAM_GRID:')[2]
+            alpha_printed = [float(v) for v in re.findall(r'^\s+([\d.]+e[+-]\d+)\s*$', block, re.M | re.I)]
+        if re.search(r'^=== \[\d+\] ตรวจขอบ grid', text, re.M):
+            block = text.partition('ผู้ชนะ 1-SE')[2].partition('ชุด CV MAE ต่ำสุด')[0]
+            edge.update(re.findall(r'^\s*(\w+)\s*:.*?->\s*(.+)$', block, re.M))
+            for table_ in cell_tables(cell):
+                for row in records(table_):
+                    if 'parameter' in row and '1-SE winner check' in row:
+                        edge[row['parameter']] = row['1-SE winner check'] + ' (' + row['1-SE winner position'] + ')'
+    if run['model'] == 'DT':
+        grid['ccp_alpha'] = alpha_printed or PARAM_MISSING
+    cls, version = estimator_class(run['model'])
+    # Missing explicit settings must never silently become library defaults.
+    params = cls(**{k: v for k, v in fixed.items() if v != PARAM_MISSING}).get_params()
+    rows = []
+
+    def add(name, value, source, explanation, kind='fixed', **extra):
+        if value == PARAM_MISSING:
+            run['missing'].append('params: ' + name + ' · ' + PARAM_MISSING)
+        rows.append({'parameter': name, 'value': value, 'source': source,
+                     'explanation': explanation, 'kind': kind, **extra})
+
+    for name, default in params.items():
+        meaning = PARAM_MEANINGS.get(name, 'การตั้งค่า ' + name)
+        if name in grid:
+            candidates = grid[name]
+            source = 'GridSearchCV + กฎ 1-SE (ช่วงที่ค้น: ' + param_display(candidates) + ')'
+            explanation = meaning + '; เลือกค่าของผู้ชนะที่มีใบน้อยที่สุดในช่วง 1-SE'
+            if name == 'ccp_alpha':
+                explanation += '; ตัวเลือกจาก ccp path บน train และ CV (ช่วงแสดงตามผลพิมพ์ 4 หลักนัยสำคัญ)'
+            status = edge.get(name, PARAM_MISSING)
+            if status == PARAM_MISSING:
+                run['missing'].append('params: ตรวจขอบ grid ' + name + ' · ' + PARAM_MISSING)
+            explanation += '; ตรวจขอบ: ' + status + '।'
+            add(name, best.get(name, PARAM_MISSING), source, explanation, 'tuned',
+                search_range=candidates, grid_edge=status,
+                candidate_source='เลือกจาก ccp path' if name == 'ccp_alpha' else 'PARAM_GRID')
+        elif name in fixed:
+            source = 'กราฟ OOB' if name == 'n_estimators' and run['model'] == 'RF' and 'OOB' in fixed_comments[name] else FIXED_SOURCE
+            comment = fixed_comments[name]
+            explanation = (comment if comment else meaning) + '; กำหนดคงที่ ไม่ได้ค้นใน grid ของไฟล์นี้।'
+            add(name, fixed[name], source, explanation)
+        else:
+            value = 'NaN' if isinstance(default, float) and math.isnan(default) else default
+            explanation = meaning + '; คงค่าเริ่มต้นของไลบรารีโดยไม่ได้ปรับจูน'
+            if default is None and run['model'] == 'XGB':
+                explanation += ' (None คือไม่ได้ระบุใน Python wrapper ให้ backend ตัดสิน)'
+            if name in ('enable_categorical', 'max_cat_threshold', 'max_cat_to_onehot'):
+                explanation += '; pipeline ใช้ FoldOneHot จึงไม่ได้ส่งหมวดหมู่ native'
+            add(name, value, 'ค่าเริ่มต้นของไลบรารี (' + version + ')', explanation + '।', 'default')
+    for name, value in constants.items():
+        meaning = {'RUN_ID': 'ชื่อการทดลอง', 'DATASET': 'ชื่อชุดข้อมูล', 'VARIANT': 'รูปแบบ base หรือ adj',
+                   'MAX_CAR_AGE': 'อายุรถสูงสุดที่ยอมรับในการกรองข้อมูล',
+                   'MODEL_ALIASES': 'กฎรวมชื่อรุ่นที่สะกดต่างกัน',
+                   'PERM_AXIS': 'ช่วงแกนกราฟ permutation importance',
+                   'SHARE_AXIS': 'ช่วงแกนสัดส่วนความสำคัญตัวแปร'}.get(name, 'ค่าประกอบการทดลอง ' + name)
+        explanation = comments[name] or meaning + '; กำหนดคงที่โดยไม่ได้ปรับจูน'
+        add(name, value, FIXED_SOURCE, explanation + '।')
+    if run['model'] == 'DT':
+        add('ccp_alpha.candidates', grid['ccp_alpha'], 'เลือกจาก ccp path',
+            'เลือก alpha บวกบนสเกล log ที่ต้นไม้ยังเกิน MIN_LEAVES แล้วใช้ CV คัดเพื่อนบ้าน CCP_NEIGHBOURS พร้อมเพิ่ม 0 ก่อนค้น grid; ค่าตัวเลือกแสดงตามผลพิมพ์ 4 หลักนัยสำคัญ।')
+
+    # Pipeline/search arguments are read from the final pipeline, not diagnostics/ablation.
+    final_pipeline = next((tree for source, tree in trees if any(
+        isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'pipeline' for t in n.targets)
+        for n in tree.body)), None)
+    calls = list(ast.walk(final_pipeline)) if final_pipeline else []
+    encoder = next((n for n in calls if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and n.func.id == 'FoldOneHot'), None)
+    target = next((n for n in calls if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and n.func.id == 'TransformedTargetRegressor'), None)
+    scaled = next((static_value(k.value, constants) for k in encoder.keywords if k.arg == 'scale_numeric'), False) if encoder else PARAM_MISSING
+    add('pipeline.target_transform', 'np.log / np.exp' if target else ('identity (บาท)' if final_pipeline else PARAM_MISSING), FIXED_SOURCE,
+        'แปลงราคา log แล้วคืนด้วย exp ก่อนวัดผลเป็นบาท; กำหนดคงที่ไม่ได้ปรับจูน।' if target else 'ใช้ราคาเป็นบาทโดยไม่แปลงเป้าหมาย; กำหนดคงที่ไม่ได้ปรับจูน।')
+    if target:
+        for kw in target.keywords:
+            if kw.arg in ('func', 'inverse_func') and ast.unparse(kw.value) not in ('np.log', 'np.exp'):
+                raise ValueError('unexpected target transform')
+        from sklearn.compose import TransformedTargetRegressor
+        for name, value in TransformedTargetRegressor().get_params(deep=False).items():
+            if name not in ('regressor', 'func', 'inverse_func'):
+                add('target.' + name, value, 'ค่าเริ่มต้นของไลบรารี (' + estimator_class('DT')[1] + ')',
+                    ('ตรวจว่าฟังก์ชันแปลงและแปลงกลับสอดคล้องกัน' if name == 'check_inverse' else 'ตัวแปลงเป้าหมายแบบ estimator ซึ่งไม่ได้ส่งเพราะใช้คู่ฟังก์ชัน log/exp') + '; คงค่าเริ่มต้นโดยไม่ได้ปรับจูน।', 'default')
+    add('FoldOneHot.scale_numeric', scaled, FIXED_SOURCE, 'กำหนดว่าจะปรับสเกลเฉพาะตัวเลขในแต่ละ fold หรือไม่ตาม pipeline; กำหนดคงที่ไม่ได้ปรับจูน।')
+    if scaled is True:
+        add('scaler', '(x - mean_train_fold) / std_train_fold; ddof=0; std=0 → 1', FIXED_SOURCE,
+            'ใช้ mean/std จากแถวฝึกของแต่ละ fold เท่านั้นและไม่ scale dummy ตามโค้ดเพื่อป้องกันข้อมูลรั่ว।')
+    else:
+        add('scaler', 'ไม่มี', FIXED_SOURCE, 'ส่งค่าตัวเลขเดิมเข้าโมเดลตามโค้ดโดยไม่ได้ปรับจูนการ scale।')
+    add('encoder', 'FoldOneHot; numeric=float; dummy=float; dense', FIXED_SOURCE, 'แปลงหมวดหมู่เป็น 0/1 และต่อกับตัวเลขโดย fit ใหม่ในแต่ละ fold เพื่อป้องกันข้อมูลรั่ว।')
+    add('FoldOneHot.reference', 'most frequent; ties: name ascending, stable', FIXED_SOURCE, 'ทิ้งระดับที่พบบ่อยที่สุดเพื่อลดคอลัมน์ซ้ำซ้อนและใช้ชื่อเรียงตัดสินเมื่อความถี่เสมอกันตามโค้ด।')
+    add('FoldOneHot.unseen', 'all zeros', FIXED_SOURCE, 'ระดับที่ไม่เคยพบในแถวฝึกได้ศูนย์ทุกคอลัมน์ตามโค้ดเพื่อให้แปลงข้อมูลใหม่ได้।')
+    split_source = next((s for s in sources if 'train_test_split(' in s), '')
+    add('split.strategy', 'forced-train 1 / brand|model' if 'forced =' in split_source else ('stratify brand|model' if 'stratify=model_key' in split_source else PARAM_MISSING), FIXED_SOURCE,
+        'ใช้กติกาแบ่งชุดของไฟล์นี้ร่วมกับ TRAIN_SIZE/VAL_SIZE/TEST_SIZE และ SEED ตามโค้ดโดยไม่ได้ปรับจูน।')
+    for source, tree in trees:
+        for call in ast.walk(tree):
+            if not isinstance(call, ast.Call) or not isinstance(call.func, ast.Name):
+                continue
+            if call.func.id in ('GridSearchCV', 'KFold'):
+                for kw in call.keywords:
+                    name = call.func.id + '.' + kw.arg
+                    if kw.arg in ('param_grid', 'cv'):
+                        continue
+                    try:
+                        value = static_value(kw.value, constants)
+                    except (ValueError, KeyError, TypeError):
+                        value = ast.unparse(kw.value)
+                    meaning = {'shuffle': 'สลับลำดับแถวก่อนแบ่ง fold เพื่อให้กระจายข้อมูล',
+                               'random_state': 'เลขสุ่มของการแบ่ง fold เพื่อทำผลซ้ำ',
+                               'scoring': 'ตัววัด CV โดยใช้ MAE หน่วยบาทเลือกผู้ชนะและใช้ใบวัดความซับซ้อน',
+                               'refit': 'ฟังก์ชันเลือกชุดค่าด้วยกฎ 1-SE แล้วฝึกผู้ชนะบน train ทั้งชุด',
+                               'return_train_score': 'เก็บคะแนน train เพื่อเทียบกับ CV',
+                               'error_score': 'ให้หยุดเมื่อการฝึกเกิดข้อผิดพลาด',
+                               'n_jobs': 'จำนวนงานค้นหาที่ทำพร้อมกัน',
+                               'pre_dispatch': 'จำนวนงานที่ส่งล่วงหน้าเพื่อคุมหน่วยความจำ',
+                               'verbose': 'ระดับข้อความความคืบหน้าของการค้นหา'}.get(kw.arg, kw.arg)
+                    add(name, value, FIXED_SOURCE, meaning + '; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।')
+    rule = 'min CV MAE + SD(ddof=0)/sqrt(N_FOLDS); min leaves → CV MAE → index'
+    add('selection.1SE', rule, FIXED_SOURCE, 'เลือกใบน้อยที่สุดในช่วงหนึ่ง SE จาก MAE ต่ำสุด; DT นับใบบน train ทั้งชุด ส่วน RF/XGB ใช้ค่าเฉลี่ยใบรวมจาก CV ตามโค้ด।')
+    rows.sort(key=lambda row: {'tuned': 0, 'fixed': 1, 'default': 2}[row['kind']])
+    return rows
 
 
 def joined(value):
@@ -171,7 +408,7 @@ def parse_notebook(path, log):
     run = {'run_id': Path(path).stem, 'notebook': path, 'model': model,
            'dataset': dataset, 'variant': 'adj' if adj else 'base',
            'result': None, 'importance': None, 'cv': None, 'cv_tables': [],
-           'ablation': [], 'overfit': [], 'plots': {}, 'data': {}, 'missing': []}
+           'ablation': [], 'overfit': [], 'plots': {}, 'data': {}, 'params': [], 'missing': []}
     if log:
         run['runtime'] = {k: log.get(k) for k in ('start', 'end', 'status')}
         run['runtime']['seconds'] = numeric(log.get('seconds'))
@@ -281,6 +518,7 @@ def parse_notebook(path, log):
     for field in ('rows', 'models', 'split'):
         if field not in run['data']:
             run['missing'].append('ข้อมูลรวม ' + field)
+    run['params'] = collect_params(cells, run)
     return run
 
 
@@ -332,6 +570,7 @@ CSS = """
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,-apple-system,'Tahoma',sans-serif}main{max-width:1120px;margin:auto;padding:24px 16px 64px}header{padding:16px 0 24px}h1{font-size:clamp(1.8rem,5vw,2.7rem);line-height:1.3;letter-spacing:-.03em}h2{font-size:1.45rem;line-height:1.5;margin:0 0 16px}h3{font-size:1.12rem}p{margin:10px 0}a{color:var(--accent);text-underline-offset:3px}nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}nav a{padding:6px 12px;border:1px solid var(--line);border-radius:20px;text-decoration:none;font-size:.9rem}section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;scroll-margin-top:12px}.muted,figcaption{color:var(--muted);font-size:.88rem}.eyebrow{color:var(--accent);font-weight:700;letter-spacing:.1em}.cards,.plots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{padding:18px;border:1px solid var(--line);border-radius:12px;min-width:0}.value{font-size:1.8rem;font-weight:750;color:var(--accent)}.note{border-left:4px solid var(--accent);padding:8px 14px;background:var(--bg)}.table-wrap{max-width:100%;overflow:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:.9rem}th,td{padding:10px 12px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}th{background:var(--bg);font-weight:650}th:first-child,td:first-child{text-align:left}tr:last-child td{border-bottom:0}.best{background:var(--best);font-weight:700}details{border-top:1px solid var(--line);padding:12px 0}summary{cursor:pointer;font-weight:650;overflow-wrap:anywhere}figure{margin:8px 0;min-width:0}img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#fff}figcaption{margin:6px 0;overflow-wrap:anywhere}ul{padding-left:22px}li{margin:7px 0;overflow-wrap:anywhere}.pass{color:var(--accent)}.warn{color:var(--warn)}code{overflow-wrap:anywhere}footer{padding:14px 0;color:var(--muted)}
 @media(max-width:600px){main{padding:12px 10px 40px}section{padding:16px 12px;border-radius:12px}.cards,.plots{grid-template-columns:1fr}th,td{padding:9px}.value{font-size:1.5rem}h2{font-size:1.25rem}}
 @media(prefers-color-scheme:dark){:root{--bg:#101a23;--card:#182630;--ink:#e0ecf3;--muted:#a4b8c5;--line:#344957;--accent:#73d7c4;--best:#173e35;--warn:#ffbf85}}
+#parameters table{table-layout:fixed;min-width:740px}#parameters th,#parameters td{text-align:left;white-space:normal;overflow-wrap:anywhere;vertical-align:top}#parameters th:nth-child(1){width:19%}#parameters th:nth-child(2){width:20%}#parameters th:nth-child(3){width:27%}#parameters th:nth-child(4){width:34%}
 """
 
 
@@ -344,7 +583,7 @@ def render(runs, missing):
              '<meta name="description" content="ผลฝึกโมเดลราคารถ v5 จาก output ที่บันทึกไว้ 12 งาน"><title>ผลการฝึกโมเดลราคารถ · v5</title>',
              '<style>' + CSS + '</style></head><body><main><header><p class="eyebrow">TRAINING RESULTS / V5</p><h1>ผลการฝึกโมเดลราคารถ</h1>',
              '<p>12 การทดลอง · DT / RF / XGB · 2 ชุดข้อมูล · base และ adj</p><p class="muted">อ่านจาก output ที่บันทึกไว้เท่านั้น ไม่มีการฝึกหรือรัน notebook ใหม่ · หน่วยเงิน: บาท</p><nav aria-label="สารบัญ">']
-    sections = [('summary', 'สรุปสั้น'), ('data', 'ข้อมูลที่ใช้'), ('results', 'ผลหลัก'), ('adjustment', 'ผลการปรับ'),
+    sections = [('summary', 'สรุปสั้น'), ('data', 'ข้อมูลที่ใช้'), ('results', 'ผลหลัก'), ('parameters', 'พารามิเตอร์ของแต่ละไฟล์'), ('adjustment', 'ผลการปรับ'),
                 ('importance', 'ความสำคัญตัวแปร'), ('overfit', 'Overfit'), ('learning', 'Learning curves'), ('runtime', 'เวลารัน')]
     parts.extend(f'<a href="#{key}">{name}</a>' for key, name in sections)
     parts.append('</nav></header><section id="summary"><h2>1. สรุปสั้น</h2><div class="cards">')
@@ -377,6 +616,19 @@ def render(runs, missing):
     parts.append(table(['โมเดล', 'ชุดข้อมูล', 'แบบ', 'Test R²', 'RMSE (บาท)', 'MAE (บาท)', 'MAPE', 'CV MAE ± SD (บาท)'], main_rows,
                        [i for i, r in enumerate(runs) if winners[r['dataset']] is r]))
     parts.append('<p><a href="results.json">ดาวน์โหลดตัวเลขทั้งหมด (JSON)</a> รวม train / validation / test, best params, CV และ importance</p></section>')
+    parts.append('<section id="parameters"><h2>พารามิเตอร์ของแต่ละไฟล์</h2><p>ค่าของโมเดลสุดท้ายจาก RESULT_JSON หรือสรุปผู้ชนะ 1-SE ของแต่ละไฟล์; ค่าคงที่อ่านจาก source และค่าที่ไม่ได้ระบุอ่านจาก get_params() ของไลบรารีที่ติดตั้งขณะสร้างรายงาน โดยไม่ฝึกโมเดล</p>')
+    parts.append('<p class="note">ที่มา: <strong>GridSearchCV + กฎ 1-SE</strong> คือค้นในช่วงที่ระบุแล้วเลือกชุดที่ใบน้อยที่สุดเมื่อ CV MAE ไม่เกินค่าต่ำสุด + SD/√จำนวน fold (SD แบบ ddof=0); เสมอกันเลือก CV MAE ต่ำกว่าแล้ว index ต่ำกว่า · DT นับใบบน train ทั้งชุด ส่วน RF/XGB ใช้ค่าเฉลี่ยใบรวมใน CV; กฎนี้เป็น heuristic ไม่ใช่หลักฐานว่าผลเท่ากันทางสถิติ</p>')
+    parts.append('<p><strong>เลือกจาก ccp path</strong>: สร้างตัวเลือก alpha จาก train แล้วคัดเพื่อนบ้านด้วย CV ก่อนเข้า grid; ช่วง alpha อ่านจากผลพิมพ์ 4 หลักนัยสำคัญ แต่ค่าผู้ชนะเก็บความละเอียดจาก JSON · <strong>กราฟ OOB / MAE รายรอบ</strong>: ใช้เป็นที่มาเฉพาะเมื่อโค้ดระบุว่าตรึงจำนวนต้นจากกราฟ (RF ระบุ OOB; XGB ค้นจำนวนรอบใน grid และกราฟรายรอบใช้ตรวจภายหลัง) · <strong>กำหนดคงที่ในโค้ด</strong>: ส่งค่าเอง แม้เท่ากับ default · <strong>ค่าเริ่มต้นของไลบรารี</strong>: ไม่ส่งค่าเอง ระบุเวอร์ชันที่ติดตั้งขณะสร้างรายงาน ซึ่งไม่ใช่การยืนยันเวอร์ชันขณะฝึก; XGB None หมายถึงไม่ได้ระบุใน wrapper และ NaN คือค่าข้อมูลสูญหาย</p><p class="muted">เรียงค่าที่ค้นหา → ค่าคงที่ → ค่าเริ่มต้น; ค่าที่ไม่มีหลักฐานแสดงว่า ไม่พบในผลรัน และอยู่ในรายการที่ขาด · ตารางเลื่อนแนวนอนได้บนจอเล็ก</p>')
+    for model in MODELS:
+        parts.append(f'<h3>{model}</h3>')
+        for run in runs:
+            if run['model'] != model:
+                continue
+            parts.append(f'<details id="params-{esc(run["run_id"])}"><summary>{esc(run["notebook"])}</summary>')
+            rows = [[p['parameter'], param_display(p['value']), p['source'], p['explanation']] for p in run['params']]
+            parts.append(table(['พารามิเตอร์', 'ค่าที่ใช้', 'ที่มา', 'คำอธิบาย'], rows) if rows else f'<p>{PARAM_MISSING}</p>')
+            parts.append('</details>')
+    parts.append('</section>')
     parts.append('<section id="adjustment"><h2>4. ผลของการปรับข้อมูล</h2><p>adj = scale ตัวแปรตัวเลข + log ราคา แล้วแปลงกลับเป็นบาทเมื่อวัดผล · Δ = adj − base; ค่าติดลบแปลว่าความคลาดเคลื่อนลดลง</p>')
     changes = []
     for dataset in DATASETS:
@@ -478,7 +730,7 @@ def main():
         raise ValueError('duplicate notebook in run_order.txt')
     missing = global_missing + [r['run_id'] + ': ' + item for r in runs for item in r['missing']]
     page, winners, main_rows = render(runs, missing)
-    payload = {'schema_version': 1, 'source': 'saved notebook outputs; no execution',
+    payload = {'schema_version': 2, 'source': 'saved notebook outputs and static source; installed estimator defaults; no notebook execution',
                'cv_precision': 'mean and SD from printed fold summary, rounded to integer baht',
                'runs': runs, 'total_seconds': sum((r['runtime'] or {}).get('seconds') or 0 for r in runs), 'missing': missing}
     encoded = json.dumps(payload, ensure_ascii=False, indent=2, allow_nan=False) + '\n'
@@ -487,8 +739,9 @@ def main():
     for dataset, winner in winners.items():
         readme.append(f'| {dataset} | {winner["model"] + " / " + winner["variant"] if winner else MISSING} | {fmt(metric(winner)) if winner else MISSING} | {fmt(metric(winner, "R2"), 4) if winner else MISSING} |')
     readme.extend(['', '**รายงานฉบับเต็ม:** [docs/index.html](docs/index.html) · [GitHub Pages]({{PAGES_URL}})', '',
+                   'ค่าพารามิเตอร์ทั้งหมดและที่มารายไฟล์: [พารามิเตอร์ของแต่ละไฟล์](docs/index.html#parameters)', '',
                    'สองชุดใช้แถว test ต่างกัน ควรเทียบภายในชุดก่อน รายงานมีผลการปรับข้อมูล, ablation, importance, overfit, learning curves และเวลารัน', '',
-                   'สร้างซ้ำจากโฟลเดอร์นี้: `python -X utf8 make_report.py` (อ่าน saved outputs เท่านั้น ไม่รัน notebook; ใช้ Python stdlib)', '',
+                   'สร้างซ้ำจากโฟลเดอร์นี้: `python -X utf8 make_report.py` (อ่าน saved outputs/source และ defaults จาก sklearn/xgboost ที่ติดตั้ง ไม่รัน notebook)', '',
                    'เผยแพร่ GitHub Pages: เลือก branch ที่มีรายงานและโฟลเดอร์ `/docs` แล้วแทน `{{PAGES_URL}}` ด้วย URL จริง เผยแพร่เฉพาะไฟล์สคริปต์/รายงานที่อนุญาต และอย่านำ notebook หรือไฟล์ข้อมูลเข้ารายงานสาธารณะ', ''])
     readme = '\n'.join(readme)
     for name, content in [('index.html', page), ('results.json', encoded), ('README.md', readme)]:
