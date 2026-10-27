@@ -1,7 +1,12 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "source": "saved notebook outputs and static source; installed estimator defaults; no notebook execution",
   "cv_precision": "mean and SD from printed fold summary, rounded to integer baht",
+  "generations": "old = 1-SE selection (older data); other value = date of the standard CV-MAE-minimum generation; winners are chosen only within the latest generation of a dataset",
+  "winners": {
+    "new_cardb": "XGB_new_cardb_adj",
+    "merge50minC": "XGB_merge50minC"
+  },
   "runs": [
     {
       "run_id": "DT_new_cardb",
@@ -9,6 +14,7 @@
       "model": "DT",
       "dataset": "new_cardb",
       "variant": "base",
+      "generation": "old",
       "result": {
         "run_id": "DT_new_cardb",
         "model": "DT",
@@ -916,6 +922,7 @@
       "model": "RF",
       "dataset": "new_cardb",
       "variant": "base",
+      "generation": "old",
       "result": {
         "run_id": "RF_new_cardb",
         "model": "RF",
@@ -1828,6 +1835,7 @@
       "model": "XGB",
       "dataset": "new_cardb",
       "variant": "base",
+      "generation": "old",
       "result": {
         "run_id": "XGB_new_cardb",
         "model": "XGB",
@@ -2909,6 +2917,7 @@
       "model": "DT",
       "dataset": "new_cardb",
       "variant": "adj",
+      "generation": "old",
       "result": {
         "run_id": "DT_new_cardb_adj",
         "model": "DT",
@@ -3883,6 +3892,7 @@
       "model": "RF",
       "dataset": "new_cardb",
       "variant": "adj",
+      "generation": "old",
       "result": {
         "run_id": "RF_new_cardb_adj",
         "model": "RF",
@@ -4862,6 +4872,7 @@
       "model": "XGB",
       "dataset": "new_cardb",
       "variant": "adj",
+      "generation": "old",
       "result": {
         "run_id": "XGB_new_cardb_adj",
         "model": "XGB",
@@ -6010,6 +6021,7 @@
       "model": "DT",
       "dataset": "merge50minC",
       "variant": "base",
+      "generation": "2026-10-27",
       "result": {
         "run_id": "DT_merge50minC",
         "model": "DT",
@@ -6027,25 +6039,25 @@
           "gear"
         ],
         "train": {
-          "R2": 0.9513040408249569,
-          "RMSE": 72702.47744366423,
-          "MAE": 48993.646198384165,
-          "MAPE": 0.09671673574641712
+          "R2": 0.9530350383602062,
+          "RMSE": 71156.09338376332,
+          "MAE": 48149.266562413526,
+          "MAPE": 0.09448273224446263
         },
         "validation": {
-          "R2": 0.9277946622819477,
-          "RMSE": 86671.25018158511,
-          "MAE": 56706.497806234715,
-          "MAPE": 0.1088683960778833
+          "R2": 0.9255363243344525,
+          "RMSE": 90271.80959915991,
+          "MAE": 57583.653471933685,
+          "MAPE": 0.10909713756698244
         },
         "test": {
-          "R2": 0.9286139391648999,
-          "RMSE": 87453.83873526199,
-          "MAE": 57794.46356523799,
-          "MAPE": 0.109997324835545
+          "R2": 0.9318722614324038,
+          "RMSE": 85629.63271977236,
+          "MAE": 56628.24566167066,
+          "MAPE": 0.10724809951749523
         },
         "best_params": {
-          "ccp_alpha": 564591.7380491865,
+          "ccp_alpha": 486064.99689526187,
           "max_depth": 25,
           "min_samples_leaf": 5
         }
@@ -6054,198 +6066,192 @@
         "run_id": "DT_merge50minC",
         "permutation": {
           "engine": {
-            "mean": 132055.18999013683,
-            "std": 1949.9216155468246
+            "mean": 136918.15410068366,
+            "std": 1808.3776729229555
           },
           "mileage": {
-            "mean": 17604.282479798225,
-            "std": 908.7276216161168
+            "mean": 18539.162709811568,
+            "std": 629.7479139135935
           },
           "car_age": {
-            "mean": 129231.62074399593,
-            "std": 1413.6219407445647
+            "mean": 126352.64835163843,
+            "std": 2324.7596107266045
           },
           "brand": {
-            "mean": 54990.42676471422,
-            "std": 1164.9463479046724
+            "mean": 55511.18001784739,
+            "std": 1094.0316985865031
           },
           "model": {
-            "mean": 38407.47287977014,
-            "std": 998.3420068090463
+            "mean": 41819.1141567242,
+            "std": 781.8213126605688
           },
           "car_type": {
-            "mean": 61544.42292075511,
-            "std": 1208.8869425757646
+            "mean": 60852.66717250226,
+            "std": 1434.3540191319032
           },
           "fuel": {
-            "mean": 14016.480875375852,
-            "std": 580.9894732715849
+            "mean": 16336.416100088842,
+            "std": 855.6556960024484
           },
           "gear": {
-            "mean": 6016.032557466123,
-            "std": 194.96044922064527
+            "mean": 6606.437986964107,
+            "std": 278.90189284278114
           }
         },
         "model_based": {
-          "engine": 0.21462862443568317,
-          "mileage": 0.058403581757196864,
-          "car_age": 0.2664338690851022,
-          "brand": 0.12628058425826896,
-          "model": 0.1423701152267068,
-          "car_type": 0.16177058067779235,
-          "fuel": 0.021311148543833775,
-          "gear": 0.008801496015415964
+          "engine": 0.20932057719504285,
+          "mileage": 0.05846537836763889,
+          "car_age": 0.26172814915029036,
+          "brand": 0.13770213197520723,
+          "model": 0.13906113417962124,
+          "car_type": 0.1554964481171467,
+          "fuel": 0.029685888471647166,
+          "gear": 0.008540292543405664
         }
       },
       "cv": {
-        "mean": 58291.0,
-        "sd": 162.0,
+        "mean": 57931.0,
+        "sd": 477.0,
         "source": "ตาราง CV train เทียบ validation",
-        "precision": "printed integer baht"
+        "precision": "printed integer baht",
+        "rmse_mean": 89802.0,
+        "rmse_sd": 1623.0,
+        "mape_mean": 0.1097,
+        "mape_sd": 0.0007
       },
       "cv_tables": [
         {
           "kind": "search_candidates",
           "rows": [
             {
-              "candidate": 109.0,
+              "candidate": 19.0,
               "chosen": "*",
-              "eligible": "yes",
-              "leaves": 1502.0,
+              "leaves": 1609.0,
               "rank": 1.0,
               "max_depth": 25.0,
               "min_samples_leaf": 5.0,
-              "ccp_alpha": 564600.0,
-              "cv_mae": 58291.0,
-              "cv_mae_sd": 162.0,
-              "train_mae": 48651.0,
-              "gap": 9640.0
+              "ccp_alpha": 486100.0,
+              "cv_mae": 57931.0,
+              "cv_mae_sd": 477.0,
+              "train_mae": 47951.0,
+              "gap": 9980.0
             },
             {
-              "candidate": 115.0,
+              "candidate": 25.0,
               "chosen": "",
-              "eligible": "yes",
-              "leaves": 1575.0,
+              "leaves": 1646.0,
               "rank": 2.0,
               "max_depth": "None",
               "min_samples_leaf": 5.0,
-              "ccp_alpha": 564600.0,
-              "cv_mae": 58325.0,
-              "cv_mae_sd": 240.0,
-              "train_mae": 48417.0,
-              "gap": 9908.0
+              "ccp_alpha": 485900.0,
+              "cv_mae": 57973.0,
+              "cv_mae_sd": 506.0,
+              "train_mae": 47855.0,
+              "gap": 10118.0
             },
             {
-              "candidate": 79.0,
+              "candidate": 18.0,
               "chosen": "",
-              "eligible": "yes",
-              "leaves": 2094.0,
+              "leaves": 1513.0,
               "rank": 3.0,
               "max_depth": 25.0,
-              "min_samples_leaf": 5.0,
-              "ccp_alpha": 272800.0,
-              "cv_mae": 58345.0,
-              "cv_mae_sd": 109.0,
-              "train_mae": 46935.0,
-              "gap": 11410.0
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 1109000.0,
+              "cv_mae": 58208.0,
+              "cv_mae_sd": 654.0,
+              "train_mae": 44352.0,
+              "gap": 13855.0
             },
             {
-              "candidate": 85.0,
+              "candidate": 13.0,
               "chosen": "",
-              "eligible": "",
-              "leaves": "",
+              "leaves": 1438.0,
               "rank": 4.0,
-              "max_depth": "None",
+              "max_depth": 20.0,
               "min_samples_leaf": 5.0,
-              "ccp_alpha": 272800.0,
-              "cv_mae": 58375.0,
-              "cv_mae_sd": 175.0,
-              "train_mae": 46601.0,
-              "gap": 11774.0
+              "ccp_alpha": 486200.0,
+              "cv_mae": 58244.0,
+              "cv_mae_sd": 605.0,
+              "train_mae": 49024.0,
+              "gap": 9220.0
             },
             {
-              "candidate": 49.0,
+              "candidate": 24.0,
               "chosen": "",
-              "eligible": "",
-              "leaves": "",
+              "leaves": 1576.0,
               "rank": 5.0,
-              "max_depth": 25.0,
-              "min_samples_leaf": 5.0,
-              "ccp_alpha": 131700.0,
-              "cv_mae": 58503.0,
-              "cv_mae_sd": 147.0,
-              "train_mae": 45809.0,
-              "gap": 12693.0
-            },
-            {
-              "candidate": 55.0,
-              "chosen": "",
-              "eligible": "",
-              "leaves": "",
-              "rank": 6.0,
               "max_depth": "None",
-              "min_samples_leaf": 5.0,
-              "ccp_alpha": 131700.0,
-              "cv_mae": 58557.0,
-              "cv_mae_sd": 178.0,
-              "train_mae": 45430.0,
-              "gap": 13127.0
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 1109000.0,
+              "cv_mae": 58281.0,
+              "cv_mae_sd": 696.0,
+              "train_mae": 44048.0,
+              "gap": 14233.0
             },
             {
-              "candidate": 138.0,
+              "candidate": 12.0,
               "chosen": "",
-              "eligible": "",
-              "leaves": "",
+              "leaves": 1356.0,
+              "rank": 6.0,
+              "max_depth": 20.0,
+              "min_samples_leaf": 1.0,
+              "ccp_alpha": 1116000.0,
+              "cv_mae": 58550.0,
+              "cv_mae_sd": 660.0,
+              "train_mae": 46130.0,
+              "gap": 12420.0
+            },
+            {
+              "candidate": 20.0,
+              "chosen": "",
+              "leaves": 1829.0,
               "rank": 7.0,
               "max_depth": 25.0,
-              "min_samples_leaf": 1.0,
-              "ccp_alpha": 1168000.0,
-              "cv_mae": 58688.0,
-              "cv_mae_sd": 164.0,
-              "train_mae": 45070.0,
-              "gap": 13618.0
+              "min_samples_leaf": 7.0,
+              "ccp_alpha": 272400.0,
+              "cv_mae": 58620.0,
+              "cv_mae_sd": 429.0,
+              "train_mae": 49237.0,
+              "gap": 9384.0
             },
             {
-              "candidate": 144.0,
+              "candidate": 26.0,
               "chosen": "",
-              "eligible": "",
-              "leaves": "",
+              "leaves": 1856.0,
               "rank": 8.0,
               "max_depth": "None",
-              "min_samples_leaf": 1.0,
-              "ccp_alpha": 1168000.0,
-              "cv_mae": 58693.0,
-              "cv_mae_sd": 110.0,
-              "train_mae": 44553.0,
-              "gap": 14140.0
+              "min_samples_leaf": 7.0,
+              "ccp_alpha": 272400.0,
+              "cv_mae": 58660.0,
+              "cv_mae_sd": 491.0,
+              "train_mae": 49151.0,
+              "gap": 9509.0
             },
             {
-              "candidate": 145.0,
+              "candidate": 14.0,
               "chosen": "",
-              "eligible": "",
-              "leaves": "",
+              "leaves": 1655.0,
               "rank": 9.0,
-              "max_depth": "None",
-              "min_samples_leaf": 5.0,
-              "ccp_alpha": 1168000.0,
-              "cv_mae": 58736.0,
-              "cv_mae_sd": 186.0,
-              "train_mae": 50788.0,
-              "gap": 7948.0
+              "max_depth": 20.0,
+              "min_samples_leaf": 7.0,
+              "ccp_alpha": 272400.0,
+              "cv_mae": 58893.0,
+              "cv_mae_sd": 540.0,
+              "train_mae": 50105.0,
+              "gap": 8789.0
             },
             {
-              "candidate": 139.0,
+              "candidate": 21.0,
               "chosen": "",
-              "eligible": "",
-              "leaves": "",
+              "leaves": 1729.0,
               "rank": 10.0,
               "max_depth": 25.0,
-              "min_samples_leaf": 5.0,
-              "ccp_alpha": 1168000.0,
-              "cv_mae": 58762.0,
-              "cv_mae_sd": 138.0,
-              "train_mae": 50942.0,
-              "gap": 7821.0
+              "min_samples_leaf": 9.0,
+              "ccp_alpha": 220500.0,
+              "cv_mae": 59382.0,
+              "cv_mae_sd": 574.0,
+              "train_mae": 51041.0,
+              "gap": 8341.0
             }
           ]
         },
@@ -6254,83 +6260,125 @@
           "rows": [
             {
               "": 1.0,
-              "train MAE": 48739.0,
-              "validation MAE": 58184.0,
-              "MAE gap": 9445.0,
-              "gap % of validation MAE": 16.23,
-              "train R2": 0.9511,
-              "validation R2": 0.9292,
-              "R2 gap": 0.0219
+              "train MAE": 47784.0,
+              "validation MAE": 58647.0,
+              "MAE gap": 10863.0,
+              "gap % of validation MAE": 18.52,
+              "train R2": 0.9542,
+              "validation R2": 0.9183,
+              "R2 gap": 0.0359,
+              "train RMSE": 70443.0,
+              "validation RMSE": 92701.0,
+              "RMSE gap": 22258.0,
+              "train MAPE": 0.0937,
+              "validation MAPE": 0.1106,
+              "MAPE gap": 0.017
             },
             {
               "": 2.0,
-              "train MAE": 48709.0,
-              "validation MAE": 58270.0,
-              "MAE gap": 9561.0,
-              "gap % of validation MAE": 16.41,
-              "train R2": 0.9511,
-              "validation R2": 0.9256,
-              "R2 gap": 0.0255
+              "train MAE": 48078.0,
+              "validation MAE": 57724.0,
+              "MAE gap": 9646.0,
+              "gap % of validation MAE": 16.71,
+              "train R2": 0.9525,
+              "validation R2": 0.9266,
+              "R2 gap": 0.0258,
+              "train RMSE": 71474.0,
+              "validation RMSE": 89520.0,
+              "RMSE gap": 18046.0,
+              "train MAPE": 0.0943,
+              "validation MAPE": 0.1085,
+              "MAPE gap": 0.0142
             },
             {
               "": 3.0,
-              "train MAE": 49013.0,
-              "validation MAE": 58074.0,
-              "MAE gap": 9060.0,
-              "gap % of validation MAE": 15.6,
-              "train R2": 0.9514,
-              "validation R2": 0.9219,
-              "R2 gap": 0.0295
+              "train MAE": 47997.0,
+              "validation MAE": 57315.0,
+              "MAE gap": 9318.0,
+              "gap % of validation MAE": 16.26,
+              "train R2": 0.9528,
+              "validation R2": 0.9278,
+              "R2 gap": 0.025,
+              "train RMSE": 71394.0,
+              "validation RMSE": 87976.0,
+              "RMSE gap": 16582.0,
+              "train MAPE": 0.0938,
+              "validation MAPE": 0.1097,
+              "MAPE gap": 0.0159
             },
             {
               "": 4.0,
-              "train MAE": 48496.0,
-              "validation MAE": 58545.0,
-              "MAE gap": 10048.0,
-              "gap % of validation MAE": 17.16,
-              "train R2": 0.9523,
-              "validation R2": 0.9238,
-              "R2 gap": 0.0285
+              "train MAE": 47679.0,
+              "validation MAE": 58298.0,
+              "MAE gap": 10619.0,
+              "gap % of validation MAE": 18.21,
+              "train R2": 0.9535,
+              "validation R2": 0.9268,
+              "R2 gap": 0.0267,
+              "train RMSE": 70514.0,
+              "validation RMSE": 90126.0,
+              "RMSE gap": 19612.0,
+              "train MAPE": 0.0938,
+              "validation MAPE": 0.1096,
+              "MAPE gap": 0.0158
             },
             {
               "": 5.0,
-              "train MAE": 48295.0,
-              "validation MAE": 58382.0,
-              "MAE gap": 10087.0,
-              "gap % of validation MAE": 17.28,
-              "train R2": 0.9532,
-              "validation R2": 0.9198,
-              "R2 gap": 0.0333
+              "train MAE": 48216.0,
+              "validation MAE": 57673.0,
+              "MAE gap": 9457.0,
+              "gap % of validation MAE": 16.4,
+              "train R2": 0.9526,
+              "validation R2": 0.9261,
+              "R2 gap": 0.0265,
+              "train RMSE": 71584.0,
+              "validation RMSE": 88689.0,
+              "RMSE gap": 17104.0,
+              "train MAPE": 0.0941,
+              "validation MAPE": 0.1103,
+              "MAPE gap": 0.0161
             },
             {
               "": "mean",
-              "train MAE": 48651.0,
-              "validation MAE": 58291.0,
-              "MAE gap": 9640.0,
-              "gap % of validation MAE": 16.54,
-              "train R2": 0.9518,
-              "validation R2": 0.9241,
-              "R2 gap": 0.0277
+              "train MAE": 47951.0,
+              "validation MAE": 57931.0,
+              "MAE gap": 9980.0,
+              "gap % of validation MAE": 17.22,
+              "train R2": 0.9531,
+              "validation R2": 0.9251,
+              "R2 gap": 0.028,
+              "train RMSE": 71082.0,
+              "validation RMSE": 89802.0,
+              "RMSE gap": 18721.0,
+              "train MAPE": 0.0939,
+              "validation MAPE": 0.1097,
+              "MAPE gap": 0.0158
             },
             {
               "": "sd",
-              "train MAE": 242.0,
-              "validation MAE": 162.0,
-              "MAE gap": 387.0,
-              "gap % of validation MAE": 0.62,
-              "train R2": 0.0008,
-              "validation R2": 0.0032,
-              "R2 gap": 0.0038
+              "train MAE": 195.0,
+              "validation MAE": 477.0,
+              "MAE gap": 634.0,
+              "gap % of validation MAE": 0.95,
+              "train R2": 0.0007,
+              "validation R2": 0.0034,
+              "R2 gap": 0.004,
+              "train RMSE": 497.0,
+              "validation RMSE": 1623.0,
+              "RMSE gap": 2047.0,
+              "train MAPE": 0.0002,
+              "validation MAPE": 0.0007,
+              "MAPE gap": 0.0009
             }
           ]
         }
       ],
       "ablation": [],
       "overfit": [
-        "PASS validation เทียบ CV     : ต่างกัน -1,584 บาท (-2.72%) เกณฑ์ ±1,918 บาท (2 SE)",
-        "PASS test เทียบ CV           : ต่างกัน -496 บาท (-0.85%) เกณฑ์ ±1,920 บาท (2 SE)",
-        "PASS test เทียบ validation   : ต่างกัน +1,088 บาท (+1.92%) เกณฑ์ ±2,706 บาท (2 SE)",
-        "PASS learning curve (3,760 -> 37,600 แถว): test MAE 81,994 -> 57,794 บาท, gap 25,119 -> 8,801 บาท (ต้องลดลงทั้งคู่)"
+        "PASS validation เทียบ CV     : ต่างกัน -348 บาท (-0.60%) เกณฑ์ ±2,093 บาท (2 SE)",
+        "PASS test เทียบ CV           : ต่างกัน -1,303 บาท (-2.25%) เกณฑ์ ±1,940 บาท (2 SE)",
+        "PASS test เทียบ validation   : ต่างกัน -955 บาท (-1.66%) เกณฑ์ ±2,789 บาท (2 SE)",
+        "PASS learning curve (3,685 -> 36,859 แถว): test MAE 80,265 -> 56,628 บาท, gap 22,135 -> 8,479 บาท (ต้องลดลงทั้งคู่)"
       ],
       "plots": {
         "learning": "img/DT_merge50minC_learning.png",
@@ -6338,23 +6386,23 @@
         "model_based": "img/DT_merge50minC_model_based.png"
       },
       "data": {
-        "rows": 47001,
+        "rows": 46074,
         "split": [
           {
             "ชุด": "train",
-            "แถว": 37600.0,
+            "แถว": 36859.0,
             "สัดส่วน (%)": 80.0,
             "จำนวนรุ่น": 115.0
           },
           {
             "ชุด": "validation",
-            "แถว": 4700.0,
+            "แถว": 4607.0,
             "สัดส่วน (%)": 10.0,
             "จำนวนรุ่น": 115.0
           },
           {
             "ชุด": "test",
-            "แถว": 4701.0,
+            "แถว": 4608.0,
             "สัดส่วน (%)": 10.0,
             "จำนวนรุ่น": 115.0
           }
@@ -6364,28 +6412,19 @@
       "params": [
         {
           "parameter": "ccp_alpha",
-          "value": 564591.7380491865,
-          "source": "GridSearchCV + กฎ 1-SE (ช่วงที่ค้น: [0.0, 131700.0, 272800.0, 564600.0, 1168000.0, 2415000.0, 5013000.0, 10340000.0])",
-          "explanation": "ความแรงของการตัดกิ่ง; เลือกค่าของผู้ชนะที่มีใบน้อยที่สุดในช่วง 1-SE; ตัวเลือกจาก ccp path บน train และ CV (ช่วงแสดงตามผลพิมพ์ 4 หลักนัยสำคัญ); ตรวจขอบ: PASS (อยู่ด้านในของ grid)।",
+          "value": 486064.99689526187,
+          "source": "GridSearchCV, ผู้ชนะ = CV MAE ต่ำสุด (refit=MAE); เลือกจากทุก alpha บน pruning path ร่วมกับ grid ด้วย 5-fold CV (CART)",
+          "explanation": "ความแรงของการตัดกิ่ง; เลือกค่าของผู้ชนะที่ CV MAE เฉลี่ยต่ำสุด; เลือกจากทุก alpha บน pruning path ร่วมกับ grid ด้วย 5-fold CV (CART) (ลอง 364 ถึง 13,279 ค่าต่อคู่ รวม 87,088 ค่า); ตรวจขอบ: PASS (อยู่ในรายการ alpha ของคู่ผู้ชนะ)।",
           "kind": "tuned",
-          "search_range": [
-            0.0,
-            131700.0,
-            272800.0,
-            564600.0,
-            1168000.0,
-            2415000.0,
-            5013000.0,
-            10340000.0
-          ],
-          "grid_edge": "PASS (อยู่ด้านในของ grid)",
-          "candidate_source": "เลือกจาก ccp path"
+          "search_range": "ทุก alpha บน pruning path",
+          "grid_edge": "PASS (อยู่ในรายการ alpha ของคู่ผู้ชนะ)",
+          "candidate_source": "pruning path (CART)"
         },
         {
           "parameter": "max_depth",
           "value": 25,
-          "source": "GridSearchCV + กฎ 1-SE (ช่วงที่ค้น: [10, 15, 20, 25, null])",
-          "explanation": "ความลึกสูงสุดของต้นไม้; เลือกค่าของผู้ชนะที่มีใบน้อยที่สุดในช่วง 1-SE; ตรวจขอบ: PASS (อยู่ด้านในของ grid)।",
+          "source": "GridSearchCV, ผู้ชนะ = CV MAE ต่ำสุด (refit=MAE) (ช่วงที่ค้น: [10, 15, 20, 25, null])",
+          "explanation": "ความลึกสูงสุดของต้นไม้; เลือกค่าของผู้ชนะที่ CV MAE เฉลี่ยต่ำสุด; ตรวจขอบ: PASS (อยู่ด้านในของ grid)।",
           "kind": "tuned",
           "search_range": [
             10,
@@ -6400,8 +6439,8 @@
         {
           "parameter": "min_samples_leaf",
           "value": 5,
-          "source": "GridSearchCV + กฎ 1-SE (ช่วงที่ค้น: [1, 5, 7, 9, 12, 15])",
-          "explanation": "จำนวนแถวขั้นต่ำต่อใบ; เลือกค่าของผู้ชนะที่มีใบน้อยที่สุดในช่วง 1-SE; ตรวจขอบ: PASS (อยู่ด้านในของ grid)।",
+          "source": "GridSearchCV, ผู้ชนะ = CV MAE ต่ำสุด (refit=MAE) (ช่วงที่ค้น: [1, 5, 7, 9, 12, 15])",
+          "explanation": "จำนวนแถวขั้นต่ำต่อใบ; เลือกค่าของผู้ชนะที่ CV MAE เฉลี่ยต่ำสุด; ตรวจขอบ: PASS (อยู่ด้านในของ grid)।",
           "kind": "tuned",
           "search_range": [
             1,
@@ -6516,13 +6555,6 @@
           "kind": "fixed"
         },
         {
-          "parameter": "DATA_SHA256",
-          "value": "191adb789285fe531bf82521e7ac0892020cbf0bf4325d22f6a657fabaab8aa1",
-          "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "ลายนิ้วมือไฟล์ข้อมูล।",
-          "kind": "fixed"
-        },
-        {
           "parameter": "MODEL_NAME",
           "value": "DT",
           "source": "กำหนดคงที่ในโค้ด",
@@ -6562,27 +6594,6 @@
           "value": 0.1,
           "source": "กำหนดคงที่ในโค้ด",
           "explanation": "สัดส่วนแบ่ง train / validation / test।",
-          "kind": "fixed"
-        },
-        {
-          "parameter": "MIN_LEAVES",
-          "value": 20,
-          "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "จำนวนใบขั้นต่ำที่ยอมรับตอนเลือก ccp_alpha (heuristic)।",
-          "kind": "fixed"
-        },
-        {
-          "parameter": "CCP_N_CANDIDATES",
-          "value": 20,
-          "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "จำนวนค่า ccp_alpha ที่คัดมาลอง (heuristic)।",
-          "kind": "fixed"
-        },
-        {
-          "parameter": "CCP_NEIGHBOURS",
-          "value": 3,
-          "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "จำนวนค่าข้างเคียงที่เพิ่มรอบค่าที่เลือก (heuristic)।",
           "kind": "fixed"
         },
         {
@@ -6747,18 +6758,9 @@
         },
         {
           "parameter": "ccp_alpha.candidates",
-          "value": [
-            0.0,
-            131700.0,
-            272800.0,
-            564600.0,
-            1168000.0,
-            2415000.0,
-            5013000.0,
-            10340000.0
-          ],
-          "source": "เลือกจาก ccp path",
-          "explanation": "เลือก alpha บวกบนสเกล log ที่ต้นไม้ยังเกิน MIN_LEAVES แล้วใช้ CV คัดเพื่อนบ้าน CCP_NEIGHBOURS พร้อมเพิ่ม 0 ก่อนค้น grid; ค่าตัวเลือกแสดงตามผลพิมพ์ 4 หลักนัยสำคัญ।",
+          "value": "ทุก alpha บน pruning path",
+          "source": "pruning path (CART)",
+          "explanation": "ใช้ทุก alpha บน pruning path ของแต่ละคู่ (max_depth, min_samples_leaf) ที่สร้างจาก train ทั้งชุด ไม่จำกัดจำนวนและไม่ใช้เกณฑ์ใบขั้นต่ำ แล้ววัดทุก alpha ด้วย 5-fold CV ร่วมกับ grid (ลอง 364 ถึง 13,279 ค่าต่อคู่ รวม 87,088 ค่า)।",
           "kind": "fixed"
         },
         {
@@ -6833,14 +6835,14 @@
             "R2": "r2"
           },
           "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "ตัววัด CV โดยใช้ MAE หน่วยบาทเลือกผู้ชนะและใช้ใบวัดความซับซ้อน; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।",
+          "explanation": "ตัววัด CV หน่วยบาท ใช้ MAE เลือกผู้ชนะ; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।",
           "kind": "fixed"
         },
         {
           "parameter": "GridSearchCV.refit",
-          "value": "refit_1se",
+          "value": "MAE",
           "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "ฟังก์ชันเลือกชุดค่าด้วยกฎ 1-SE แล้วฝึกผู้ชนะบน train ทั้งชุด; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।",
+          "explanation": "เลือกผู้ชนะที่ mean CV MAE ต่ำสุดแล้วฝึกผู้ชนะบน train ทั้งชุด; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।",
           "kind": "fixed"
         },
         {
@@ -6879,19 +6881,19 @@
           "kind": "fixed"
         },
         {
-          "parameter": "selection.1SE",
-          "value": "min CV MAE + SD(ddof=0)/sqrt(N_FOLDS); min leaves → CV MAE → index",
+          "parameter": "selection.minCV",
+          "value": "min mean CV MAE; เสมอ → index แรก",
           "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "เลือกใบน้อยที่สุดในช่วงหนึ่ง SE จาก MAE ต่ำสุด; DT นับใบบน train ทั้งชุด ส่วน RF/XGB ใช้ค่าเฉลี่ยใบรวมจาก CV ตามโค้ด।",
+          "explanation": "ผู้ชนะคือชุดที่ CV MAE เฉลี่ยต่ำสุด (refit=MAE) ไม่มีเกณฑ์จำนวนใบ; จำนวนใบแสดงเป็นข้อมูลประกอบเท่านั้น।",
           "kind": "fixed"
         }
       ],
       "missing": [],
       "runtime": {
-        "start": "2026-10-26 02:38:11",
-        "end": "2026-10-26 02:44:44",
+        "start": "2026-10-27 18:27:54",
+        "end": "2026-10-27 18:30:41",
         "status": "ok",
-        "seconds": 393.0
+        "seconds": 167.0
       }
     },
     {
@@ -6900,6 +6902,7 @@
       "model": "RF",
       "dataset": "merge50minC",
       "variant": "base",
+      "generation": "2026-10-27",
       "result": {
         "run_id": "RF_merge50minC",
         "model": "RF",
@@ -6917,22 +6920,22 @@
           "gear"
         ],
         "train": {
-          "R2": 0.9671043105103881,
-          "RMSE": 59754.724002635856,
-          "MAE": 38902.04836364557,
-          "MAPE": 0.07468988881860679
+          "R2": 0.9679525363017099,
+          "RMSE": 58778.96607763507,
+          "MAE": 38515.517987657586,
+          "MAPE": 0.07340637531266539
         },
         "validation": {
-          "R2": 0.9410954573461947,
-          "RMSE": 78282.52104878938,
-          "MAE": 52209.298102918736,
-          "MAPE": 0.10127589727223421
+          "R2": 0.9426549810197048,
+          "RMSE": 79218.70960163062,
+          "MAE": 52064.89516169211,
+          "MAPE": 0.10013988718254845
         },
         "test": {
-          "R2": 0.9394257413455945,
-          "RMSE": 80559.39987596293,
-          "MAE": 53415.836252871675,
-          "MAPE": 0.10251432504220247
+          "R2": 0.9431052425510231,
+          "RMSE": 78252.49974567599,
+          "MAE": 52275.15220742816,
+          "MAPE": 0.09981890403677883
         },
         "best_params": {
           "max_features": 0.3,
@@ -6943,188 +6946,182 @@
         "run_id": "RF_merge50minC",
         "permutation": {
           "engine": {
-            "mean": 104729.42661559311,
-            "std": 1203.9991793610586
+            "mean": 105698.59101147662,
+            "std": 1457.2233919247574
           },
           "mileage": {
-            "mean": 21877.493893201427,
-            "std": 832.0499812777887
+            "mean": 21207.321438750114,
+            "std": 743.0947737384952
           },
           "car_age": {
-            "mean": 114979.2466093686,
-            "std": 1551.8881529612052
+            "mean": 112293.69578563023,
+            "std": 1900.7156125637157
           },
           "brand": {
-            "mean": 41620.55078950645,
-            "std": 884.1117080162874
+            "mean": 41524.03675743301,
+            "std": 626.9877771555292
           },
           "model": {
-            "mean": 32745.270592636265,
-            "std": 504.40983156676657
+            "mean": 34315.710344053135,
+            "std": 350.7893284293946
           },
           "car_type": {
-            "mean": 46979.17151828073,
-            "std": 1052.5808192727734
+            "mean": 45958.13669879183,
+            "std": 577.7923408564906
           },
           "fuel": {
-            "mean": 18849.66835307553,
-            "std": 660.787807653559
+            "mean": 22445.766737983886,
+            "std": 294.0588901873475
           },
           "gear": {
-            "mean": 7448.032331906276,
-            "std": 319.9853611456674
+            "mean": 8326.251266267243,
+            "std": 376.6102139615691
           }
         },
         "model_based": {
-          "engine": 0.17011123658960417,
-          "mileage": 0.0829951974514856,
-          "car_age": 0.22488412461907192,
-          "brand": 0.1302291191833123,
-          "model": 0.18644802906088104,
-          "car_type": 0.12163254606714473,
-          "fuel": 0.05597911931389877,
-          "gear": 0.027720627714601462
+          "engine": 0.17059900054953978,
+          "mileage": 0.08457255897366084,
+          "car_age": 0.22421099581473342,
+          "brand": 0.13519127784620683,
+          "model": 0.1809543099081363,
+          "car_type": 0.12136336452740355,
+          "fuel": 0.056068609821363094,
+          "gear": 0.027039882558956264
         }
       },
       "cv": {
-        "mean": 53541.0,
-        "sd": 316.0,
+        "mean": 53323.0,
+        "sd": 256.0,
         "source": "ตาราง CV train เทียบ validation",
-        "precision": "printed integer baht"
+        "precision": "printed integer baht",
+        "rmse_mean": 80694.0,
+        "rmse_sd": 1088.0,
+        "mape_mean": 0.1018,
+        "mape_sd": 0.0009
       },
       "cv_tables": [
         {
           "kind": "search_candidates",
           "rows": [
             {
+              "candidate": 7.0,
+              "chosen": "*",
+              "leaves": 1853752.0,
+              "rank": 1.0,
+              "max_features": 0.3,
+              "min_samples_leaf": 2.0,
+              "cv_mae": 53323.0,
+              "cv_mae_sd": 256.0,
+              "train_mae": 38601.0,
+              "gap": 14722.0
+            },
+            {
               "candidate": 13.0,
               "chosen": "",
-              "eligible": "yes",
-              "leaves": 1917320.0,
-              "rank": 1.0,
+              "leaves": 1917290.0,
+              "rank": 2.0,
               "max_features": 0.4,
               "min_samples_leaf": 2.0,
-              "cv_mae": 53483.0,
-              "cv_mae_sd": 264.0,
-              "train_mae": 38313.0,
-              "gap": 15170.0
+              "cv_mae": 53369.0,
+              "cv_mae_sd": 272.0,
+              "train_mae": 38026.0,
+              "gap": 15343.0
             },
             {
               "candidate": 19.0,
               "chosen": "",
-              "eligible": "yes",
-              "leaves": 1973993.0,
-              "rank": 2.0,
+              "leaves": 1963850.0,
+              "rank": 3.0,
               "max_features": 0.5,
               "min_samples_leaf": 2.0,
-              "cv_mae": 53539.0,
-              "cv_mae_sd": 246.0,
-              "train_mae": 37806.0,
-              "gap": 15733.0
-            },
-            {
-              "candidate": 7.0,
-              "chosen": "*",
-              "eligible": "yes",
-              "leaves": 1838780.0,
-              "rank": 3.0,
-              "max_features": 0.3,
-              "min_samples_leaf": 2.0,
-              "cv_mae": 53541.0,
-              "cv_mae_sd": 316.0,
-              "train_mae": 39052.0,
-              "gap": 14488.0
-            },
-            {
-              "candidate": 25.0,
-              "chosen": "",
-              "eligible": "",
-              "leaves": 2026128.0,
-              "rank": 4.0,
-              "max_features": 0.6,
-              "min_samples_leaf": 2.0,
-              "cv_mae": 53657.0,
-              "cv_mae_sd": 227.0,
-              "train_mae": 37331.0,
-              "gap": 16326.0
+              "cv_mae": 53449.0,
+              "cv_mae_sd": 322.0,
+              "train_mae": 37615.0,
+              "gap": 15834.0
             },
             {
               "candidate": 14.0,
               "chosen": "",
-              "eligible": "",
-              "leaves": 1216178.0,
-              "rank": 5.0,
+              "leaves": 1219094.0,
+              "rank": 4.0,
               "max_features": 0.4,
               "min_samples_leaf": 3.0,
-              "cv_mae": 53746.0,
-              "cv_mae_sd": 238.0,
-              "train_mae": 42839.0,
-              "gap": 10907.0
+              "cv_mae": 53512.0,
+              "cv_mae_sd": 325.0,
+              "train_mae": 42510.0,
+              "gap": 11002.0
             },
             {
               "candidate": 20.0,
               "chosen": "",
-              "eligible": "",
-              "leaves": 1267008.0,
-              "rank": 6.0,
+              "leaves": 1262621.0,
+              "rank": 5.0,
               "max_features": 0.5,
               "min_samples_leaf": 3.0,
-              "cv_mae": 53762.0,
-              "cv_mae_sd": 259.0,
-              "train_mae": 42244.0,
-              "gap": 11518.0
-            },
-            {
-              "candidate": 26.0,
-              "chosen": "",
-              "eligible": "",
-              "leaves": 1314293.0,
-              "rank": 7.0,
-              "max_features": 0.6,
-              "min_samples_leaf": 3.0,
-              "cv_mae": 53803.0,
-              "cv_mae_sd": 190.0,
-              "train_mae": 41722.0,
-              "gap": 12081.0
+              "cv_mae": 53514.0,
+              "cv_mae_sd": 364.0,
+              "train_mae": 42008.0,
+              "gap": 11506.0
             },
             {
               "candidate": 1.0,
               "chosen": "",
-              "eligible": "",
-              "leaves": 1740705.0,
-              "rank": 8.0,
+              "leaves": 1771075.0,
+              "rank": 6.0,
               "max_features": 0.2,
               "min_samples_leaf": 2.0,
-              "cv_mae": 53871.0,
-              "cv_mae_sd": 356.0,
-              "train_mae": 40221.0,
-              "gap": 13650.0
+              "cv_mae": 53545.0,
+              "cv_mae_sd": 284.0,
+              "train_mae": 39525.0,
+              "gap": 14021.0
             },
             {
-              "candidate": 31.0,
+              "candidate": 25.0,
               "chosen": "",
-              "eligible": "",
-              "leaves": 2121545.0,
-              "rank": 9.0,
-              "max_features": 0.8,
+              "leaves": 2008017.0,
+              "rank": 7.0,
+              "max_features": 0.6,
               "min_samples_leaf": 2.0,
-              "cv_mae": 53883.0,
-              "cv_mae_sd": 199.0,
-              "train_mae": 36538.0,
-              "gap": 17344.0
+              "cv_mae": 53553.0,
+              "cv_mae_sd": 346.0,
+              "train_mae": 37192.0,
+              "gap": 16361.0
+            },
+            {
+              "candidate": 26.0,
+              "chosen": "",
+              "leaves": 1303355.0,
+              "rank": 8.0,
+              "max_features": 0.6,
+              "min_samples_leaf": 3.0,
+              "cv_mae": 53574.0,
+              "cv_mae_sd": 384.0,
+              "train_mae": 41521.0,
+              "gap": 12053.0
+            },
+            {
+              "candidate": 8.0,
+              "chosen": "",
+              "leaves": 1158831.0,
+              "rank": 9.0,
+              "max_features": 0.3,
+              "min_samples_leaf": 3.0,
+              "cv_mae": 53614.0,
+              "cv_mae_sd": 291.0,
+              "train_mae": 43255.0,
+              "gap": 10359.0
             },
             {
               "candidate": 32.0,
               "chosen": "",
-              "eligible": "",
-              "leaves": 1396686.0,
+              "leaves": 1374848.0,
               "rank": 10.0,
               "max_features": 0.8,
               "min_samples_leaf": 3.0,
-              "cv_mae": 53981.0,
-              "cv_mae_sd": 160.0,
-              "train_mae": 40877.0,
-              "gap": 13105.0
+              "cv_mae": 53824.0,
+              "cv_mae_sd": 431.0,
+              "train_mae": 40777.0,
+              "gap": 13048.0
             }
           ]
         },
@@ -7133,85 +7130,127 @@
           "rows": [
             {
               "": 1.0,
-              "train MAE": 39178.0,
-              "validation MAE": 53365.0,
-              "MAE gap": 14187.0,
-              "gap % of validation MAE": 26.58,
-              "train R2": 0.9663,
-              "validation R2": 0.942,
-              "R2 gap": 0.0242
+              "train MAE": 38457.0,
+              "validation MAE": 53799.0,
+              "MAE gap": 15342.0,
+              "gap % of validation MAE": 28.52,
+              "train R2": 0.9686,
+              "validation R2": 0.9354,
+              "R2 gap": 0.0331,
+              "train RMSE": 58396.0,
+              "validation RMSE": 82415.0,
+              "RMSE gap": 24019.0,
+              "train MAPE": 0.0735,
+              "validation MAPE": 0.103,
+              "MAPE gap": 0.0296
             },
             {
               "": 2.0,
-              "train MAE": 39217.0,
-              "validation MAE": 53235.0,
-              "MAE gap": 14017.0,
-              "gap % of validation MAE": 26.33,
-              "train R2": 0.9665,
-              "validation R2": 0.9392,
-              "R2 gap": 0.0274
+              "train MAE": 38637.0,
+              "validation MAE": 53178.0,
+              "MAE gap": 14541.0,
+              "gap % of validation MAE": 27.34,
+              "train R2": 0.9675,
+              "validation R2": 0.9407,
+              "R2 gap": 0.0268,
+              "train RMSE": 59094.0,
+              "validation RMSE": 80447.0,
+              "RMSE gap": 21353.0,
+              "train MAPE": 0.0736,
+              "validation MAPE": 0.1009,
+              "MAPE gap": 0.0273
             },
             {
               "": 3.0,
-              "train MAE": 38980.0,
-              "validation MAE": 53675.0,
-              "MAE gap": 14695.0,
-              "gap % of validation MAE": 27.38,
-              "train R2": 0.9671,
-              "validation R2": 0.9374,
-              "R2 gap": 0.0297
+              "train MAE": 38677.0,
+              "validation MAE": 53057.0,
+              "MAE gap": 14381.0,
+              "gap % of validation MAE": 27.1,
+              "train R2": 0.9676,
+              "validation R2": 0.9417,
+              "R2 gap": 0.0259,
+              "train RMSE": 59103.0,
+              "validation RMSE": 79006.0,
+              "RMSE gap": 19903.0,
+              "train MAPE": 0.0738,
+              "validation MAPE": 0.1021,
+              "MAPE gap": 0.0283
             },
             {
               "": 4.0,
-              "train MAE": 38775.0,
-              "validation MAE": 54098.0,
-              "MAE gap": 15323.0,
-              "gap % of validation MAE": 28.32,
-              "train R2": 0.9673,
-              "validation R2": 0.9371,
-              "R2 gap": 0.0302
+              "train MAE": 38613.0,
+              "validation MAE": 53233.0,
+              "MAE gap": 14620.0,
+              "gap % of validation MAE": 27.46,
+              "train R2": 0.9678,
+              "validation R2": 0.941,
+              "R2 gap": 0.0268,
+              "train RMSE": 58712.0,
+              "validation RMSE": 80916.0,
+              "RMSE gap": 22204.0,
+              "train MAPE": 0.0738,
+              "validation MAPE": 0.1006,
+              "MAPE gap": 0.0268
             },
             {
               "": 5.0,
-              "train MAE": 39110.0,
-              "validation MAE": 53331.0,
-              "MAE gap": 14221.0,
-              "gap % of validation MAE": 26.66,
-              "train R2": 0.9672,
-              "validation R2": 0.9361,
-              "R2 gap": 0.0312
+              "train MAE": 38619.0,
+              "validation MAE": 53347.0,
+              "MAE gap": 14728.0,
+              "gap % of validation MAE": 27.61,
+              "train R2": 0.968,
+              "validation R2": 0.9389,
+              "R2 gap": 0.0291,
+              "train RMSE": 58822.0,
+              "validation RMSE": 80688.0,
+              "RMSE gap": 21866.0,
+              "train MAPE": 0.0736,
+              "validation MAPE": 0.1021,
+              "MAPE gap": 0.0285
             },
             {
               "": "mean",
-              "train MAE": 39052.0,
-              "validation MAE": 53541.0,
-              "MAE gap": 14488.0,
-              "gap % of validation MAE": 27.06,
-              "train R2": 0.9669,
-              "validation R2": 0.9384,
-              "R2 gap": 0.0285
+              "train MAE": 38601.0,
+              "validation MAE": 53323.0,
+              "MAE gap": 14722.0,
+              "gap % of validation MAE": 27.61,
+              "train R2": 0.9679,
+              "validation R2": 0.9396,
+              "R2 gap": 0.0283,
+              "train RMSE": 58825.0,
+              "validation RMSE": 80694.0,
+              "RMSE gap": 21869.0,
+              "train MAPE": 0.0737,
+              "validation MAPE": 0.1018,
+              "MAPE gap": 0.0281
             },
             {
               "": "sd",
-              "train MAE": 160.0,
-              "validation MAE": 316.0,
-              "MAE gap": 474.0,
-              "gap % of validation MAE": 0.72,
+              "train MAE": 75.0,
+              "validation MAE": 256.0,
+              "MAE gap": 330.0,
+              "gap % of validation MAE": 0.48,
               "train R2": 0.0004,
-              "validation R2": 0.0021,
-              "R2 gap": 0.0025
+              "validation R2": 0.0023,
+              "R2 gap": 0.0026,
+              "train RMSE": 263.0,
+              "validation RMSE": 1088.0,
+              "RMSE gap": 1332.0,
+              "train MAPE": 0.0001,
+              "validation MAPE": 0.0009,
+              "MAPE gap": 0.001
             }
           ]
         }
       ],
       "ablation": [],
       "overfit": [
-        "PASS validation เทียบ CV     : ต่างกัน -1,331 บาท (-2.49%) เกณฑ์ ±1,725 บาท (2 SE)",
-        "PASS test เทียบ CV           : ต่างกัน -125 บาท (-0.23%) เกณฑ์ ±1,782 บาท (2 SE)",
-        "PASS validation เทียบ OOB    : ต่างกัน -546 บาท (-1.03%) เกณฑ์ ±1,814 บาท (2 SE)",
-        "PASS test เทียบ OOB          : ต่างกัน +661 บาท (+1.25%) เกณฑ์ ±1,868 บาท (2 SE)",
-        "PASS test เทียบ validation   : ต่างกัน +1,207 บาท (+2.31%) เกณฑ์ ±2,448 บาท (2 SE)",
-        "PASS learning curve (3,760 -> 37,600 แถว): test MAE 66,027 -> 53,422 บาท, gap 21,352 -> 14,502 บาท (ต้องลดลงทั้งคู่)"
+        "PASS validation เทียบ CV     : ต่างกัน -1,258 บาท (-2.36%) เกณฑ์ ±1,774 บาท (2 SE)",
+        "PASS test เทียบ CV           : ต่างกัน -1,048 บาท (-1.96%) เกณฑ์ ±1,731 บาท (2 SE)",
+        "PASS validation เทียบ OOB    : ต่างกัน -550 บาท (-1.04%) เกณฑ์ ±1,867 บาท (2 SE)",
+        "PASS test เทียบ OOB          : ต่างกัน -339 บาท (-0.65%) เกณฑ์ ±1,826 บาท (2 SE)",
+        "PASS test เทียบ validation   : ต่างกัน +210 บาท (+0.40%) เกณฑ์ ±2,458 บาท (2 SE)",
+        "PASS learning curve (3,685 -> 36,859 แถว): test MAE 64,689 -> 52,276 บาท, gap 19,558 -> 13,793 บาท (ต้องลดลงทั้งคู่)"
       ],
       "plots": {
         "learning": "img/RF_merge50minC_learning.png",
@@ -7219,23 +7258,23 @@
         "model_based": "img/RF_merge50minC_model_based.png"
       },
       "data": {
-        "rows": 47001,
+        "rows": 46074,
         "split": [
           {
             "ชุด": "train",
-            "แถว": 37600.0,
+            "แถว": 36859.0,
             "สัดส่วน (%)": 80.0,
             "จำนวนรุ่น": 115.0
           },
           {
             "ชุด": "validation",
-            "แถว": 4700.0,
+            "แถว": 4607.0,
             "สัดส่วน (%)": 10.0,
             "จำนวนรุ่น": 115.0
           },
           {
             "ชุด": "test",
-            "แถว": 4701.0,
+            "แถว": 4608.0,
             "สัดส่วน (%)": 10.0,
             "จำนวนรุ่น": 115.0
           }
@@ -7246,8 +7285,8 @@
         {
           "parameter": "max_features",
           "value": 0.3,
-          "source": "GridSearchCV + กฎ 1-SE (ช่วงที่ค้น: [0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 1.0])",
-          "explanation": "จำนวนหรือสัดส่วนตัวแปรที่ใช้เลือกจุดแตกกิ่ง; เลือกค่าของผู้ชนะที่มีใบน้อยที่สุดในช่วง 1-SE; ตรวจขอบ: PASS (อยู่ด้านในของ grid)।",
+          "source": "GridSearchCV, ผู้ชนะ = CV MAE ต่ำสุด (refit=MAE) (ช่วงที่ค้น: [0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 1.0])",
+          "explanation": "จำนวนหรือสัดส่วนตัวแปรที่ใช้เลือกจุดแตกกิ่ง; เลือกค่าของผู้ชนะที่ CV MAE เฉลี่ยต่ำสุด; ตรวจขอบ: PASS (อยู่ด้านในของ grid)।",
           "kind": "tuned",
           "search_range": [
             0.2,
@@ -7264,8 +7303,8 @@
         {
           "parameter": "min_samples_leaf",
           "value": 2,
-          "source": "GridSearchCV + กฎ 1-SE (ช่วงที่ค้น: [1, 2, 3, 4, 6, 8])",
-          "explanation": "จำนวนแถวขั้นต่ำต่อใบ; เลือกค่าของผู้ชนะที่มีใบน้อยที่สุดในช่วง 1-SE; ตรวจขอบ: PASS (อยู่ด้านในของ grid)।",
+          "source": "GridSearchCV, ผู้ชนะ = CV MAE ต่ำสุด (refit=MAE) (ช่วงที่ค้น: [1, 2, 3, 4, 6, 8])",
+          "explanation": "จำนวนแถวขั้นต่ำต่อใบ; เลือกค่าของผู้ชนะที่ CV MAE เฉลี่ยต่ำสุด; ตรวจขอบ: PASS (อยู่ด้านในของ grid)।",
           "kind": "tuned",
           "search_range": [
             1,
@@ -7426,13 +7465,6 @@
           ],
           "source": "กำหนดคงที่ในโค้ด",
           "explanation": "feature ประเภทกลุ่ม।",
-          "kind": "fixed"
-        },
-        {
-          "parameter": "DATA_SHA256",
-          "value": "191adb789285fe531bf82521e7ac0892020cbf0bf4325d22f6a657fabaab8aa1",
-          "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "ลายนิ้วมือไฟล์ข้อมูล।",
           "kind": "fixed"
         },
         {
@@ -7728,14 +7760,14 @@
           "parameter": "GridSearchCV.scoring",
           "value": "{'MAE': 'neg_mean_absolute_error', 'RMSE': 'neg_root_mean_squared_error', 'MAPE': 'neg_mean_absolute_percentage_error', 'R2': 'r2', 'leaves': count_leaves_scorer}",
           "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "ตัววัด CV โดยใช้ MAE หน่วยบาทเลือกผู้ชนะและใช้ใบวัดความซับซ้อน; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।",
+          "explanation": "ตัววัด CV หน่วยบาท ใช้ MAE เลือกผู้ชนะ; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।",
           "kind": "fixed"
         },
         {
           "parameter": "GridSearchCV.refit",
-          "value": "select_1se",
+          "value": "MAE",
           "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "ฟังก์ชันเลือกชุดค่าด้วยกฎ 1-SE แล้วฝึกผู้ชนะบน train ทั้งชุด; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।",
+          "explanation": "เลือกผู้ชนะที่ mean CV MAE ต่ำสุดแล้วฝึกผู้ชนะบน train ทั้งชุด; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।",
           "kind": "fixed"
         },
         {
@@ -7774,19 +7806,19 @@
           "kind": "fixed"
         },
         {
-          "parameter": "selection.1SE",
-          "value": "min CV MAE + SD(ddof=0)/sqrt(N_FOLDS); min leaves → CV MAE → index",
+          "parameter": "selection.minCV",
+          "value": "min mean CV MAE; เสมอ → index แรก",
           "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "เลือกใบน้อยที่สุดในช่วงหนึ่ง SE จาก MAE ต่ำสุด; DT นับใบบน train ทั้งชุด ส่วน RF/XGB ใช้ค่าเฉลี่ยใบรวมจาก CV ตามโค้ด।",
+          "explanation": "ผู้ชนะคือชุดที่ CV MAE เฉลี่ยต่ำสุด (refit=MAE) ไม่มีเกณฑ์จำนวนใบ; จำนวนใบแสดงเป็นข้อมูลประกอบเท่านั้น।",
           "kind": "fixed"
         }
       ],
       "missing": [],
       "runtime": {
-        "start": "2026-10-26 02:44:44",
-        "end": "2026-10-26 03:03:09",
+        "start": "2026-10-27 18:30:41",
+        "end": "2026-10-27 18:51:20",
         "status": "ok",
-        "seconds": 1105.0
+        "seconds": 1239.0
       }
     },
     {
@@ -7795,6 +7827,7 @@
       "model": "XGB",
       "dataset": "merge50minC",
       "variant": "base",
+      "generation": "2026-10-27",
       "result": {
         "run_id": "XGB_merge50minC",
         "model": "XGB",
@@ -7812,236 +7845,230 @@
           "gear"
         ],
         "train": {
-          "R2": 0.9629954695701599,
-          "RMSE": 63376.7674783118,
-          "MAE": 42882.9765625,
-          "MAPE": 0.0846389067735716
+          "R2": 0.9657774567604065,
+          "RMSE": 60740.92498472508,
+          "MAE": 41367.20703125,
+          "MAPE": 0.08148518350709917
         },
         "validation": {
-          "R2": 0.9435633420944214,
-          "RMSE": 76625.12089386875,
-          "MAE": 51228.734375,
-          "MAPE": 0.09931620222261506
+          "R2": 0.9455731511116028,
+          "RMSE": 77176.74924483409,
+          "MAE": 51190.72265625,
+          "MAPE": 0.09844326664906769
         },
         "test": {
-          "R2": 0.9431384801864624,
-          "RMSE": 78051.54235503613,
-          "MAE": 52194.87109375,
-          "MAPE": 0.10039211162910083
+          "R2": 0.9457974433898926,
+          "RMSE": 76378.66424597906,
+          "MAE": 51270.578125,
+          "MAPE": 0.09738763283353508
         },
         "best_params": {
           "max_depth": 16,
           "min_child_weight": 1,
-          "n_estimators": 100,
-          "reg_lambda": 10.0
+          "reg_lambda": 10.0,
+          "n_estimators": 122
         }
       },
       "importance": {
         "run_id": "XGB_merge50minC",
         "permutation": {
           "engine": {
-            "mean": 118108.20234375,
-            "std": 1459.7771553607038
+            "mean": 116638.790625,
+            "std": 1220.7740015263817
           },
           "mileage": {
-            "mean": 21781.16875,
-            "std": 790.8758702657321
+            "mean": 21026.659375,
+            "std": 779.518236333421
           },
           "car_age": {
-            "mean": 121912.71328125,
-            "std": 1709.5093762767506
+            "mean": 119873.915625,
+            "std": 2039.606062526038
           },
           "brand": {
-            "mean": 47699.84921875,
-            "std": 856.0015372702796
+            "mean": 46878.20703125,
+            "std": 581.8366881944846
           },
           "model": {
-            "mean": 32929.0421875,
-            "std": 626.9228773413131
+            "mean": 34656.3296875,
+            "std": 445.56055958019664
           },
           "car_type": {
-            "mean": 51649.66953125,
-            "std": 1235.333251360338
+            "mean": 55719.5328125,
+            "std": 761.8672922295839
           },
           "fuel": {
-            "mean": 13095.772265625,
-            "std": 550.6468821722119
+            "mean": 21473.075,
+            "std": 514.3557326092214
           },
           "gear": {
-            "mean": 7047.170703125,
-            "std": 231.25533814606536
+            "mean": 7638.774609375,
+            "std": 288.522787326955
           }
         },
         "model_based": {
-          "engine": 0.011431964509630355,
-          "mileage": 0.0004962590053940571,
-          "car_age": 0.00585587614900077,
-          "brand": 0.21166452521129817,
-          "model": 0.45618749085083266,
-          "car_type": 0.2939828832646027,
-          "fuel": 0.014586573298325184,
-          "gear": 0.005794427710916118
+          "engine": 0.011856173046711724,
+          "mileage": 0.0005398827814822134,
+          "car_age": 0.005816992576300326,
+          "brand": 0.20899027524074007,
+          "model": 0.4704411173011849,
+          "car_type": 0.2752195439481654,
+          "fuel": 0.02240832106376223,
+          "gear": 0.004727694041653138
         }
       },
       "cv": {
-        "mean": 52646.0,
-        "sd": 261.0,
+        "mean": 52256.0,
+        "sd": 533.0,
         "source": "ตาราง CV train เทียบ validation",
-        "precision": "printed integer baht"
+        "precision": "printed integer baht",
+        "rmse_mean": 78836.0,
+        "rmse_sd": 1536.0,
+        "mape_mean": 0.0996,
+        "mape_sd": 0.0011
       },
       "cv_tables": [
         {
           "kind": "search_candidates",
           "rows": [
             {
-              "candidate": 190.0,
-              "chosen": "",
-              "eligible": "yes",
-              "leaves": 111065.0,
+              "candidate": 26.0,
+              "chosen": "*",
+              "leaves": 77153.0,
               "rank": 1.0,
+              "rounds": 122.0,
+              "max_depth": 16.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "cv_mae": 52256.0,
+              "cv_mae_sd": 533.0,
+              "train_mae": 41006.0,
+              "gap": 11250.0
+            },
+            {
+              "candidate": 38.0,
+              "chosen": "",
+              "leaves": 101372.0,
+              "rank": 2.0,
+              "rounds": 88.0,
               "max_depth": 20.0,
               "min_child_weight": 1.0,
               "reg_lambda": 10.0,
-              "n_estimators": 100.0,
-              "cv_mae": 52578.0,
-              "cv_mae_sd": 272.0,
-              "train_mae": 38905.0,
-              "gap": 13673.0
+              "cv_mae": 52331.0,
+              "cv_mae_sd": 519.0,
+              "train_mae": 39600.0,
+              "gap": 12731.0
             },
             {
-              "candidate": 130.0,
-              "chosen": "*",
-              "eligible": "yes",
-              "leaves": 65640.0,
-              "rank": 2.0,
-              "max_depth": 16.0,
-              "min_child_weight": 1.0,
-              "reg_lambda": 10.0,
-              "n_estimators": 100.0,
-              "cv_mae": 52646.0,
-              "cv_mae_sd": 261.0,
-              "train_mae": 42317.0,
-              "gap": 10330.0
-            },
-            {
-              "candidate": 134.0,
+              "candidate": 50.0,
               "chosen": "",
-              "eligible": "",
-              "leaves": 112785.0,
+              "leaves": 132348.0,
               "rank": 3.0,
-              "max_depth": 16.0,
-              "min_child_weight": 1.0,
-              "reg_lambda": 10.0,
-              "n_estimators": 200.0,
-              "cv_mae": 52702.0,
-              "cv_mae_sd": 292.0,
-              "train_mae": 38582.0,
-              "gap": 14119.0
-            },
-            {
-              "candidate": 74.0,
-              "chosen": "",
-              "eligible": "",
-              "leaves": 49807.0,
-              "rank": 4.0,
-              "max_depth": 12.0,
-              "min_child_weight": 1.0,
-              "reg_lambda": 10.0,
-              "n_estimators": 200.0,
-              "cv_mae": 52739.0,
-              "cv_mae_sd": 407.0,
-              "train_mae": 43788.0,
-              "gap": 8951.0
-            },
-            {
-              "candidate": 78.0,
-              "chosen": "",
-              "eligible": "",
-              "leaves": 75180.0,
-              "rank": 5.0,
-              "max_depth": 12.0,
-              "min_child_weight": 1.0,
-              "reg_lambda": 10.0,
-              "n_estimators": 300.0,
-              "cv_mae": 52745.0,
-              "cv_mae_sd": 407.0,
-              "train_mae": 41328.0,
-              "gap": 11417.0
-            },
-            {
-              "candidate": 250.0,
-              "chosen": "",
-              "eligible": "",
-              "leaves": 159419.0,
-              "rank": 6.0,
+              "rounds": 78.0,
               "max_depth": 24.0,
               "min_child_weight": 1.0,
               "reg_lambda": 10.0,
-              "n_estimators": 100.0,
-              "cv_mae": 52747.0,
-              "cv_mae_sd": 305.0,
-              "train_mae": 36442.0,
-              "gap": 16305.0
+              "cv_mae": 52356.0,
+              "cv_mae_sd": 518.0,
+              "train_mae": 38003.0,
+              "gap": 14354.0
             },
             {
-              "candidate": 210.0,
+              "candidate": 39.0,
               "chosen": "",
-              "eligible": "",
-              "leaves": 57328.0,
+              "leaves": 232052.0,
+              "rank": 4.0,
+              "rounds": 299.0,
+              "max_depth": 20.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 100.0,
+              "cv_mae": 52430.0,
+              "cv_mae_sd": 325.0,
+              "train_mae": 41910.0,
+              "gap": 10520.0
+            },
+            {
+              "candidate": 14.0,
+              "chosen": "",
+              "leaves": 54375.0,
+              "rank": 5.0,
+              "rounds": 213.0,
+              "max_depth": 12.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 10.0,
+              "cv_mae": 52448.0,
+              "cv_mae_sd": 446.0,
+              "train_mae": 43063.0,
+              "gap": 9385.0
+            },
+            {
+              "candidate": 51.0,
+              "chosen": "",
+              "leaves": 265306.0,
+              "rank": 6.0,
+              "rounds": 244.0,
+              "max_depth": 24.0,
+              "min_child_weight": 1.0,
+              "reg_lambda": 100.0,
+              "cv_mae": 52470.0,
+              "cv_mae_sd": 415.0,
+              "train_mae": 41581.0,
+              "gap": 10889.0
+            },
+            {
+              "candidate": 42.0,
+              "chosen": "",
+              "leaves": 58260.0,
               "rank": 7.0,
+              "rounds": 103.0,
               "max_depth": 20.0,
               "min_child_weight": 5.0,
               "reg_lambda": 10.0,
-              "n_estimators": 100.0,
-              "cv_mae": 52866.0,
-              "cv_mae_sd": 317.0,
-              "train_mae": 42355.0,
-              "gap": 10511.0
+              "cv_mae": 52542.0,
+              "cv_mae_sd": 463.0,
+              "train_mae": 42110.0,
+              "gap": 10432.0
             },
             {
-              "candidate": 259.0,
+              "candidate": 30.0,
               "chosen": "",
-              "eligible": "",
-              "leaves": 347610.0,
+              "leaves": 48323.0,
               "rank": 8.0,
-              "max_depth": 24.0,
+              "rounds": 142.0,
+              "max_depth": 16.0,
+              "min_child_weight": 5.0,
+              "reg_lambda": 10.0,
+              "cv_mae": 52562.0,
+              "cv_mae_sd": 478.0,
+              "train_mae": 43033.0,
+              "gap": 9529.0
+            },
+            {
+              "candidate": 27.0,
+              "chosen": "",
+              "leaves": 201917.0,
+              "rank": 9.0,
+              "rounds": 411.0,
+              "max_depth": 16.0,
               "min_child_weight": 1.0,
               "reg_lambda": 100.0,
-              "n_estimators": 300.0,
-              "cv_mae": 52900.0,
-              "cv_mae_sd": 433.0,
-              "train_mae": 40059.0,
-              "gap": 12841.0
+              "cv_mae": 52569.0,
+              "cv_mae_sd": 348.0,
+              "train_mae": 42379.0,
+              "gap": 10190.0
             },
             {
-              "candidate": 69.0,
+              "candidate": 13.0,
               "chosen": "",
-              "eligible": "",
-              "leaves": 48226.0,
-              "rank": 9.0,
+              "leaves": 50111.0,
+              "rank": 10.0,
+              "rounds": 106.0,
               "max_depth": 12.0,
               "min_child_weight": 1.0,
               "reg_lambda": 1.0,
-              "n_estimators": 100.0,
-              "cv_mae": 52925.0,
-              "cv_mae_sd": 370.0,
-              "train_mae": 40337.0,
-              "gap": 12588.0
-            },
-            {
-              "candidate": 199.0,
-              "chosen": "",
-              "eligible": "",
-              "leaves": 231224.0,
-              "rank": 10.0,
-              "max_depth": 20.0,
-              "min_child_weight": 1.0,
-              "reg_lambda": 100.0,
-              "n_estimators": 300.0,
-              "cv_mae": 52927.0,
-              "cv_mae_sd": 456.0,
-              "train_mae": 42140.0,
-              "gap": 10787.0
+              "cv_mae": 52593.0,
+              "cv_mae_sd": 541.0,
+              "train_mae": 39951.0,
+              "gap": 12642.0
             }
           ]
         },
@@ -8050,73 +8077,115 @@
           "rows": [
             {
               "": 1.0,
-              "train MAE": 42395.0,
-              "validation MAE": 52440.0,
-              "MAE gap": 10045.0,
-              "gap % of validation MAE": 19.16,
-              "train R2": 0.9637,
-              "validation R2": 0.9442,
-              "R2 gap": 0.0194
+              "train MAE": 40715.0,
+              "validation MAE": 53139.0,
+              "MAE gap": 12424.0,
+              "gap % of validation MAE": 23.38,
+              "train R2": 0.9672,
+              "validation R2": 0.9371,
+              "R2 gap": 0.0301,
+              "train RMSE": 59684.0,
+              "validation RMSE": 81357.0,
+              "RMSE gap": 21673.0,
+              "train MAPE": 0.0803,
+              "validation MAPE": 0.1014,
+              "MAPE gap": 0.0212
             },
             {
               "": 2.0,
-              "train MAE": 42089.0,
-              "validation MAE": 52551.0,
-              "MAE gap": 10462.0,
-              "gap % of validation MAE": 19.91,
-              "train R2": 0.9642,
-              "validation R2": 0.9411,
-              "R2 gap": 0.0231
+              "train MAE": 40388.0,
+              "validation MAE": 51537.0,
+              "MAE gap": 11149.0,
+              "gap % of validation MAE": 21.63,
+              "train R2": 0.9671,
+              "validation R2": 0.9451,
+              "R2 gap": 0.022,
+              "train RMSE": 59453.0,
+              "validation RMSE": 77411.0,
+              "RMSE gap": 17958.0,
+              "train MAPE": 0.0799,
+              "validation MAPE": 0.0981,
+              "MAPE gap": 0.0183
             },
             {
               "": 3.0,
-              "train MAE": 42302.0,
-              "validation MAE": 52811.0,
-              "MAE gap": 10509.0,
-              "gap % of validation MAE": 19.9,
-              "train R2": 0.9641,
-              "validation R2": 0.9396,
-              "R2 gap": 0.0245
+              "train MAE": 41104.0,
+              "validation MAE": 51980.0,
+              "MAE gap": 10876.0,
+              "gap % of validation MAE": 20.92,
+              "train R2": 0.9662,
+              "validation R2": 0.9442,
+              "R2 gap": 0.022,
+              "train RMSE": 60369.0,
+              "validation RMSE": 77290.0,
+              "RMSE gap": 16922.0,
+              "train MAPE": 0.0813,
+              "validation MAPE": 0.0994,
+              "MAPE gap": 0.0181
             },
             {
               "": 4.0,
-              "train MAE": 42271.0,
-              "validation MAE": 53069.0,
-              "MAE gap": 10799.0,
-              "gap % of validation MAE": 20.35,
-              "train R2": 0.9638,
-              "validation R2": 0.9399,
-              "R2 gap": 0.0239
+              "train MAE": 40663.0,
+              "validation MAE": 52459.0,
+              "MAE gap": 11796.0,
+              "gap % of validation MAE": 22.49,
+              "train R2": 0.9669,
+              "validation R2": 0.9427,
+              "R2 gap": 0.0242,
+              "train RMSE": 59531.0,
+              "validation RMSE": 79737.0,
+              "RMSE gap": 20206.0,
+              "train MAPE": 0.0803,
+              "validation MAPE": 0.099,
+              "MAPE gap": 0.0186
             },
             {
               "": 5.0,
-              "train MAE": 42526.0,
-              "validation MAE": 52360.0,
-              "MAE gap": 9834.0,
-              "gap % of validation MAE": 18.78,
-              "train R2": 0.9642,
-              "validation R2": 0.9386,
-              "R2 gap": 0.0256
+              "train MAE": 42161.0,
+              "validation MAE": 52166.0,
+              "MAE gap": 10005.0,
+              "gap % of validation MAE": 19.18,
+              "train R2": 0.9644,
+              "validation R2": 0.9423,
+              "R2 gap": 0.022,
+              "train RMSE": 62083.0,
+              "validation RMSE": 78384.0,
+              "RMSE gap": 16301.0,
+              "train MAPE": 0.0828,
+              "validation MAPE": 0.0999,
+              "MAPE gap": 0.0171
             },
             {
               "": "mean",
-              "train MAE": 42317.0,
-              "validation MAE": 52646.0,
-              "MAE gap": 10330.0,
-              "gap % of validation MAE": 19.62,
-              "train R2": 0.964,
-              "validation R2": 0.9407,
-              "R2 gap": 0.0233
+              "train MAE": 41006.0,
+              "validation MAE": 52256.0,
+              "MAE gap": 11250.0,
+              "gap % of validation MAE": 21.52,
+              "train R2": 0.9664,
+              "validation R2": 0.9423,
+              "R2 gap": 0.0241,
+              "train RMSE": 60224.0,
+              "validation RMSE": 78836.0,
+              "RMSE gap": 18612.0,
+              "train MAPE": 0.0809,
+              "validation MAPE": 0.0996,
+              "MAPE gap": 0.0187
             },
             {
               "": "sd",
-              "train MAE": 144.0,
-              "validation MAE": 261.0,
-              "MAE gap": 345.0,
-              "gap % of validation MAE": 0.57,
-              "train R2": 0.0002,
-              "validation R2": 0.0019,
-              "R2 gap": 0.0021
+              "train MAE": 621.0,
+              "validation MAE": 533.0,
+              "MAE gap": 822.0,
+              "gap % of validation MAE": 1.43,
+              "train R2": 0.001,
+              "validation R2": 0.0028,
+              "R2 gap": 0.0031,
+              "train RMSE": 984.0,
+              "validation RMSE": 1536.0,
+              "RMSE gap": 2026.0,
+              "train MAPE": 0.001,
+              "validation MAPE": 0.0011,
+              "MAPE gap": 0.0013
             }
           ]
         }
@@ -8134,23 +8203,23 @@
         "model_based": "img/XGB_merge50minC_model_based.png"
       },
       "data": {
-        "rows": 47001,
+        "rows": 46074,
         "split": [
           {
             "ชุด": "train",
-            "แถว": 37600.0,
+            "แถว": 36859.0,
             "สัดส่วน (%)": 80.0,
             "จำนวนรุ่น": 115.0
           },
           {
             "ชุด": "validation",
-            "แถว": 4700.0,
+            "แถว": 4607.0,
             "สัดส่วน (%)": 10.0,
             "จำนวนรุ่น": 115.0
           },
           {
             "ชุด": "test",
-            "แถว": 4701.0,
+            "แถว": 4608.0,
             "สัดส่วน (%)": 10.0,
             "จำนวนรุ่น": 115.0
           }
@@ -8161,8 +8230,8 @@
         {
           "parameter": "max_depth",
           "value": 16,
-          "source": "GridSearchCV + กฎ 1-SE (ช่วงที่ค้น: [8, 12, 16, 20, 24])",
-          "explanation": "ความลึกสูงสุดของต้นไม้; เลือกค่าของผู้ชนะที่มีใบน้อยที่สุดในช่วง 1-SE; ตรวจขอบ: PASS (inside)।",
+          "source": "ค้นทุกชุดด้วย 5-fold CV (โค้ดเอง), ผู้ชนะ = CV MAE ต่ำสุด (ช่วงที่ค้น: [8, 12, 16, 20, 24])",
+          "explanation": "ความลึกสูงสุดของต้นไม้; เลือกค่าของผู้ชนะที่ CV MAE เฉลี่ยต่ำสุด; ตรวจขอบ: PASS (inside)।",
           "kind": "tuned",
           "search_range": [
             8,
@@ -8177,8 +8246,8 @@
         {
           "parameter": "min_child_weight",
           "value": 1,
-          "source": "GridSearchCV + กฎ 1-SE (ช่วงที่ค้น: [1, 5, 20])",
-          "explanation": "น้ำหนัก Hessian ขั้นต่ำของโหนดลูก; เลือกค่าของผู้ชนะที่มีใบน้อยที่สุดในช่วง 1-SE; ตรวจขอบ: PASS (natural bound) (min edge)।",
+          "source": "ค้นทุกชุดด้วย 5-fold CV (โค้ดเอง), ผู้ชนะ = CV MAE ต่ำสุด (ช่วงที่ค้น: [1, 5, 20])",
+          "explanation": "น้ำหนัก Hessian ขั้นต่ำของโหนดลูก; เลือกค่าของผู้ชนะที่ CV MAE เฉลี่ยต่ำสุด; ตรวจขอบ: PASS (natural bound) (min edge)।",
           "kind": "tuned",
           "search_range": [
             1,
@@ -8190,25 +8259,19 @@
         },
         {
           "parameter": "n_estimators",
-          "value": 100,
-          "source": "GridSearchCV + กฎ 1-SE (ช่วงที่ค้น: [25, 50, 100, 200, 300])",
-          "explanation": "จำนวนต้นไม้หรือรอบ boosting; เลือกค่าของผู้ชนะที่มีใบน้อยที่สุดในช่วง 1-SE; ตรวจขอบ: PASS (inside)।",
+          "value": 122,
+          "source": "จำนวนรอบจาก early stopping ต่อ fold (ค่าเฉลี่ย)",
+          "explanation": "จำนวนต้นไม้หรือรอบ boosting; early stopping ต่อ fold (เพดาน MAX_ROUNDS, หยุดเมื่อ MAE บนแถวตรวจของ fold ไม่ดีขึ้นต่อเนื่อง EARLY_STOPPING_ROUNDS รอบ) จำนวนรอบของชุด = ค่าเฉลี่ยของ fold ปัดเป็นจำนวนเต็ม; CV MAE แบบนี้อาจต่ำกว่าจริงเล็กน้อยเพราะแถวตรวจเป็นตัวกำหนดจุดหยุด; ตรวจเพดาน: PASS: early stopping ทำงานในทุก fold ของผู้ชนะ (รอบ [128, 139, 124, 122, 97] ต่ำกว่าเพดาน MAX_ROUNDS = 1,000)।",
           "kind": "tuned",
-          "search_range": [
-            25,
-            50,
-            100,
-            200,
-            300
-          ],
-          "grid_edge": "PASS (inside)",
-          "candidate_source": "PARAM_GRID"
+          "search_range": "early stopping ต่อ fold",
+          "grid_edge": "PASS: early stopping ทำงานในทุก fold ของผู้ชนะ (รอบ [128, 139, 124, 122, 97] ต่ำกว่าเพดาน MAX_ROUNDS = 1,000)",
+          "candidate_source": "early stopping"
         },
         {
           "parameter": "reg_lambda",
           "value": 10.0,
-          "source": "GridSearchCV + กฎ 1-SE (ช่วงที่ค้น: [0.0, 1.0, 10.0, 100.0])",
-          "explanation": "บทลงโทษ L2 ของค่าในใบ; เลือกค่าของผู้ชนะที่มีใบน้อยที่สุดในช่วง 1-SE; ตรวจขอบ: PASS (inside)।",
+          "source": "ค้นทุกชุดด้วย 5-fold CV (โค้ดเอง), ผู้ชนะ = CV MAE ต่ำสุด (ช่วงที่ค้น: [0.0, 1.0, 10.0, 100.0])",
+          "explanation": "บทลงโทษ L2 ของค่าในใบ; เลือกค่าของผู้ชนะที่ CV MAE เฉลี่ยต่ำสุด; ตรวจขอบ: PASS (inside)।",
           "kind": "tuned",
           "search_range": [
             0.0,
@@ -8244,14 +8307,14 @@
           "parameter": "early_stopping_rounds",
           "value": null,
           "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "ไม่หยุดก่อนครบรอบ (จำนวนรอบเลือกด้วย CV ใน grid); กำหนดคงที่ ไม่ได้ค้นใน grid ของไฟล์นี้।",
+          "explanation": "[search] ค่าตั้งต้น = ไม่หยุดก่อน (เซลล์ [22] ตั้งเป็น EARLY_STOPPING_ROUNDS); กำหนดคงที่ ไม่ได้ค้นใน grid ของไฟล์นี้।",
           "kind": "fixed"
         },
         {
           "parameter": "eval_metric",
           "value": "mae",
           "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "ใช้เฉพาะตอนส่ง eval_set ในเซลล์ [38] เพื่อวาดกราฟรายรอบ; กำหนดคงที่ ไม่ได้ค้นใน grid ของไฟล์นี้।",
+          "explanation": "ใช้ตอนส่ง eval_set: เป็นตัวชี้วัดของ early stopping (เซลล์ [22]) และกราฟรายรอบ (เซลล์ [38]); กำหนดคงที่ ไม่ได้ค้นใน grid ของไฟล์นี้।",
           "kind": "fixed"
         },
         {
@@ -8363,13 +8426,6 @@
           "kind": "fixed"
         },
         {
-          "parameter": "DATA_SHA256",
-          "value": "191adb789285fe531bf82521e7ac0892020cbf0bf4325d22f6a657fabaab8aa1",
-          "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "ลายนิ้วมือไฟล์ข้อมูล।",
-          "kind": "fixed"
-        },
-        {
           "parameter": "MODEL_NAME",
           "value": "XGB",
           "source": "กำหนดคงที่ในโค้ด",
@@ -8419,6 +8475,20 @@
           "kind": "fixed"
         },
         {
+          "parameter": "MAX_ROUNDS",
+          "value": 1000,
+          "source": "กำหนดคงที่ในโค้ด",
+          "explanation": "เพดานจำนวนรอบ (ต้นไม้) ของ early stopping ต้องหยุดเองก่อนถึงเพดานนี้।",
+          "kind": "fixed"
+        },
+        {
+          "parameter": "EARLY_STOPPING_ROUNDS",
+          "value": 50,
+          "source": "กำหนดคงที่ในโค้ด",
+          "explanation": "หยุดฝึกเมื่อ MAE บนแถวตรวจของ fold ไม่ดีขึ้นต่อเนื่องกี่รอบ।",
+          "kind": "fixed"
+        },
+        {
           "parameter": "LC_FRACTIONS",
           "value": [
             0.1,
@@ -8447,7 +8517,7 @@
           "parameter": "SEARCH_JOBS",
           "value": 6,
           "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "จำนวนงานที่รันพร้อมกันใน GridSearchCV (process คู่ขนาน)।",
+          "explanation": "จำนวนงานที่รันพร้อมกันในการค้นหา (process คู่ขนาน เซลล์ [25]-[26])।",
           "kind": "fixed"
         },
         {
@@ -8642,59 +8712,10 @@
           "kind": "fixed"
         },
         {
-          "parameter": "GridSearchCV.scoring",
-          "value": "{'MAE': 'neg_mean_absolute_error', 'RMSE': 'neg_root_mean_squared_error', 'MAPE': 'neg_mean_absolute_percentage_error', 'R2': 'r2', 'leaves': count_leaves_scorer}",
+          "parameter": "selection.minCV",
+          "value": "min mean CV MAE; เสมอ → index แรก",
           "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "ตัววัด CV โดยใช้ MAE หน่วยบาทเลือกผู้ชนะและใช้ใบวัดความซับซ้อน; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।",
-          "kind": "fixed"
-        },
-        {
-          "parameter": "GridSearchCV.refit",
-          "value": "select_1se",
-          "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "ฟังก์ชันเลือกชุดค่าด้วยกฎ 1-SE แล้วฝึกผู้ชนะบน train ทั้งชุด; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।",
-          "kind": "fixed"
-        },
-        {
-          "parameter": "GridSearchCV.return_train_score",
-          "value": true,
-          "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "เก็บคะแนน train เพื่อเทียบกับ CV; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।",
-          "kind": "fixed"
-        },
-        {
-          "parameter": "GridSearchCV.error_score",
-          "value": "raise",
-          "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "ให้หยุดเมื่อการฝึกเกิดข้อผิดพลาด; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।",
-          "kind": "fixed"
-        },
-        {
-          "parameter": "GridSearchCV.n_jobs",
-          "value": 6,
-          "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "จำนวนงานค้นหาที่ทำพร้อมกัน; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।",
-          "kind": "fixed"
-        },
-        {
-          "parameter": "GridSearchCV.pre_dispatch",
-          "value": 6,
-          "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "จำนวนงานที่ส่งล่วงหน้าเพื่อคุมหน่วยความจำ; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।",
-          "kind": "fixed"
-        },
-        {
-          "parameter": "GridSearchCV.verbose",
-          "value": 0,
-          "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "ระดับข้อความความคืบหน้าของการค้นหา; กำหนดคงที่ตามโค้ดโดยไม่ได้ปรับจูน।",
-          "kind": "fixed"
-        },
-        {
-          "parameter": "selection.1SE",
-          "value": "min CV MAE + SD(ddof=0)/sqrt(N_FOLDS); min leaves → CV MAE → index",
-          "source": "กำหนดคงที่ในโค้ด",
-          "explanation": "เลือกใบน้อยที่สุดในช่วงหนึ่ง SE จาก MAE ต่ำสุด; DT นับใบบน train ทั้งชุด ส่วน RF/XGB ใช้ค่าเฉลี่ยใบรวมจาก CV ตามโค้ด।",
+          "explanation": "ผู้ชนะคือชุดที่ CV MAE เฉลี่ยต่ำสุด (refit=MAE) ไม่มีเกณฑ์จำนวนใบ; จำนวนใบแสดงเป็นข้อมูลประกอบเท่านั้น।",
           "kind": "fixed"
         },
         {
@@ -8847,10 +8868,10 @@
       ],
       "missing": [],
       "runtime": {
-        "start": "2026-10-26 03:03:09",
-        "end": "2026-10-26 03:36:21",
+        "start": "2026-10-27 18:51:20",
+        "end": "2026-10-27 19:07:40",
         "status": "ok",
-        "seconds": 1991.0
+        "seconds": 980.0
       }
     },
     {
@@ -8859,6 +8880,7 @@
       "model": "DT",
       "dataset": "merge50minC",
       "variant": "adj",
+      "generation": "old",
       "result": {
         "run_id": "DT_merge50minC_adj",
         "model": "DT",
@@ -9816,6 +9838,7 @@
       "model": "RF",
       "dataset": "merge50minC",
       "variant": "adj",
+      "generation": "old",
       "result": {
         "run_id": "RF_merge50minC_adj",
         "model": "RF",
@@ -10778,6 +10801,7 @@
       "model": "XGB",
       "dataset": "merge50minC",
       "variant": "adj",
+      "generation": "old",
       "result": {
         "run_id": "XGB_merge50minC_adj",
         "model": "XGB",
@@ -11904,6 +11928,6 @@
       }
     }
   ],
-  "total_seconds": 15660.0,
+  "total_seconds": 14557.0,
   "missing": []
 }
