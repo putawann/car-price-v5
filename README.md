@@ -11,10 +11,12 @@
 
 **รายงานฉบับเต็ม:** [docs/index.html](docs/index.html) · [GitHub Pages](https://putawann.github.io/car-price-v5/)
 
+[ผลรันรอบใหม่และ MAE / RMSE / MAPE ของ 5-fold CV](docs/index.html#latest-results)
+
 ค่าพารามิเตอร์ทั้งหมดและที่มารายไฟล์: [พารามิเตอร์ของแต่ละไฟล์](docs/index.html#parameters)
 
 สองชุดใช้แถว test ต่างกัน ควรเทียบภายในชุดก่อน รายงานมีผลการปรับข้อมูล, ablation, importance, overfit, learning curves และเวลารัน
 
 สร้างซ้ำจากโฟลเดอร์นี้: `python -X utf8 make_report.py` (อ่าน saved outputs/source และ defaults จาก sklearn/xgboost ที่ติดตั้ง ไม่รัน notebook)
 
-เผยแพร่ GitHub Pages: เลือก branch ที่มีรายงานและโฟลเดอร์ `/docs` แล้วแทน `https://putawann.github.io/car-price-v5/` ด้วย URL จริง เผยแพร่เฉพาะไฟล์สคริปต์/รายงานที่อนุญาต และอย่านำ notebook หรือไฟล์ข้อมูลเข้ารายงานสาธารณะ
+เผยแพร่ GitHub Pages จาก branch `main` และโฟลเดอร์ `/docs`

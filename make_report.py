@@ -22,6 +22,7 @@ OUT = ROOT / 'docs'
 MISSING = 'ไม่มีผล'
 DATASETS = ('new_cardb', 'merge50minC')
 MODELS = ('DT', 'RF', 'XGB')
+PAGES_URL = 'https://putawann.github.io/car-price-v5/'
 FORBIDDEN = re.compile(r'[A-Za-z]:[/\\]|putaw|(?:api[_-]?key|access[_-]?token|secret)\s*[:=]', re.I)
 
 PARAM_MISSING = 'ไม่พบในผลรัน'
@@ -663,6 +664,40 @@ def table(headers, rows, best=()):
         f'<th scope="col">{esc(h)}</th>' for h in headers) + '</tr></thead><tbody>' + ''.join(body) + '</tbody></table></div>'
 
 
+def latest_results(runs):
+    latest = [r for r in runs if is_new(r) and metric(r) is not None
+              and r['generation'] == latest_generation(runs, r['dataset'])]
+    if not latest:
+        return ''
+    parts = ['<section id="latest-results"><h2>ผลรันรอบใหม่ · DT / RF / XGB</h2>']
+    for dataset in DATASETS:
+        group = [r for r in latest if r['dataset'] == dataset]
+        if not group:
+            continue
+        best = min(group, key=metric)
+        parts.append(f'<h3>{esc(dataset)} · {esc(gen_label(group[0]))}</h3>')
+        parts.append(f'<p>ข้อมูล {fmt(group[0]["data"].get("rows"))} แถว · '
+                     'เลือกพารามิเตอร์ด้วย CV MAE ต่ำสุดบน train · '
+                     'ผลด้านล่างอ่านจากการรันที่บันทึกในโน้ตบุ๊ก</p>')
+        parts.append('<h3>5-fold cross-validation บน train</h3>'
+                     '<p class="muted">คะแนนบนแถวตรวจของแต่ละ fold · ค่าเฉลี่ย ± SD ข้าม 5 folds (ddof=0) · '
+                     'MAE/RMSE หน่วยบาท; MAPE แสดงเป็นเปอร์เซ็นต์ · ค่ายิ่งต่ำยิ่งดี</p>')
+        parts.append(table(['โมเดล / แบบ', 'CV MAE ± SD (บาท)', 'CV RMSE ± SD (บาท)', 'CV MAPE ± SD'],
+                           [[f'{r["model"]} / {r["variant"]}', cv_text(r),
+                             cv_extra_text(r, 'rmse'), cv_extra_text(r, 'mape')] for r in group]))
+        parts.append('<h3>ผลบนชุด test ที่กันไว้</h3>')
+        parts.append(table(['โมเดล / แบบ', 'Test MAE (บาท)', 'Test RMSE (บาท)', 'Test MAPE', 'Test R²'],
+                           [[f'{r["model"]} / {r["variant"]}', fmt(metric(r)), fmt(metric(r, 'RMSE')),
+                             pct(metric(r, 'MAPE'), True), fmt(metric(r, 'R2'), 4)] for r in group],
+                           [group.index(best)]))
+        for r in group:
+            parts.append(f'<details><summary>{esc(r["model"])} / {esc(r["variant"])} · ผลครบทั้ง 5 folds</summary>'
+                         + cv_fold_table(r) + '</details>')
+    parts.append('<p class="muted">ผลรอบเก่าและการทดลองอื่นอยู่ใน <a href="#results">ตารางทั้ง 12 งาน</a> '
+                 'แยกป้ายรอบไว้เพื่อไม่เทียบข้อมูลและวิธีเลือกโมเดลคนละรอบ</p></section>')
+    return ''.join(parts)
+
+
 def figure(run, kind):
     rel = run['plots'].get(kind)
     names = {'learning': 'Learning curve', 'permutation': 'Permutation importance', 'model_based': 'Model-based importance'}
@@ -692,10 +727,11 @@ def render(runs, missing):
              '<meta name="description" content="ผลฝึกโมเดลราคารถ v5 จาก output ที่บันทึกไว้ 12 งาน"><title>ผลการฝึกโมเดลราคารถ · v5</title>',
              '<style>' + CSS + '</style></head><body><main><header><p class="eyebrow">TRAINING RESULTS / V5</p><h1>ผลการฝึกโมเดลราคารถ</h1>',
              '<p>12 การทดลอง · DT / RF / XGB · 2 ชุดข้อมูล · base และ adj</p><p class="muted">อ่านจาก output ที่บันทึกไว้เท่านั้น ไม่มีการฝึกหรือรัน notebook ใหม่ · หน่วยเงิน: บาท</p>' + generation_note(runs) + '<nav aria-label="สารบัญ">']
-    sections = [('summary', 'สรุปสั้น'), ('data', 'ข้อมูลที่ใช้'), ('results', 'ผลหลัก'), ('parameters', 'พารามิเตอร์ของแต่ละไฟล์'), ('adjustment', 'ผลการปรับ'),
+    sections = [('latest-results', 'รอบใหม่ / 5-fold CV'), ('summary', 'สรุปสั้น'), ('data', 'ข้อมูลที่ใช้'), ('results', 'ผลทั้ง 12 งาน'), ('parameters', 'พารามิเตอร์ของแต่ละไฟล์'), ('adjustment', 'ผลการปรับ'),
                 ('importance', 'ความสำคัญตัวแปร'), ('overfit', 'Overfit'), ('learning', 'Learning curves'), ('runtime', 'เวลารัน')]
     parts.extend(f'<a href="#{key}">{name}</a>' for key, name in sections)
-    parts.append('</nav></header><section id="summary"><h2>1. สรุปสั้น</h2><div class="cards">')
+    parts.append('</nav></header>' + latest_results(runs))
+    parts.append('<section id="summary"><h2>1. สรุปสั้น</h2><div class="cards">')
     for dataset, winner in winners.items():
         parts.append(f'<article class="card"><h3>{dataset}</h3>')
         if winner:
@@ -865,10 +901,12 @@ def main():
         runs.append(run)
     if len(paths) != len(set(paths)):
         raise ValueError('duplicate notebook in run_order.txt')
+    # Show current runs before historical runs in every report section.
+    runs.sort(key=lambda r: (not is_new(r), r['dataset'], r['variant'], MODELS.index(r['model'])))
     missing = global_missing + [r['run_id'] + ': ' + item for r in runs for item in r['missing']]
     page, winners, main_rows = render(runs, missing)
     payload = {'schema_version': 3, 'source': 'saved notebook outputs and static source; installed estimator defaults; no notebook execution',
-               'cv_precision': 'mean and SD from printed fold summary, rounded to integer baht',
+               'cv_precision': 'mean and SD from printed fold summary; MAE/RMSE rounded to integer baht; MAPE stored as a fraction to 4 decimal places and displayed as percent',
                'generations': 'old = 1-SE selection (older data); other value = date of the standard CV-MAE-minimum generation; winners are chosen only within the latest generation of a dataset',
                'winners': {d: (w['run_id'] if w else None) for d, w in winners.items()},
                'runs': runs, 'total_seconds': sum((r['runtime'] or {}).get('seconds') or 0 for r in runs), 'missing': missing}
@@ -883,14 +921,15 @@ def main():
         readme.extend(['', f'ผลสองรอบปนกัน: {n_new} งานเป็นรอบใหม่ (ผู้ชนะ = CV MAE ต่ำสุด) และ {n_old} งานเป็นรอบเก่า (เลือกด้วยกฎ 1-SE) ซึ่งใช้ข้อมูลต่างกัน '
                        + ' · '.join(old_label(runs, d) for d in DATASETS if any(r['generation'] == OLD for r in runs if r['dataset'] == d))
                        + ' · ไม่เทียบ base/adj ข้ามรอบ'])
-    readme.extend(['', '**รายงานฉบับเต็ม:** [docs/index.html](docs/index.html) · [GitHub Pages]({{PAGES_URL}})', '',
+    readme.extend(['', f'**รายงานฉบับเต็ม:** [docs/index.html](docs/index.html) · [GitHub Pages]({PAGES_URL})', '',
+                   '[ผลรันรอบใหม่และ MAE / RMSE / MAPE ของ 5-fold CV](docs/index.html#latest-results)', '',
                    'ค่าพารามิเตอร์ทั้งหมดและที่มารายไฟล์: [พารามิเตอร์ของแต่ละไฟล์](docs/index.html#parameters)', '',
                    'สองชุดใช้แถว test ต่างกัน ควรเทียบภายในชุดก่อน รายงานมีผลการปรับข้อมูล, ablation, importance, overfit, learning curves และเวลารัน', '',
                    'สร้างซ้ำจากโฟลเดอร์นี้: `python -X utf8 make_report.py` (อ่าน saved outputs/source และ defaults จาก sklearn/xgboost ที่ติดตั้ง ไม่รัน notebook)', '',
-                   'เผยแพร่ GitHub Pages: เลือก branch ที่มีรายงานและโฟลเดอร์ `/docs` แล้วแทน `{{PAGES_URL}}` ด้วย URL จริง เผยแพร่เฉพาะไฟล์สคริปต์/รายงานที่อนุญาต และอย่านำ notebook หรือไฟล์ข้อมูลเข้ารายงานสาธารณะ', ''])
+                   'เผยแพร่ GitHub Pages จาก branch `main` และโฟลเดอร์ `/docs`', ''])
     readme = '\n'.join(readme)
     for name, content in [('index.html', page), ('results.json', encoded), ('README.md', readme)]:
-        if FORBIDDEN.search(content):
+        if FORBIDDEN.search(content.replace(PAGES_URL, '')):
             raise ValueError('public output safety check failed: ' + name)
     (OUT / 'index.html').write_text(page, encoding='utf-8')
     (OUT / 'results.json').write_text(encoded, encoding='utf-8')
