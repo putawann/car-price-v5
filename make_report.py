@@ -605,25 +605,21 @@ def latest_generation(runs, dataset):
     return max(gens, default=OLD)
 
 
-def old_rows(runs, dataset):
-    rows = sorted({r['data'].get('rows') for r in runs if r['dataset'] == dataset and r['generation'] == OLD} - {None})
-    return ' / '.join(fmt(v) for v in rows) or MISSING
+def old_note(runs):
+    old = [r for r in runs if not is_new(r)]
+    rows = ' / '.join(fmt(v) for v in sorted({r['data'].get('rows') for r in old} - {None}))
+    return (f'<p class="note"><strong>ผลรอบเก่า {len(old)} งาน:</strong> ใช้ข้อมูลรุ่นเก่า ({rows} แถว) และเลือกพารามิเตอร์ด้วยกฎ 1-SE '
+            'เทียบกับรอบใหม่ตรงๆ ไม่ได้และไม่นำมาจัดอันดับร่วมกัน · <a href="index.html">กลับหน้าหลัก (ผลรอบใหม่)</a></p>')
 
 
-def old_label(runs, dataset):
-    return f'ผลรอบเก่า: ข้อมูล {old_rows(runs, dataset)} แถว เลือกด้วยกฎ 1-SE ไม่นำมาจัดอันดับร่วมกับรอบใหม่'
-
-
-def generation_note(runs):
-    new = [r for r in runs if is_new(r)]
-    old = [r for r in runs if r['generation'] == OLD]
-    if not new or not old:
-        return ''
-    new_rows = ' / '.join(fmt(v) for v in sorted({r['data'].get('rows') for r in new} - {None}))
-    old_rows_all = ' / '.join(fmt(v) for v in sorted({r['data'].get('rows') for r in old} - {None}))
-    return (f'<p class="note"><strong>ผลสองรอบปนกัน:</strong> {len(new)} งานเป็นรอบใหม่ ({", ".join(sorted({r["generation"] for r in new}))}; ข้อมูล {new_rows} แถว; ผู้ชนะ = CV MAE ต่ำสุด) '
-            f'ส่วนอีก {len(old)} งานเป็นรอบเก่า (ข้อมูล {old_rows_all} แถว; เลือกด้วยกฎ 1-SE) สองรอบเทียบกันตรงๆ ไม่ได้ '
-            'จึงเลือกผู้ชนะเฉพาะในรอบล่าสุดของแต่ละชุดข้อมูล แสดงผลรอบเก่าเป็นแถวที่ติดป้ายไว้ และไม่เทียบ base/adj ข้ามรอบ</p>')
+def winner_map(runs):
+    winners = {}
+    for dataset in DATASETS:
+        # Never rank across generations: only the newest generation present for the dataset competes.
+        latest = latest_generation(runs, dataset)
+        eligible = [r for r in runs if r['dataset'] == dataset and metric(r) is not None and r['generation'] == latest]
+        winners[dataset] = min(eligible, key=metric) if eligible else None
+    return winners
 
 
 def cv_text(run):
@@ -693,8 +689,7 @@ def latest_results(runs):
         for r in group:
             parts.append(f'<details><summary>{esc(r["model"])} / {esc(r["variant"])} · ผลครบทั้ง 5 folds</summary>'
                          + cv_fold_table(r) + '</details>')
-    parts.append('<p class="muted">ผลรอบเก่าและการทดลองอื่นอยู่ใน <a href="#results">ตารางทั้ง 12 งาน</a> '
-                 'แยกป้ายรอบไว้เพื่อไม่เทียบข้อมูลและวิธีเลือกโมเดลคนละรอบ</p></section>')
+    parts.append('<p class="muted">ผลรอบเก่าแยกไว้ในเมนู "ผลรอบเก่า" ด้านบน เพื่อไม่เทียบข้อมูลและวิธีเลือกโมเดลคนละรอบ</p></section>')
     return ''.join(parts)
 
 
@@ -710,27 +705,40 @@ def figure(run, kind):
 CSS = """
 :root{color-scheme:light dark;--bg:#f4f6f8;--card:#fff;--ink:#172c3b;--muted:#526572;--line:#d5dfe5;--accent:#006a64;--best:#e0f4e9;--warn:#8d410b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,-apple-system,'Tahoma',sans-serif}main{max-width:1120px;margin:auto;padding:24px 16px 64px}header{padding:16px 0 24px}h1{font-size:clamp(1.8rem,5vw,2.7rem);line-height:1.3;letter-spacing:-.03em}h2{font-size:1.45rem;line-height:1.5;margin:0 0 16px}h3{font-size:1.12rem}p{margin:10px 0}a{color:var(--accent);text-underline-offset:3px}nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}nav a{padding:6px 12px;border:1px solid var(--line);border-radius:20px;text-decoration:none;font-size:.9rem}section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;scroll-margin-top:12px}.muted,figcaption{color:var(--muted);font-size:.88rem}.eyebrow{color:var(--accent);font-weight:700;letter-spacing:.1em}.cards,.plots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{padding:18px;border:1px solid var(--line);border-radius:12px;min-width:0}.value{font-size:1.8rem;font-weight:750;color:var(--accent)}.note{border-left:4px solid var(--accent);padding:8px 14px;background:var(--bg)}.table-wrap{max-width:100%;overflow:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:.9rem}th,td{padding:10px 12px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}th{background:var(--bg);font-weight:650}th:first-child,td:first-child{text-align:left}tr:last-child td{border-bottom:0}.best{background:var(--best);font-weight:700}details{border-top:1px solid var(--line);padding:12px 0}summary{cursor:pointer;font-weight:650;overflow-wrap:anywhere}figure{margin:8px 0;min-width:0}img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#fff}figcaption{margin:6px 0;overflow-wrap:anywhere}ul{padding-left:22px}li{margin:7px 0;overflow-wrap:anywhere}.pass{color:var(--accent)}.warn{color:var(--warn)}code{overflow-wrap:anywhere}footer{padding:14px 0;color:var(--muted)}
-@media(max-width:600px){main{padding:12px 10px 40px}section{padding:16px 12px;border-radius:12px}.cards,.plots{grid-template-columns:1fr}th,td{padding:9px}.value{font-size:1.5rem}h2{font-size:1.25rem}}
+@media(max-width:600px){main{padding:12px 16px 40px}section{padding:16px 12px;border-radius:12px}.cards,.plots{grid-template-columns:1fr}th,td{padding:9px}.value{font-size:1.5rem}h2{font-size:1.25rem}}
 @media(prefers-color-scheme:dark){:root{--bg:#101a23;--card:#182630;--ink:#e0ecf3;--muted:#a4b8c5;--line:#344957;--accent:#73d7c4;--best:#173e35;--warn:#ffbf85}}
 #parameters table{table-layout:fixed;min-width:740px}#parameters th,#parameters td{text-align:left;white-space:normal;overflow-wrap:anywhere;vertical-align:top}#parameters th:nth-child(1){width:19%}#parameters th:nth-child(2){width:20%}#parameters th:nth-child(3){width:27%}#parameters th:nth-child(4){width:34%}
 """
 
 
-def render(runs, missing):
-    winners = {}
-    for dataset in DATASETS:
-        # Never rank across generations: only the newest generation present for the dataset competes.
-        latest = latest_generation(runs, dataset)
-        eligible = [r for r in runs if r['dataset'] == dataset and metric(r) is not None and r['generation'] == latest]
-        winners[dataset] = min(eligible, key=metric) if eligible else None
+def render(all_runs, missing, old=False):
+    """One page: the new-generation runs (index.html) or every other run (old.html)."""
+    runs = [r for r in all_runs if (not is_new(r)) == old]
+    n_old = sum(not is_new(r) for r in all_runs)
+    winners = {d: w for d, w in winner_map(runs).items() if any(r['dataset'] == d for r in runs)}
+    title = 'ผลรอบเก่า · ผลการฝึกโมเดลราคารถ v5' if old else 'ผลการฝึกโมเดลราคารถ · v5'
+    desc = (f'ผลรอบเก่า {len(runs)} งาน (ข้อมูลรุ่นเก่า กฎ 1-SE) จาก output ที่บันทึกไว้' if old
+            else f'ผลฝึกโมเดลราคารถ v5 รอบล่าสุด {len(runs)} งาน (DT / RF / XGB) จาก output ที่บันทึกไว้')
     parts = ['<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">',
-             '<meta name="description" content="ผลฝึกโมเดลราคารถ v5 จาก output ที่บันทึกไว้ 12 งาน"><title>ผลการฝึกโมเดลราคารถ · v5</title>',
-             '<style>' + CSS + '</style></head><body><main><header><p class="eyebrow">TRAINING RESULTS / V5</p><h1>ผลการฝึกโมเดลราคารถ</h1>',
-             '<p>12 การทดลอง · DT / RF / XGB · 2 ชุดข้อมูล · base และ adj</p><p class="muted">อ่านจาก output ที่บันทึกไว้เท่านั้น ไม่มีการฝึกหรือรัน notebook ใหม่ · หน่วยเงิน: บาท</p>' + generation_note(runs) + '<nav aria-label="สารบัญ">']
-    sections = [('latest-results', 'รอบใหม่ / 5-fold CV'), ('summary', 'สรุปสั้น'), ('data', 'ข้อมูลที่ใช้'), ('results', 'ผลทั้ง 12 งาน'), ('parameters', 'พารามิเตอร์ของแต่ละไฟล์'), ('adjustment', 'ผลการปรับ'),
-                ('importance', 'ความสำคัญตัวแปร'), ('overfit', 'Overfit'), ('learning', 'Learning curves'), ('runtime', 'เวลารัน')]
+             f'<meta name="description" content="{esc(desc)}"><title>{esc(title)}</title>',
+             '<style>' + CSS + '</style></head><body><main><header>']
+    if old:
+        parts.append(f'<p class="eyebrow">TRAINING RESULTS / V5 / OLD</p><h1>ผลรอบเก่า</h1><p>{len(runs)} งาน · DT / RF / XGB · base และ adj</p>')
+        parts.append('<p class="muted">อ่านจาก output ที่บันทึกไว้เท่านั้น ไม่มีการฝึกหรือรัน notebook ใหม่ · หน่วยเงิน: บาท</p>' + old_note(runs) + '<nav aria-label="สารบัญ"><a href="index.html">หน้าหลัก (ผลรอบใหม่)</a>')
+        sections = [('summary', 'สรุปสั้น'), ('data', 'ข้อมูลที่ใช้'), ('results', f'ผลทั้ง {len(runs)} งาน'), ('parameters', 'พารามิเตอร์ของแต่ละไฟล์'), ('adjustment', 'ผลการปรับ'),
+                    ('importance', 'ความสำคัญตัวแปร'), ('overfit', 'Overfit'), ('learning', 'Learning curves'), ('runtime', 'เวลารัน')]
+    else:
+        rows_new = ' / '.join(fmt(v) for v in sorted({r['data'].get('rows') for r in runs} - {None}))
+        parts.append(f'<p class="eyebrow">TRAINING RESULTS / V5</p><h1>ผลการฝึกโมเดลราคารถ</h1><p>ผลรอบล่าสุด · {len(runs)} งาน · DT / RF / XGB บน merge50minC · {rows_new} แถว · ผู้ชนะ = CV MAE ต่ำสุด</p>')
+        parts.append('<p class="muted">อ่านจาก output ที่บันทึกไว้เท่านั้น ไม่มีการฝึกหรือรัน notebook ใหม่ · หน่วยเงิน: บาท</p>')
+        parts.append('<p>DT เลือก <code>ccp_alpha</code> จากทุก alpha บน pruning path ร่วมกับ grid ด้วย 5-fold CV; XGB เลือกจำนวนรอบด้วย early stopping ต่อ fold ซึ่งทำให้ CV MAE ของ XGB อาจต่ำกว่าความจริงเล็กน้อย (แถวตรวจเป็นตัวกำหนดจุดหยุด) '
+                     f'ผลรอบเก่า {n_old} งานแยกไว้ในเมนู "ผลรอบเก่า ({n_old} งาน)" ด้านล่าง</p><nav aria-label="สารบัญ">')
+        sections = [('latest-results', 'รอบใหม่ / 5-fold CV'), ('summary', 'สรุปสั้น'), ('data', 'ข้อมูลที่ใช้'), ('results', f'ผลทั้ง {len(runs)} งาน'), ('parameters', 'พารามิเตอร์ของแต่ละไฟล์'),
+                    ('importance', 'ความสำคัญตัวแปร'), ('overfit', 'Overfit'), ('learning', 'Learning curves'), ('runtime', 'เวลารัน')]
     parts.extend(f'<a href="#{key}">{name}</a>' for key, name in sections)
-    parts.append('</nav></header>' + latest_results(runs))
+    if not old:
+        parts.append(f'<a href="old.html">ผลรอบเก่า ({n_old} งาน)</a>')
+    parts.append('</nav></header>' + ('' if old else latest_results(runs)))
     parts.append('<section id="summary"><h2>1. สรุปสั้น</h2><div class="cards">')
     for dataset, winner in winners.items():
         parts.append(f'<article class="card"><h3>{dataset}</h3>')
@@ -741,19 +749,16 @@ def render(runs, missing):
             parts.append('<p>ตัวแปรสำคัญ 3 อันดับของโมเดลนี้: ' + esc(' → '.join(top) or MISSING) + '</p>')
         else:
             parts.append(f'<p>{MISSING}</p>')
-        pairs = [(m, metric(b) if b else None, metric(a) if a else None, comparable(b, a)) for m, b, a in adjustment_pairs(runs, dataset)]
-        helped = [m for m, b, a, ok in pairs if ok and b is not None and a is not None and a < b]
-        worse = [m for m, b, a, ok in pairs if ok and b is not None and a is not None and a >= b]
-        if any(ok for *_, ok in pairs):
-            parts.append(f'<p>adj ลด test MAE: {esc(", ".join(helped) or "ไม่มี")}; ไม่ลด: {esc(", ".join(worse) or "ไม่มี")}</p>')
-        else:
-            parts.append('<p>adj: เทียบกับ base ไม่ได้ เพราะคนละรอบ</p>')
-        if any(is_new(r) for r in runs if r['dataset'] == dataset) and any(r['generation'] == OLD for r in runs if r['dataset'] == dataset):
-            parts.append(f'<p class="muted">{esc(old_label(runs, dataset))}</p>')
-        elif winner and winner['generation'] == OLD:
-            parts.append(f'<p class="muted">{esc(old_label(runs, dataset))} (ยังไม่มีผลรอบใหม่ของชุดนี้)</p>')
+        if old:
+            pairs = [(m, metric(b) if b else None, metric(a) if a else None, comparable(b, a)) for m, b, a in adjustment_pairs(runs, dataset)]
+            helped = [m for m, b, a, ok in pairs if ok and b is not None and a is not None and a < b]
+            worse = [m for m, b, a, ok in pairs if ok and b is not None and a is not None and a >= b]
+            if any(ok for *_, ok in pairs):
+                parts.append(f'<p>adj ลด test MAE: {esc(", ".join(helped) or "ไม่มี")}; ไม่ลด: {esc(", ".join(worse) or "ไม่มี")}</p>')
+            else:
+                parts.append('<p>adj: เทียบกับ base ไม่ได้ เพราะไม่มี base ของชุดนี้ในรอบเดียวกัน</p>')
         parts.append('</article>')
-    parts.append('</div><p class="muted">เลือกผู้ชนะจาก test MAE ภายในรอบล่าสุดของแต่ละชุดข้อมูล เป็นการสรุปเชิงพรรณนา ไม่ใช่หลักฐานยืนยันผลบนข้อมูลใหม่ ความสำคัญแบบ permutation วัด MAE ที่เพิ่มขึ้นเมื่อสลับตัวแปร ไม่ได้บอกเหตุและผล</p></section>')
+    parts.append('</div><p class="muted">เลือกผู้ชนะจาก test MAE ภายใน' + ('ผลรอบเก่าของแต่ละชุดข้อมูล' if old else 'รอบล่าสุด') + ' เป็นการสรุปเชิงพรรณนา ไม่ใช่หลักฐานยืนยันผลบนข้อมูลใหม่ ความสำคัญแบบ permutation วัด MAE ที่เพิ่มขึ้นเมื่อสลับตัวแปร ไม่ได้บอกเหตุและผล</p></section>')
     parts.append('<section id="data"><h2>2. ข้อมูลที่ใช้</h2>')
     rows = []
     for dataset in DATASETS:
@@ -763,27 +768,35 @@ def render(runs, missing):
             splits = {s['ชุด']: s['แถว'] for s in data.get('split', [])}
             rows.append([dataset, gen_label(group[0]), fmt(data.get('rows')), fmt(data.get('models')), *(fmt(splits.get(k)) for k in ('train', 'validation', 'test'))])
     parts.append(table(['ชุดข้อมูล', 'รอบ', 'แถว', 'รุ่น (brand|model)', 'Train', 'Validation', 'Test'], rows))
-    parts.append('<ul><li><strong>merge50minC / merge_50min_clean</strong>: ทำความสะอาดด้วยการลบแถวเท่านั้น ไม่รวมชื่อรุ่น; แบ่งแบบ stratify ตาม brand|model</li><li><strong>new_cardb</strong>: กฎ v3 กรองอายุรถและรวมชื่อรุ่นที่สะกดต่างกัน; forced-train บังคับ 1 แถวต่อ brand|model เข้า train ก่อนสุ่มเติมโควตาและแบ่ง validation/test</li><li>ทั้งสองชุดใช้ car_age แทน year และตัด color; เป้าหมายคือ price และใช้ 8 ตัวแปร</li></ul>')
-    if any(is_new(r) and r['dataset'] == 'merge50minC' for r in runs):
-        rows_new = next(r['data'].get('rows') for r in runs if is_new(r) and r['dataset'] == 'merge50minC')
-        parts.append(f'<p class="note"><strong>ข้อมูลรอบใหม่ของ merge50minC:</strong> {fmt(rows_new)} แถว ({old_label(runs, "merge50minC")}); ไฟล์ข้อมูลถูกทำความสะอาดใหม่ระหว่างสองรอบ และรอบใหม่ไม่ตรวจ sha256 ของไฟล์ข้อมูลแล้ว จึงยืนยันตัวไฟล์ด้วยแฮชไม่ได้</p>')
-    parts.append('<p class="note"><strong>เทียบภายในชุดข้อมูลก่อน:</strong> สองชุดใช้แถว test คนละชุดและวิธีแบ่งต่างกัน ค่า error ข้ามชุดจึงไม่ใช่การแข่งบนข้อสอบเดียวกัน</p></section>')
-    parts.append('<section id="results"><h2>3. ผลหลักทั้ง 12 งาน</h2><p class="muted">เลื่อนตารางแนวนอนได้ · แถวสีเน้น = test MAE ต่ำสุดในรอบล่าสุดของชุดข้อมูล (ไม่จัดอันดับข้ามรอบ) · CV คือ validation MAE / RMSE / MAPE ของโมเดลที่เลือก บน 5 folds ใน train; mean ± SD อ่านจากตารางที่พิมพ์ (MAE/RMSE ปัดเป็นบาท, MAPE 4 ทศนิยมของสัดส่วน) · CV RMSE/MAPE มีเฉพาะรอบใหม่ รอบเก่าแสดง ไม่พบในผลรัน</p>')
+    merge_li = '<li><strong>merge50minC / merge_50min_clean</strong>: ทำความสะอาดด้วยการลบแถวเท่านั้น ไม่รวมชื่อรุ่น; แบ่งแบบ stratify ตาม brand|model</li>'
+    cardb_li = '<li><strong>new_cardb</strong>: กฎ v3 กรองอายุรถและรวมชื่อรุ่นที่สะกดต่างกัน; forced-train บังคับ 1 แถวต่อ brand|model เข้า train ก่อนสุ่มเติมโควตาและแบ่ง validation/test</li>'
+    parts.append('<ul>' + (merge_li + cardb_li if old else merge_li) + f'<li>{"ทั้งสองชุด" if old else "ชุดนี้"}ใช้ car_age แทน year และตัด color; เป้าหมายคือ price และใช้ 8 ตัวแปร</li></ul>')
+    if old:
+        parts.append('<p class="note"><strong>เทียบภายในชุดข้อมูลก่อน:</strong> สองชุดใช้แถว test คนละชุดและวิธีแบ่งต่างกัน ค่า error ข้ามชุดจึงไม่ใช่การแข่งบนข้อสอบเดียวกัน</p></section>')
+    else:
+        parts.append('<p class="note"><strong>ข้อมูลรอบใหม่:</strong> ใช้ merge_50min_clean จำนวน 46,074 แถว เทียบกับ 47,001 แถวของรอบก่อน ถูกลบออก 927 แถวใน 3 ขั้นตอน คือ แถวที่เครื่องยนต์เกิน 3,500 cc จำนวน 2 แถว, แถวจากการตรวจรอบแรก 305 แถว และแถวที่ถูกระบุว่าผิดปกติ 620 แถว ส่วน sha256 ของไฟล์ข้อมูลไม่ได้ตรวจแล้ว</p></section>')
+    if old:
+        intro = 'เลื่อนตารางแนวนอนได้ · แถวสีเน้น = test MAE ต่ำสุดของแต่ละชุดข้อมูลในผลรอบเก่า (ไม่จัดอันดับร่วมกับรอบใหม่) · CV คือ validation MAE ของโมเดลที่เลือก บน 5 folds ใน train; mean ± SD อ่านจากตารางที่พิมพ์ (ปัดเป็นบาท) · CV RMSE/MAPE ไม่พบในผลรันของรอบเก่า'
+    else:
+        intro = 'เลื่อนตารางแนวนอนได้ · แถวสีเน้น = test MAE ต่ำสุด · CV คือ validation MAE / RMSE / MAPE ของโมเดลที่เลือก บน 5 folds ใน train; mean ± SD อ่านจากตารางที่พิมพ์ (MAE/RMSE ปัดเป็นบาท, MAPE 4 ทศนิยมของสัดส่วน)'
+    parts.append(f'<section id="results"><h2>3. ผลหลักทั้ง {len(runs)} งาน</h2><p class="muted">{intro}</p>')
     main_rows = [[r['model'], r['dataset'], r['variant'], gen_label(r), fmt(metric(r, 'R2'), 4), fmt(metric(r, 'RMSE')),
                   fmt(metric(r)), pct(metric(r, 'MAPE'), True), cv_text(r), cv_extra_text(r, 'rmse'), cv_extra_text(r, 'mape')] for r in runs]
     parts.append(table(['โมเดล', 'ชุดข้อมูล', 'แบบ', 'รอบ', 'Test R²', 'RMSE (บาท)', 'MAE (บาท)', 'MAPE', 'CV MAE ± SD (บาท)', 'CV RMSE ± SD (บาท)', 'CV MAPE ± SD'], main_rows,
                        [i for i, r in enumerate(runs) if winners[r['dataset']] is r]))
-    parts.append('<p class="muted">ผลรอบเก่าแสดงไว้เพื่อดูประกอบเท่านั้น: ' + esc(' · '.join(old_label(runs, d) for d in DATASETS if any(r['generation'] == OLD for r in runs if r['dataset'] == d))) + '</p>')
     if any(is_new(r) and r['model'] == 'XGB' for r in runs):
         parts.append('<p class="note">ข้อควรระวังของ XGB รอบใหม่: จำนวนรอบเลือกด้วย early stopping บนแถวตรวจของแต่ละ fold ดังนั้น CV MAE ของ XGB อาจต่ำกว่าความจริงเล็กน้อย (แถวตรวจเป็นตัวกำหนดจุดหยุด) ส่วน test MAE ไม่ได้ใช้ตัดสินจุดหยุด</p>')
     parts.append('<p><a href="results.json">ดาวน์โหลดตัวเลขทั้งหมด (JSON)</a> รวม train / validation / test, best params, CV และ importance</p></section>')
-    parts.append('<section id="parameters"><h2>พารามิเตอร์ของแต่ละไฟล์</h2><p>ค่าของโมเดลสุดท้ายจาก RESULT_JSON หรือสรุปผู้ชนะของแต่ละไฟล์ (รอบเก่าอ่านจากสรุปกฎ 1-SE); ค่าคงที่อ่านจาก source และค่าที่ไม่ได้ระบุอ่านจาก get_params() ของไลบรารีที่ติดตั้งขณะสร้างรายงาน โดยไม่ฝึกโมเดล</p>')
-    if any(is_new(r) for r in runs):
+    parts.append('<section id="parameters"><h2>พารามิเตอร์ของแต่ละไฟล์</h2><p>ค่าของโมเดลสุดท้ายจาก RESULT_JSON หรือสรุปผู้ชนะของแต่ละไฟล์' + (' (อ่านจากสรุปกฎ 1-SE)' if old else '') + '; ค่าคงที่อ่านจาก source และค่าที่ไม่ได้ระบุอ่านจาก get_params() ของไลบรารีที่ติดตั้งขณะสร้างรายงาน โดยไม่ฝึกโมเดล</p>')
+    if not old:
         parts.append('<p class="note">รอบใหม่: ที่มาของค่าที่ปรับคือ <strong>GridSearchCV, ผู้ชนะ = CV MAE ต่ำสุด (refit=MAE)</strong> ผู้ชนะคือชุดที่ mean CV MAE ต่ำสุด เสมอกันเลือกชุดแรก ไม่มีเกณฑ์จำนวนใบ · DT <code>ccp_alpha</code>: ' + ALPHA_SOURCE + ' (ไม่มีรายการ alpha ตายตัวหรือกฎจำกัดจำนวน alpha) · XGB <code>n_estimators</code>: ' + ES_SOURCE + ' (เพดาน 1,000 รอบ หยุดเมื่อ MAE บนแถวตรวจไม่ดีขึ้น 50 รอบ; XGB รอบใหม่ใช้โค้ดค้นเองที่ทำงานเหมือน GridSearchCV แต่ไม่ได้เรียก GridSearchCV)</p>')
-    if any(r['generation'] == OLD for r in runs):
-        parts.append('<p class="muted">เฉพาะไฟล์รอบเก่า (ป้ายรอบเก่า) ใช้ข้อความต่อไปนี้</p>')
-    parts.append('<p class="note">ที่มา (รอบเก่า): <strong>GridSearchCV + กฎ 1-SE</strong> คือค้นในช่วงที่ระบุแล้วเลือกชุดที่ใบน้อยที่สุดเมื่อ CV MAE ไม่เกินค่าต่ำสุด + SD/√จำนวน fold (SD แบบ ddof=0); เสมอกันเลือก CV MAE ต่ำกว่าแล้ว index ต่ำกว่า · DT นับใบบน train ทั้งชุด ส่วน RF/XGB ใช้ค่าเฉลี่ยใบรวมใน CV; กฎนี้เป็น heuristic ไม่ใช่หลักฐานว่าผลเท่ากันทางสถิติ</p>')
-    parts.append('<p><strong>เลือกจาก ccp path</strong> (DT รอบเก่า): สร้างตัวเลือก alpha จาก train แล้วคัดเพื่อนบ้านด้วย CV ก่อนเข้า grid; ช่วง alpha อ่านจากผลพิมพ์ 4 หลักนัยสำคัญ แต่ค่าผู้ชนะเก็บความละเอียดจาก JSON · <strong>กราฟ OOB / MAE รายรอบ</strong>: ใช้เป็นที่มาเฉพาะเมื่อโค้ดระบุว่าตรึงจำนวนต้นจากกราฟ (RF ระบุ OOB; XGB ค้นจำนวนรอบใน grid และกราฟรายรอบใช้ตรวจภายหลัง) · <strong>กำหนดคงที่ในโค้ด</strong>: ส่งค่าเอง แม้เท่ากับ default · <strong>ค่าเริ่มต้นของไลบรารี</strong>: ไม่ส่งค่าเอง ระบุเวอร์ชันที่ติดตั้งขณะสร้างรายงาน ซึ่งไม่ใช่การยืนยันเวอร์ชันขณะฝึก; XGB None หมายถึงไม่ได้ระบุใน wrapper และ NaN คือค่าข้อมูลสูญหาย</p><p class="muted">เรียงค่าที่ค้นหา → ค่าคงที่ → ค่าเริ่มต้น; ค่าที่ไม่มีหลักฐานแสดงว่า ไม่พบในผลรัน และอยู่ในรายการที่ขาด · ตารางเลื่อนแนวนอนได้บนจอเล็ก</p>')
+    if old:
+        parts.append('<p class="note">ที่มา (รอบเก่า): <strong>GridSearchCV + กฎ 1-SE</strong> คือค้นในช่วงที่ระบุแล้วเลือกชุดที่ใบน้อยที่สุดเมื่อ CV MAE ไม่เกินค่าต่ำสุด + SD/√จำนวน fold (SD แบบ ddof=0); เสมอกันเลือก CV MAE ต่ำกว่าแล้ว index ต่ำกว่า · DT นับใบบน train ทั้งชุด ส่วน RF/XGB ใช้ค่าเฉลี่ยใบรวมใน CV; กฎนี้เป็น heuristic ไม่ใช่หลักฐานว่าผลเท่ากันทางสถิติ</p>')
+    if old:
+        parts.append('<p><strong>เลือกจาก ccp path</strong> (DT รอบเก่า): สร้างตัวเลือก alpha จาก train แล้วคัดเพื่อนบ้านด้วย CV ก่อนเข้า grid; ช่วง alpha อ่านจากผลพิมพ์ 4 หลักนัยสำคัญ แต่ค่าผู้ชนะเก็บความละเอียดจาก JSON · <strong>กราฟ OOB / MAE รายรอบ</strong>: ใช้เป็นที่มาเฉพาะเมื่อโค้ดระบุว่าตรึงจำนวนต้นจากกราฟ (RF ระบุ OOB; XGB ค้นจำนวนรอบใน grid และกราฟรายรอบใช้ตรวจภายหลัง) · <strong>กำหนดคงที่ในโค้ด</strong>: ส่งค่าเอง แม้เท่ากับ default · <strong>ค่าเริ่มต้นของไลบรารี</strong>: ไม่ส่งค่าเอง ระบุเวอร์ชันที่ติดตั้งขณะสร้างรายงาน ซึ่งไม่ใช่การยืนยันเวอร์ชันขณะฝึก; XGB None หมายถึงไม่ได้ระบุใน wrapper และ NaN คือค่าข้อมูลสูญหาย</p>')
+    else:
+        parts.append('<p><strong>กราฟ OOB</strong>: ใช้เป็นที่มาเฉพาะเมื่อโค้ดระบุว่าตรึงจำนวนต้นจากกราฟ · <strong>กำหนดคงที่ในโค้ด</strong>: ส่งค่าเอง แม้เท่ากับ default · <strong>ค่าเริ่มต้นของไลบรารี</strong>: ไม่ส่งค่าเอง ระบุเวอร์ชันที่ติดตั้งขณะสร้างรายงาน ซึ่งไม่ใช่การยืนยันเวอร์ชันขณะฝึก; XGB None หมายถึงไม่ได้ระบุใน wrapper และ NaN คือค่าข้อมูลสูญหาย</p>')
+    parts.append('<p class="muted">เรียงค่าที่ค้นหา → ค่าคงที่ → ค่าเริ่มต้น; ค่าที่ไม่มีหลักฐานแสดงว่า ไม่พบในผลรัน และอยู่ในรายการที่ขาด · ตารางเลื่อนแนวนอนได้บนจอเล็ก</p>')
     for model in MODELS:
         parts.append(f'<h3>{model}</h3>')
         for run in runs:
@@ -794,35 +807,37 @@ def render(runs, missing):
             parts.append(table(['พารามิเตอร์', 'ค่าที่ใช้', 'ที่มา', 'คำอธิบาย'], rows) if rows else f'<p>{PARAM_MISSING}</p>')
             parts.append('</details>')
     parts.append('</section>')
-    parts.append('<section id="adjustment"><h2>4. ผลของการปรับข้อมูล</h2><p>adj = scale ตัวแปรตัวเลข + log ราคา แล้วแปลงกลับเป็นบาทเมื่อวัดผล · Δ = adj − base; ค่าติดลบแปลว่าความคลาดเคลื่อนลดลง</p>')
-    changes = []
-    for dataset in DATASETS:
-        for model, b_run, a_run in adjustment_pairs(runs, dataset):
-            base, adj = (metric(b_run) if b_run else None), (metric(a_run) if a_run else None)
-            ok = comparable(b_run, a_run)
-            delta = adj - base if ok and base is not None and adj is not None else None
-            changes.append([model, dataset, ' / '.join(gen_label(x) if x else MISSING for x in (b_run, a_run)), fmt(base), fmt(adj),
-                            fmt(delta) if ok else 'เทียบไม่ได้ (คนละรอบ)', pct(delta / base * 100) if delta is not None and base else ('เทียบไม่ได้' if not ok else MISSING)])
-    parts.append(table(['โมเดล', 'ชุดข้อมูล', 'รอบ base / adj', 'Base MAE', 'Adj MAE', 'Δ บาท', 'Δ %'], changes))
-    parts.append('<p class="note">Ablation ด้านล่างตรึงพารามิเตอร์ที่ปรับสำหรับ both ไม่ได้ค้นหาพารามิเตอร์ใหม่ให้แต่ละแบบ ดังนั้น none ใน ablation อาจไม่เท่ากับ base ด้านบน · scale only = scale ตัวเลข; log only = log ราคา</p>')
-    for r in runs:
-        if r['variant'] != 'adj':
-            continue
-        parts.append(f'<details><summary>{esc(label(r))} · ablation 4 แบบ</summary>')
-        if r['ablation']:
-            headers = list(r['ablation'][0])
-            rows = []
-            for item in r['ablation']:
-                row = []
-                for key in headers:
-                    v = item.get(key)
-                    row.append(v if key == 'variant' else pct(v, True) if key == 'test MAPE' else pct(v) if '(%)' in key else fmt(v, 4) if key == 'test R2' else fmt(v))
-                rows.append(row)
-            parts.append(table(headers, rows))
-        else:
-            parts.append(f'<p>{MISSING}</p>')
-        parts.append('</details>')
-    parts.append('</section><section id="importance"><h2>5. ความสำคัญของตัวแปร</h2><p>Permutation: MAE บน test ที่เพิ่มขึ้น (บาท), mean ± std จากการสลับ 10 รอบ; ค่าสูงแปลว่าโมเดลพึ่งตัวแปรนั้นมาก · Model-based: สัดส่วน impurity (DT/RF) หรือ gain (XGB) รวม dummy กลับเป็นตัวแปรเดิม แต่ละวิธีใช้คนละสเกลและอาจให้อันดับต่างกัน</p>')
+    if old:
+        parts.append('<section id="adjustment"><h2>4. ผลของการปรับข้อมูล</h2><p>adj = scale ตัวแปรตัวเลข + log ราคา แล้วแปลงกลับเป็นบาทเมื่อวัดผล · Δ = adj − base; ค่าติดลบแปลว่าความคลาดเคลื่อนลดลง</p>')
+        changes = []
+        for dataset in DATASETS:
+            for model, b_run, a_run in adjustment_pairs(runs, dataset):
+                base, adj = (metric(b_run) if b_run else None), (metric(a_run) if a_run else None)
+                ok = comparable(b_run, a_run)
+                delta = adj - base if ok and base is not None and adj is not None else None
+                changes.append([model, dataset, ' / '.join(gen_label(x) if x else MISSING for x in (b_run, a_run)), fmt(base), fmt(adj),
+                                fmt(delta) if ok else 'เทียบไม่ได้ (คนละรอบ)', pct(delta / base * 100) if delta is not None and base else ('เทียบไม่ได้' if not ok else MISSING)])
+        parts.append(table(['โมเดล', 'ชุดข้อมูล', 'รอบ base / adj', 'Base MAE', 'Adj MAE', 'Δ บาท', 'Δ %'], changes))
+        parts.append('<p class="note">Ablation ด้านล่างตรึงพารามิเตอร์ที่ปรับสำหรับ both ไม่ได้ค้นหาพารามิเตอร์ใหม่ให้แต่ละแบบ ดังนั้น none ใน ablation อาจไม่เท่ากับ base ด้านบน · scale only = scale ตัวเลข; log only = log ราคา</p>')
+        for r in runs:
+            if r['variant'] != 'adj':
+                continue
+            parts.append(f'<details><summary>{esc(label(r))} · ablation 4 แบบ</summary>')
+            if r['ablation']:
+                headers = list(r['ablation'][0])
+                rows = []
+                for item in r['ablation']:
+                    row = []
+                    for key in headers:
+                        v = item.get(key)
+                        row.append(v if key == 'variant' else pct(v, True) if key == 'test MAPE' else pct(v) if '(%)' in key else fmt(v, 4) if key == 'test R2' else fmt(v))
+                    rows.append(row)
+                parts.append(table(headers, rows))
+            else:
+                parts.append(f'<p>{MISSING}</p>')
+            parts.append('</details>')
+    parts.append('</section>' if old else '')
+    parts.append('<section id="importance"><h2>5. ความสำคัญของตัวแปร</h2><p>Permutation: MAE บน test ที่เพิ่มขึ้น (บาท), mean ± std จากการสลับ 10 รอบ; ค่าสูงแปลว่าโมเดลพึ่งตัวแปรนั้นมาก · Model-based: สัดส่วน impurity (DT/RF) หรือ gain (XGB) รวม dummy กลับเป็นตัวแปรเดิม แต่ละวิธีใช้คนละสเกลและอาจให้อันดับต่างกัน</p>')
     for r in runs:
         parts.append(f'<details><summary>{esc(label(r))}</summary>')
         imp = r['importance'] or {}
@@ -858,9 +873,9 @@ def render(runs, missing):
                      duration(runtime.get('seconds')), runtime.get('status') or MISSING])
     parts.append(table(['งาน', 'เริ่ม', 'จบ', 'ระยะเวลา', 'สถานะ'], rows))
     parts.append('</section><section id="missing"><h2>รายการที่ขาด</h2>')
-    parts.append('<ul>' + ''.join(f'<li>{esc(item)}</li>' for item in missing) + '</ul>' if missing else '<p>ไม่มี · พบผลและรูปที่ต้องใช้ครบทั้ง 12 งาน</p>')
-    parts.append('</section><footer>รายงานสรุปจาก saved outputs · สร้างซ้ำด้วย make_report.py · ไม่มีข้อมูลรถรายแถวในรายงาน</footer></main></body></html>')
-    return ''.join(parts), winners, main_rows
+    parts.append('<ul>' + ''.join(f'<li>{esc(item)}</li>' for item in missing) + '</ul>' if missing else f'<p>ไม่มี · พบผลและรูปที่ต้องใช้ครบทั้ง {len(runs)} งาน</p>')
+    parts.append('</section><footer>' + ('<a href="index.html">กลับหน้าหลัก (ผลรอบใหม่)</a> · ' if old else '') + 'รายงานสรุปจาก saved outputs · สร้างซ้ำด้วย make_report.py · ไม่มีข้อมูลรถรายแถวในรายงาน</footer></main></body></html>')
+    return ''.join(parts), main_rows
 
 
 def adjustment_pairs(runs, dataset):
@@ -904,34 +919,41 @@ def main():
     # Show current runs before historical runs in every report section.
     runs.sort(key=lambda r: (not is_new(r), r['dataset'], r['variant'], MODELS.index(r['model'])))
     missing = global_missing + [r['run_id'] + ': ' + item for r in runs for item in r['missing']]
-    page, winners, main_rows = render(runs, missing)
-    payload = {'schema_version': 3, 'source': 'saved notebook outputs and static source; installed estimator defaults; no notebook execution',
+    runs_new = [r for r in runs if is_new(r)]
+    runs_old = [r for r in runs if not is_new(r)]
+    # Each page lists only the missing items of its own runs.
+    scoped = lambda group: global_missing + [r['run_id'] + ': ' + item for r in group for item in r['missing']]
+    page, main_rows = render(runs, scoped(runs_new))
+    page_old, rows_old = render(runs, scoped(runs_old), old=True)
+    winners = winner_map(runs)
+    payload = {'schema_version': 4, 'pages': {'main': 'index.html', 'old': 'old.html'},
+               'source': 'saved notebook outputs and static source; installed estimator defaults; no notebook execution',
                'cv_precision': 'mean and SD from printed fold summary; MAE/RMSE rounded to integer baht; MAPE stored as a fraction to 4 decimal places and displayed as percent',
                'generations': 'old = 1-SE selection (older data); other value = date of the standard CV-MAE-minimum generation; winners are chosen only within the latest generation of a dataset',
                'winners': {d: (w['run_id'] if w else None) for d, w in winners.items()},
                'runs': runs, 'total_seconds': sum((r['runtime'] or {}).get('seconds') or 0 for r in runs), 'missing': missing}
     encoded = json.dumps(payload, ensure_ascii=False, indent=2, allow_nan=False) + '\n'
-    readme = ['# ผลฝึกโมเดลราคารถ v5', '', 'สรุปจาก output ที่บันทึกไว้ 12 งาน (DT / RF / XGB × 2 ชุดข้อมูล × base / adj) เลือกผู้ชนะด้วย test MAE ภายในรอบล่าสุดของแต่ละชุดข้อมูล', '',
-              '| ชุดข้อมูล | ผู้ชนะ | รอบ | Test MAE (บาท) | Test R² |', '|---|---|---|---:|---:|']
-    for dataset, winner in winners.items():
-        readme.append(f'| {dataset} | {winner["model"] + " / " + winner["variant"] if winner else MISSING} | {gen_label(winner) if winner else MISSING} | {fmt(metric(winner)) if winner else MISSING} | {fmt(metric(winner, "R2"), 4) if winner else MISSING} |')
-    n_new = sum(is_new(r) for r in runs)
-    n_old = sum(r['generation'] == OLD for r in runs)
-    if n_new and n_old:
-        readme.extend(['', f'ผลสองรอบปนกัน: {n_new} งานเป็นรอบใหม่ (ผู้ชนะ = CV MAE ต่ำสุด) และ {n_old} งานเป็นรอบเก่า (เลือกด้วยกฎ 1-SE) ซึ่งใช้ข้อมูลต่างกัน '
-                       + ' · '.join(old_label(runs, d) for d in DATASETS if any(r['generation'] == OLD for r in runs if r['dataset'] == d))
-                       + ' · ไม่เทียบ base/adj ข้ามรอบ'])
+    best = {d: w for d, w in winner_map(runs_new).items() if w}
+    readme = ['# ผลฝึกโมเดลราคารถ v5', '',
+              f'ผลรอบล่าสุด {len(runs_new)} งาน (DT / RF / XGB บน merge50minC, ผู้ชนะ = CV MAE ต่ำสุด) จาก output ที่บันทึกไว้', '',
+              '| โมเดล / แบบ | ชุดข้อมูล | Test MAE (บาท) | Test R² | CV MAE ± SD (บาท) |', '|---|---|---:|---:|---:|']
+    for r in runs_new:
+        readme.append(f'| {r["model"]} / {r["variant"]} | {r["dataset"]} | {fmt(metric(r))} | {fmt(metric(r, "R2"), 4)} | {cv_text(r)} |')
+    for dataset, winner in best.items():
+        readme.append('')
+        readme.append(f'ผู้ชนะของ {dataset}: **{winner["model"]} / {winner["variant"]}** (test MAE {fmt(metric(winner))} บาท)')
     readme.extend(['', f'**รายงานฉบับเต็ม:** [docs/index.html](docs/index.html) · [GitHub Pages]({PAGES_URL})', '',
+                   f'ผลรอบเก่า {len(runs_old)} งาน (ข้อมูลรุ่นเก่า, กฎ 1-SE, เทียบกับรอบใหม่ไม่ได้): [docs/old.html](docs/old.html)', '',
                    '[ผลรันรอบใหม่และ MAE / RMSE / MAPE ของ 5-fold CV](docs/index.html#latest-results)', '',
                    'ค่าพารามิเตอร์ทั้งหมดและที่มารายไฟล์: [พารามิเตอร์ของแต่ละไฟล์](docs/index.html#parameters)', '',
-                   'สองชุดใช้แถว test ต่างกัน ควรเทียบภายในชุดก่อน รายงานมีผลการปรับข้อมูล, ablation, importance, overfit, learning curves และเวลารัน', '',
                    'สร้างซ้ำจากโฟลเดอร์นี้: `python -X utf8 make_report.py` (อ่าน saved outputs/source และ defaults จาก sklearn/xgboost ที่ติดตั้ง ไม่รัน notebook)', '',
                    'เผยแพร่ GitHub Pages จาก branch `main` และโฟลเดอร์ `/docs`', ''])
     readme = '\n'.join(readme)
-    for name, content in [('index.html', page), ('results.json', encoded), ('README.md', readme)]:
+    for name, content in [('index.html', page), ('old.html', page_old), ('results.json', encoded), ('README.md', readme)]:
         if FORBIDDEN.search(content.replace(PAGES_URL, '')):
             raise ValueError('public output safety check failed: ' + name)
     (OUT / 'index.html').write_text(page, encoding='utf-8')
+    (OUT / 'old.html').write_text(page_old, encoding='utf-8')
     (OUT / 'results.json').write_text(encoded, encoding='utf-8')
     (ROOT / 'README.md').write_text(readme, encoding='utf-8')
     # Remove only stale plots owned by this generator, never unrelated files.
@@ -944,7 +966,7 @@ def main():
         raise ValueError('docs must be smaller than 15 MB')
     print(f'Created report: {len(runs)} runs, {len(used)} figures, {size:,} bytes; missing items: {len(missing)}')
     print('Model | Dataset | Variant | Generation | Test R2 | RMSE | MAE | MAPE | CV MAE +/- SD | CV RMSE +/- SD | CV MAPE +/- SD')
-    for row in main_rows:
+    for row in main_rows + rows_old:
         print(' | '.join(map(str, row)))
 
 

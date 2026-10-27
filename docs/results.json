@@ -1,5 +1,9 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
+  "pages": {
+    "main": "index.html",
+    "old": "old.html"
+  },
   "source": "saved notebook outputs and static source; installed estimator defaults; no notebook execution",
   "cv_precision": "mean and SD from printed fold summary; MAE/RMSE rounded to integer baht; MAPE stored as a fraction to 4 decimal places and displayed as percent",
   "generations": "old = 1-SE selection (older data); other value = date of the standard CV-MAE-minimum generation; winners are chosen only within the latest generation of a dataset",
