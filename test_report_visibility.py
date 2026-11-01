@@ -14,6 +14,24 @@ class ReportVisibilityTests(unittest.TestCase):
     def setUpClass(cls):
         cls.runs = json.loads((ROOT / 'docs/results.json').read_text(encoding='utf-8'))['runs']
 
+    def test_current_report_explains_documented_cleaning_and_data_limitations(self):
+        page, _ = report.render(self.runs, [])
+        for term in ('ทำความสะอาดด้วยการลบแถวเท่านั้น', 'ไม่รวมชื่อรุ่น',
+                     'ทุกรุ่น (brand|model) มีอย่างน้อย 50 แถว',
+                     'หลังลบออก 927 แถวจากข้อมูลรอบก่อน 47,001 แถว',
+                     'เครื่องยนต์เกิน 3,500 cc จำนวน 2 แถว',
+                     'แถวจากการตรวจรอบแรก 305 แถว',
+                     'แถวที่ถูกระบุว่าผิดปกติ 620 แถว',
+                     'sha256 ของไฟล์ปัจจุบันไม่ได้ตรวจยืนยัน'):
+            self.assertIn(term, page)
+        for unsupported in ('อายุรถยนต์ 0–20 ปี', 'เลขไมล์ไม่เกิน 300,000',
+                            'ราคาไม่เกิน 2,000,000 บาท', 'CSV ไม่ได้อยู่ใน repo'):
+            self.assertNotIn(unsupported, page)
+
+    def test_old_report_does_not_claim_current_scope(self):
+        page, _ = report.render(self.runs, [], old=True)
+        self.assertNotIn('ขอบเขตการคัดข้อมูล', page)
+
     def test_both_pages_hide_validation(self):
         for old in (False, True):
             with self.subTest(old=old):
