@@ -1,12 +1,12 @@
 # ผลฝึกโมเดลราคารถ v5
 
-ผลรอบล่าสุด 3 งาน (DT / RF / XGB บน merge50minC, ผู้ชนะ = CV MAE ต่ำสุด) จาก output ที่บันทึกไว้
+ผลรอบล่าสุด 3 งาน (DT / RF / XGB บน merge50minC, ผลจากชุดทดสอบ) จาก output ที่บันทึกไว้
 
-| โมเดล / แบบ | ชุดข้อมูล | Test MAE (บาท) | Test R² | CV MAE ± SD (บาท) |
-|---|---|---:|---:|---:|
-| DT / base | merge50minC | 56,628 | 0.9319 | 57,931 ± 477 |
-| RF / base | merge50minC | 52,275 | 0.9431 | 53,323 ± 256 |
-| XGB / base | merge50minC | 51,271 | 0.9458 | 52,256 ± 533 |
+| โมเดล / แบบ | ชุดข้อมูล | Test MAE (บาท) | Test R² |
+|---|---|---:|---:|
+| DT / base | merge50minC | 56,628 | 0.9319 |
+| RF / base | merge50minC | 52,275 | 0.9431 |
+| XGB / base | merge50minC | 51,271 | 0.9458 |
 
 ผู้ชนะของ merge50minC: **XGB / base** (test MAE 51,271 บาท)
 
@@ -14,7 +14,7 @@
 
 ผลรอบเก่า 9 งาน (ข้อมูลรุ่นเก่า, กฎ 1-SE, เทียบกับรอบใหม่ไม่ได้): [docs/old.html](docs/old.html)
 
-[ผลรันรอบใหม่และ MAE / RMSE / MAPE ของ 5-fold CV](docs/index.html#latest-results)
+[ผลรันรอบใหม่บนชุดทดสอบ](docs/index.html#latest-results)
 
 ค่าพารามิเตอร์ทั้งหมดและที่มารายไฟล์: [พารามิเตอร์ของแต่ละไฟล์](docs/index.html#parameters)
 
